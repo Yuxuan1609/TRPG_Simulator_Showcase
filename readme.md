@@ -180,89 +180,80 @@ flowchart LR
 ```
 
 <details>
-<summary>展开完整管线图（含 Step 2.5 战斗入口、依赖图点火、Author 三级响应等细节）</summary>
+<summary>展开完整管线图（含 requirement 解析阶段、entity/other 分流、Author 递归回路等细节）</summary>
 
 ```mermaid
 flowchart TB
-    subgraph Step0[Step 0 消歧]
-        PreParse[PreParseDisambiguator<br/>模糊输入反问/跨turn整合]
+    subgraph S0[Step 0 消歧]
+        Pre[PreParse<br/>模糊反问/跨turn整合]
     end
 
-    subgraph Step1[Step 1 解析]
-        Parse[Parse · LLM<br/>实体匹配 + 行动分类]
-        NPCDialogue[NPC对话 · LLM<br/>talk_to + 跟随检测]
+    subgraph S15[Step 1.5 确定性检查]
+        DetReq[确定性 requirement 解析<br/>AND/OR 布尔逻辑 / time_condition]
     end
 
-    subgraph Step2[Step 2 判定]
-        Judge[Judge · 确定性闸门<br/>requirement / dependency_graph<br/>time_condition / D100 检定]
-        Search[Search · 侦查检定<br/>发现隐藏物品/线索/武器]
-        Move[Move · 场景移动<br/>defer 至 Author 确认后]
-        DepFire[依赖图自动触发<br/>dependency_graph → 事件自动点火]
+    subgraph S2[Step 2 意图匹配]
+        Parse[Parse · LLM<br/>意图匹配 + 非确定性 req 解析]
+        NPC[NPC 对话 · LLM<br/>talk_to / 跟随]
     end
 
-    subgraph Step25[Step 2.5 战斗入口]
-        CombatEntry[CombatEntry · LLM<br/>敌意检测 → 是否进入战斗]
-        Standoff[Standoff · 对峙<br/>avoidable 敌人 → 最后一次机会]
-        BossCheck[Boss 遭遇检测<br/>at / interaction / event]
+    subgraph S25[Step 2.5 战斗入口]
+        Combat[战斗判定<br/>LLM 敌意检测<br/>enemy/boss manager]
     end
 
-    subgraph Step3[Step 3 并行增强]
-        Enrich[Enrich · LLM<br/>叙事润色 + emphasis]
-        TimeAgent[TimeAgent · LLM<br/>时间评估 → Clock.advance_time]
-        TimeComm[TimePressure · 时间压力通信<br/>L3 time_pressure → 玩家提示]
+    subgraph S31[Step 3.1 预编排路径]
+        Entity[entity / move / search<br/>确定性执行等待]
     end
 
-    subgraph Step4[Step 4 Author 响应]
-        IntentDetect[IntentDetector<br/>other 行动 → 意图判定]
-        AuthorResp{Author 响应}
-        Structural[StructuralEdit<br/>触发补充管线 → 递归]
-        Patch[ModulePatch<br/>实体注入 → 递归]
-        Reject[Reject<br/>注入玩家可见提示]
+    subgraph S32[Step 3.2-3.5 other 路径]
+        Other[3.2 other 解析]
+        ID[3.3 IntentDetector<br/>判定是否需 Author]
+        Author{3.4 Author 介入}
+        Patch[Patch<br/>缺 entity → 递归]
+        Structural[StructuralEdit<br/>超场景范围 → 递归]
+        Reject[Reject<br/>注入拒绝叙事]
     end
 
-    subgraph Step5[Step 5-6 输出]
-        SideEffects[应用副效果 + Move<br/>@markup / item_gain / stat_change]
-        Ending[结局检测<br/>##END_ + L3 ending_conditions]
-        Curate[Curator · 确定性<br/>outcomes → NarratorBrief]
-        Narrator[Narrator · LLM<br/>L1 + NarratorBrief → 沉浸式叙事]
+    subgraph S4[Step 4 执行]
+        Exec[执行结果<br/>应用 side_effects / completion]
+        Ending[结局检测<br/>##END_ + L3 conditions]
     end
 
-    PreParse --> Parse
-    PreParse --> NPCDialogue
-    Parse --> Judge
-    Judge --> Search
-    Judge --> Move
-    Judge --> DepFire
-    Judge --> CombatEntry
-    CombatEntry -->|enter_combat| Standoff
-    CombatEntry -->|hostile| BossCheck
-    Standoff -->|进入战斗| BossCheck
-    DepFire --> Enrich
-    Move --> Enrich
-    Search --> Enrich
-    BossCheck --> Enrich
-    CombatEntry -->|no combat| Enrich
-    Standoff -->|避免战斗| Enrich
-    Enrich & TimeAgent --> TimeComm
-    TimeComm --> IntentDetect
-    IntentDetect -->|needs_author| AuthorResp
-    AuthorResp --> Structural
-    AuthorResp --> Patch
-    AuthorResp --> Reject
-    Structural -->|supplement 完成| SideEffects
-    Patch -->|patch 完成| SideEffects
-    Reject --> SideEffects
-    IntentDetect -->|no author needed| SideEffects
-    SideEffects --> Ending
-    Ending --> Curate
-    Curate --> Narrator
-    Narrator -->|返回玩家| UI[玩家 UI]
+    subgraph S5[Step 5 并行增强]
+        Enrich[Enrich · LLM 叙事润色]
+        Time[TimeAgent · LLM 时间推进]
+    end
 
-    UI -->|玩家输入| PreParse
-    Narrator -.-> L1
-    AuthorResp -.-> L3
-    Parse -.-> L2
+    subgraph S6[Step 6 叙事输出]
+        Narrator[Narrator · LLM<br/>L1 + enrich → 叙事]
+    end
+
+    Pre --> DetReq
+    DetReq --> Parse
+    DetReq --> NPC
+    Parse --> Combat
+    Combat --> S31 & S32
+
+    S31 --> Exec
+
+    S32 --> Other --> ID
+    ID -->|needs_author| Author
+    ID -->|no| Exec
+    Author --> Patch
+    Author --> Structural
+    Author --> Reject
+    Patch -->|递归回 S2| Parse
+    Structural -->|递归回 S2| Parse
+    Reject --> Exec
+
+    Exec --> Ending
+    Ending --> Enrich
+    Ending --> Time
+    Enrich & Time --> Narrator
+    Narrator --> Out[叙事输出]
 ```
+
+</details>
 
 </details>
 
