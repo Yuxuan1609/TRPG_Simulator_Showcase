@@ -146,7 +146,6 @@ Keeper和Author本身是多agent封装层，核心特征是agent是否使用L2/L
 
 ### 单回合管线
 
-```mermaid
 flowchart LR
     subgraph Input[玩家输入]
         P[自然语言]
@@ -154,29 +153,36 @@ flowchart LR
     subgraph S0[Step 0 消歧]
         Pre[PreParse<br/>反问/整合]
     end
-    subgraph S1[Step 1 解析]
-        Pa[Parse LLM<br/>实体匹配]
+    subgraph S15[Step 1.5 确定性]
+        Det[确定性 req 检查<br/>AND/OR / time_condition]
     end
-    subgraph S2[Step 2-3 判定+增强]
-        J[Judge 确定性<br/>D100/条件检查]
-        E[Enrich LLM<br/>叙事整合]
-        TA[TimeAgent LLM<br/>时间推进]
+    subgraph S2[Step 2 意图匹配]
+        Pa[Parse LLM<br/>实体匹配 + 非确定性 req]
     end
-    subgraph S4[Step 4 创作]
-        A[Author LLM<br/>动态补充]
-    end
-    subgraph S5[Step 5-6 输出]
-        C[Curator 确定性<br/>策展]
-        N[Narrator LLM<br/>叙事生成]
+    subgraph S25[Step 2.5 战斗]
+        Cbt[战斗判定<br/>enemy/boss manager]
     end
 
-    P --> Pre --> Pa --> J
-    J --> E & TA
-    E & TA --> A
-    A --> C --> N --> O[叙事输出]
-    N -.->|L1| O
-    Pa -.->|L2| J
-    A -.->|L3| A
+    subgraph S3[Step 3 分流]
+        direction LR
+        E31[3.1 预编排<br/>entity/move/NPC对话]
+        E32[3.2 other<br/>→ IntentDetector]
+        Auth[3.4 Author<br/>Patch/StructuralEdit]
+    end
+
+    subgraph S4[Step 4-6 输出]
+        Exec[执行<br/>side_effects]
+        En[Enrich+时间<br/>叙事润色]
+        Nar[Narrator<br/>叙事生成]
+    end
+
+    P --> Pre --> Det --> Pa --> Cbt
+    Cbt --> E31 & E32
+    E31 --> Exec
+    E32 --> Auth
+    Auth -->|递归| Pa
+    Auth -->|Reject| Exec
+    Exec --> En --> Nar --> O[叙事输出]
 ```
 
 <details>
