@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}TRPG 启动{% endblock %}
+{% block asset_context %}launcher{% endblock %}
+{% block body %}
+<div class="h-screen flex bg-[#0d0d0d]">
+  <nav class="w-56 border-r border-gray-800 bg-[#0f0f0f] flex flex-col p-4 gap-2">
+    <h1 class="text-lg text-aged-gold font-bold tracking-wider border-b border-gray-800 pb-3">TRPG 调查员助手</h1>
+    <a href="/" class="nav-link block px-3 py-2 text-sm text-aged-gold bg-[#1a1a1a] rounded"
+       hx-get="/launcher/tabs/module-gen" hx-target="#tab-content" hx-swap="innerHTML"
+        onclick="event.preventDefault();document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('text-aged-gold','bg-[#1a1a1a]');l.classList.add('text-gray-400')});this.classList.remove('text-gray-400');this.classList.add('text-aged-gold','bg-[#1a1a1a]')">模组生成</a>
+    <a href="/" class="nav-link block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold hover:bg-[#1a1a1a] rounded"
+       hx-get="/launcher/tabs/step0" hx-target="#tab-content" hx-swap="innerHTML"
+       onclick="event.preventDefault();document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('text-aged-gold','bg-[#1a1a1a]');l.classList.add('text-gray-400')});this.classList.remove('text-gray-400');this.classList.add('text-aged-gold','bg-[#1a1a1a]')">小说转模组 (Step 0)</a>
+    <a href="/" class="nav-link block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold hover:bg-[#1a1a1a] rounded"
+       hx-get="/launcher/tabs/game-start" hx-target="#tab-content" hx-swap="innerHTML"
+       onclick="event.preventDefault();document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('text-aged-gold','bg-[#1a1a1a]');l.classList.add('text-gray-400')});this.classList.remove('text-gray-400');this.classList.add('text-aged-gold','bg-[#1a1a1a]')">开始游戏</a>
+    <a href="/" class="nav-link block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold hover:bg-[#1a1a1a] rounded"
+       hx-get="/launcher/tabs/config" hx-target="#tab-content" hx-swap="innerHTML"
+       onclick="event.preventDefault();document.querySelectorAll('.nav-link').forEach(l=>{l.classList.remove('text-aged-gold','bg-[#1a1a1a]');l.classList.add('text-gray-400')});this.classList.remove('text-gray-400');this.classList.add('text-aged-gold','bg-[#1a1a1a]')">其他工具</a>
+    <div class="mt-auto pt-4 border-t border-gray-800 space-y-1">
+      <a href="/character" class="block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold rounded">创建调查员</a>
+      <a href="/editor" class="block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold rounded">JSON 编辑器</a>
+    </div>
+  </nav>
+  <div class="flex-1 overflow-y-auto p-6" id="tab-content"
+       hx-get="/launcher/tabs/module-gen" hx-trigger="load" hx-swap="innerHTML">
+    <p class="text-gray-500">加载中...</p>
+  </div>
+</div>
+{% endblock %}

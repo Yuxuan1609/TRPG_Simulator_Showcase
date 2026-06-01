@@ -1,0 +1,68 @@
+{
+  "module_meta": {
+    "name": "test_module",
+    "supplement_of": "test_module",
+    "generated_for": "玩家试图通过凝视裂痕镜子来与黑暗中的存在沟通，并尝试进入镜子内部的空间"
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "梦境法则",
+      "rule": "这列电车所在的整个世界是由奈亚拉托提普创造的噩梦空间，并非现实。物理法则可被扭曲，逻辑可被篡改。",
+      "scope": "整个电车及其外部黑暗空间",
+      "is_absolute": "绝对不可违反"
+    }
+  ],
+  "scene_intents": {
+    "test_room": {
+      "purpose": "Debug and expansion entry point",
+      "emotion": "Unease and curiosity"
+    },
+    "SS1_镜中虚空": {
+      "purpose": "建立镜中世界的初始氛围与规则，迫使玩家面对深渊的询问并做出回答，为后续旅程定调。",
+      "key_threat": "低沉的无从辨别的声音与漂浮的碎片可能误导玩家，回答错误可能引发迷失或提前失去锚点。",
+      "notes": "过渡场景，重点在于玩家对镜中世界的第一次交互，答案会直接影响后续进入实验室的方式。碎片映照的影像可埋下伏笔。"
+    },
+    "SS2_霍桑实验室": {
+      "purpose": "揭示镜中世界核心实验，引入关键NPC霍桑与钥匙机制，提供探索与选择的机会。",
+      "key_threat": "黑色液体蔓延与霍桑的实验室危险，触发实验可能招致不可逆后果。",
+      "notes": "鼓励玩家自由选择躲藏或干扰，钥匙开启镜门是推进必需的步骤。可在此处收集关于灵魂剥离实验的信息。"
+    },
+    "SS3_回廊囚笼": {
+      "purpose": "作为逃脱镜中世界的最后试炼，测试玩家对真实世界锚点的记忆与意志力。",
+      "key_threat": "不跟随动作的倒影与低语会尝试欺骗或恐吓玩家，使其永远困于镜中。",
+      "notes": "玩家必须主动回忆起测试房间的白炽灯灯光才能脱出，倒影的对话可作为误导或提示。此场景强化了心理恐怖元素。"
+    }
+  },
+  "ending_conditions": [],
+  "tone_constraints": {
+    "genre": "Lovecraftian horror",
+    "narrative_style": "Oppressive, with faint hope in despair",
+    "forbidden": [
+      "superpowers",
+      "firearms",
+      "modern communication devices working"
+    ],
+    "recommended": [
+      "tension",
+      "unknown fear",
+      "moral dilemma"
+    ]
+  },
+  "characters": {
+    "conductor": "Injured train conductor, key info provider"
+  },
+  "driving_force": "Keep moving forward in darkness, escape the devouring maw, find hope",
+  "narrative_lines": [
+    {
+      "name": "霍桑研究员的真相",
+      "outline": "从测试房间开始，通过检查桌子上的物品发现霍桑的日志，逐步揭示镜子背后隐藏的实验真相和灵魂囚笼的秘密。",
+      "key_scenes": [
+        "test_room",
+        "car_6"
+      ],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {}
+}

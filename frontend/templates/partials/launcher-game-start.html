@@ -1,0 +1,86 @@
+<h2 class="text-xl text-aged-gold mb-6 border-b border-gray-800 pb-3">开始游戏</h2>
+<form id="init-form" class="space-y-5 max-w-2xl">
+  <fieldset class="border border-gray-700 rounded-lg p-4">
+    <legend class="text-sm text-aged-gold px-2">模组文件</legend>
+    <div class="space-y-3">
+      {% for label, id, placeholder in [
+        ('L2 KP 守秘人层', 'l2-path', 'data/modules/常暗之厢/l2_test.json'),
+        ('L1 玩家可见层', 'l1-path', 'data/modules/常暗之厢/l1_test.json'),
+        ('L3 设计者层', 'l3-path', 'data/modules/常暗之厢/l3_test.json'),
+      ] %}
+      <div>
+        <label class="block text-xs text-gray-300 mb-1">{{ label }}</label>
+        <div class="flex gap-2">
+          <input type="text" id="{{ id }}" name="{{ id.replace('-', '_') }}" placeholder="{{ placeholder }}"
+                 class="flex-1 bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+          <button type="button" hx-get="/api/files?dir=data/modules&target_input={{ id }}"
+                  hx-target="#file-browser-content" hx-swap="innerHTML"
+                  onclick="openFileBrowser()"
+                  class="px-3 py-1.5 border border-gray-600 rounded text-xs text-gray-400 hover:text-aged-gold bg-[#1a150c]">浏览</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <fieldset class="border border-gray-700 rounded-lg p-4">
+    <legend class="text-sm text-aged-gold px-2">调查员角色卡</legend>
+    <div class="flex gap-2">
+      <input type="text" id="char-path" name="char_path" placeholder="investigator/test_character.json"
+             class="flex-1 bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+      <button type="button" hx-get="/api/files?dir=investigator&target_input=char-path"
+              hx-target="#file-browser-content" hx-swap="innerHTML"
+              onclick="openFileBrowser()"
+              class="px-3 py-1.5 border border-gray-600 rounded text-xs text-gray-400 hover:text-aged-gold bg-[#1a150c]">浏览</button>
+      <a href="/character" class="px-3 py-1.5 border border-gray-600 rounded text-xs text-gray-400 hover:text-aged-gold bg-[#1a150c]">+ 新建</a>
+    </div>
+    <p class="text-[10px] text-gray-500 mt-1">留空则自动创建默认调查员</p>
+  </fieldset>
+
+  <div class="flex gap-3 items-center">
+    <button type="button" id="start-game-btn" onclick="startGame()"
+            class="px-8 py-2.5 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30 font-bold">
+      <span id="start-game-label">开始游戏</span>
+    </button>
+    <span id="init-error" class="text-red-400 text-sm"></span>
+  </div>
+</form>
+
+  <script>
+  async function startGame() {
+    const btn = document.getElementById('start-game-btn');
+    const label = document.getElementById('start-game-label');
+    const form = document.getElementById('init-form');
+    const fd = new FormData(form);
+    const errEl = document.getElementById('init-error');
+    errEl.textContent = '';
+
+    for (const id of ['l2-path', 'l1-path', 'l3-path']) {
+      if (!document.getElementById(id).value.trim()) {
+        errEl.textContent = '请填写所有模组文件路径';
+        return;
+      }
+    }
+
+    btn.disabled = true;
+    label.textContent = '加载中...';
+
+    fd.append('weapon_path', '');
+    fd.append('enemy_path', '');
+    fd.append('boss_path', '');
+    try {
+      const resp = await fetch('/api/game/init', { method: 'POST', body: fd });
+      if (!resp.ok) {
+        errEl.textContent = '初始化失败: ' + (await resp.text());
+        btn.disabled = false;
+        label.textContent = '开始游戏';
+        return;
+      }
+      window.location.href = '/game';
+    } catch(e) {
+      errEl.textContent = '网络错误: ' + e.message;
+      btn.disabled = false;
+      label.textContent = '开始游戏';
+    }
+  }
+</script>

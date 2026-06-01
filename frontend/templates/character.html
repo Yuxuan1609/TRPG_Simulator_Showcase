@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}COC 7th — 创建调查员{% endblock %}
+{% block asset_context %}character{% endblock %}
+{% block body %}
+<div class="min-h-screen bg-[#0d0d0d] max-w-3xl mx-auto py-8 px-4">
+
+  {# Header with back-to-home #}
+  <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+    <a href="/" class="text-xs text-gray-500 hover:text-aged-gold transition-colors">← 返回主页</a>
+    <h1 class="text-2xl text-aged-gold text-center tracking-widest">调查员创建</h1>
+    <div class="w-20"></div>{# spacer for centering #}
+  </div>
+
+  {# Hidden fields for cross-step data persistence #}
+  <form id="char-form" style="display:none">
+    <input type="hidden" id="char-name" name="name" value="">
+    <input type="hidden" id="char-age" name="age" value="">
+    <input type="hidden" id="char-gender" name="gender" value="">
+    <input type="hidden" id="char-occupation" name="occupation" value="">
+    <input type="hidden" id="char-appearance" name="appearance" value="">
+    <input type="hidden" id="char-description" name="description" value="">
+    <input type="hidden" id="char-backstory" name="backstory" value="">
+    {% for s in stats %}
+    <input type="hidden" id="stat-{{ s }}" name="stat_{{ s }}" value="">
+    {% endfor %}
+    <input type="hidden" id="stat-HP" name="stat_HP" value="">
+    <input type="hidden" id="stat-MP" name="stat_MP" value="">
+    <input type="hidden" id="stat-SAN" name="stat_SAN" value="">
+    <input type="hidden" id="stat-DODGE" name="stat_DODGE" value="">
+    <input type="hidden" id="stat-DB" name="stat_DB" value="">
+    <input type="hidden" id="stat-BUILD" name="stat_BUILD" value="">
+    <input type="hidden" id="skills-json" name="skills_json" value="">
+    <input type="hidden" id="avatar-url-input-global" name="avatar_url" value="">
+  </form>
+
+  {# Progress bar #}
+  <div class="flex justify-between mb-8 px-8" id="wizard-progress">
+    <span id="step-dot-1" class="text-sm px-4 py-1 rounded text-aged-gold bg-aged-brown/20 border border-aged-gold/30">1. 基本信息 & 属性</span>
+    <span id="step-dot-2" class="text-sm px-4 py-1 rounded text-gray-600">2. 职业 & 技能</span>
+    <span id="step-dot-3" class="text-sm px-4 py-1 rounded text-gray-600">3. 预览 & 导出</span>
+  </div>
+
+  {# Step content (loaded via HTMX) #}
+  <div id="step-content"
+       hx-get="/character/step/1"
+       hx-trigger="load"
+       hx-swap="innerHTML">
+    <p class="text-gray-500 text-sm">加载中...</p>
+  </div>
+</div>
+
+{# ── Global helper functions ── #}
+<script>
+// === Recalculate derived stats from stat inputs ===
+function charRecalcDerived() {
+  var cards = document.querySelectorAll('#roll-result .stat-input');
+  var vals = { STR: 0, CON: 0, SIZ: 0, DEX: 0, APP: 0, INT: 0, POW: 0, EDU: 0, LUCK: 0 };
+  cards.forEach(function(inp) {
+    if (inp.name) {
+      var key = inp.name.replace('stat_', '');
+      vals[key] = parseInt(inp.value) || 0;
+    }
+  });
+  var hp = Math.floor((vals.CON + vals.SIZ) / 10);
+  var mp = Math.floor(vals.POW / 5);
+  var san = vals.POW;
+  var dodge = Math.floor(vals.DEX / 2);
+  var ss = vals.STR + vals.SIZ;
+  var db, build;
+  if (ss <= 64) { db = '-2'; build = -2; }
+  else if (ss <= 84) { db = '-1'; build = -1; }
+  else if (ss <= 124) { db = '0'; build = 0; }
+  else if (ss <= 164) { db = '+1D4'; build = 1; }
+  else if (ss <= 204) { db = '+1D6'; build = 2; }
+  else { db = '+2D6'; build = 3; }
+  var el;
+  el = document.getElementById('derived-hp'); if (el) el.value = hp;
+  el = document.getElementById('derived-mp'); if (el) el.value = mp;
+  el = document.getElementById('derived-san'); if (el) el.value = san;
+  el = document.getElementById('derived-dodge'); if (el) el.value = dodge;
+  el = document.getElementById('derived-db'); if (el) el.value = db;
+  el = document.getElementById('derived-build'); if (el) el.value = build;
+}
+
+// === Store stats from roll result into hidden form ===
+function charStoreStats() {
+  var statInputs = document.querySelectorAll('#roll-result .stat-input, #roll-result .derived-input');
+  if (statInputs.length === 0) return;
+  statInputs.forEach(function(inp) {
+    var el = document.getElementById(inp.name);
+    if (el) el.value = inp.value;
+    else {
+      var key = inp.name.replace('stat_', '');
+      el = document.getElementById('stat-' + key);
+      if (el) el.value = inp.value;
+    }
+  });
+  // Also store collected via name attribute
+  document.querySelectorAll('#step-content input[name], #step-content textarea[name], #step-content select[name]').forEach(function(el) {
+    if (!el.name) return;
+    var target = document.getElementById('char-' + el.name);
+    if (target) target.value = el.value;
+  });
+}
+
+// === Store skills into hidden form ===
+function charStoreSkills() {
+  var inputs = document.querySelectorAll('#skills-list .skill-input');
+  if (inputs.length === 0) return;
+  var data = {};
+  inputs.forEach(function(inp) {
+    var label = inp.closest('.flex')?.querySelector('span')?.textContent?.replace(/职业\s*$/, '').trim();
+    if (label) data[label] = inp.value;
+  });
+  if (Object.keys(data).length > 0) {
+    document.getElementById('skills-json').value = JSON.stringify(data);
+  }
+}
+
+// === Sync step 1 & 2 fields to hidden form before navigating away ===
+function charSyncAllFields() {
+  // Sync basic info fields
+  ['name','age','gender','occupation','appearance','description','backstory'].forEach(function(f) {
+    var el = document.querySelector('#step-content [name="' + f + '"]');
+    if (el) document.getElementById('char-' + f).value = el.value;
+  });
+  // Sync stats from roll result
+  charStoreStats();
+  // Sync skills
+  charStoreSkills();
+}
+
+// === Export character ===
+function exportCharacter() {
+  charSyncAllFields();
+  var form = document.getElementById('char-form');
+  var params = new URLSearchParams();
+  form.querySelectorAll('input').forEach(function(el) {
+    if (el.value) params.append(el.name, el.value);
+  });
+  document.querySelectorAll('#step-content [name]').forEach(function(el) {
+    if (el.value) params.append(el.name, el.value);
+  });
+  if (!params.has('name')) params.append('name', '调查员');
+
+  window.open('/character/export?' + params.toString(), '_blank');
+}
+</script>
+{% endblock %}

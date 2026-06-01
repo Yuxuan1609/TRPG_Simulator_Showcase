@@ -1,0 +1,401 @@
+<div>
+  <h2 class="text-lg text-aged-gold mb-4 border-l-2 border-aged-gold pl-3">基本信息</h2>
+  <div class="grid grid-cols-3 gap-4 mb-6">
+    <div>
+      <label class="block text-xs text-gray-500 mb-1">姓名</label>
+      <input type="text" name="name" placeholder="调查员姓名"
+             class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300 focus:border-aged-gold focus:outline-none">
+    </div>
+    <div>
+      <label class="block text-xs text-gray-500 mb-1">年龄</label>
+      <input type="number" name="age" value="25" min="15" max="99"
+             class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300 focus:border-aged-gold focus:outline-none">
+    </div>
+    <div>
+      <label class="block text-xs text-gray-500 mb-1">性别</label>
+      <select name="gender" class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300">
+        <option value="">选择...</option>
+        <option value="男">男</option>
+        <option value="女">女</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Avatar upload with crop -->
+  <div class="mb-6">
+    <label class="block text-xs text-gray-500 mb-2">头像 <span class="text-gray-700">(上传图片，选择区域后裁剪为方形)</span></label>
+    <div class="flex items-start gap-4">
+      <div class="shrink-0">
+        <div id="avatar-preview" class="w-20 h-20 rounded bg-gray-800 border border-gray-600 flex items-center justify-center text-gray-500 text-xs overflow-hidden">无</div>
+      </div>
+      <div class="flex-1">
+        <input type="hidden" name="avatar_url" id="avatar-url-input" value="">
+        <button type="button" onclick="document.getElementById('avatar-file-input').click()"
+                class="px-4 py-2 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30">
+          选择图片
+        </button>
+        <span id="avatar-filename" class="text-xs text-gray-600 ml-2"></span>
+        <input type="file" id="avatar-file-input" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none">
+        <div id="avatar-crop-area" class="hidden mt-3">
+          <div class="relative inline-block" id="crop-container">
+            <canvas id="crop-canvas"></canvas>
+          </div>
+          <div class="flex gap-2 mt-2">
+            <button type="button" id="btn-confirm-crop"
+                    class="px-3 py-1.5 bg-[#2a5a2a] text-white text-xs rounded hover:bg-[#3a7a3a]">确认裁剪</button>
+            <button type="button" id="btn-cancel-crop"
+                    class="px-3 py-1.5 border border-gray-600 text-gray-400 text-xs rounded hover:text-gray-200">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+  #crop-container {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #4a3820;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  #crop-canvas {
+    display: block;
+    max-width: 360px;
+    max-height: 320px;
+    cursor: crosshair;
+  }
+</style>
+
+<script>
+(function() {
+  const fileInput = document.getElementById('avatar-file-input');
+  const preview = document.getElementById('avatar-preview');
+  const urlInput = document.getElementById('avatar-url-input');
+  const urlInputGlobal = document.getElementById('avatar-url-input-global');
+  const filenameLabel = document.getElementById('avatar-filename');
+  const cropArea = document.getElementById('avatar-crop-area');
+  const canvas = document.getElementById('crop-canvas');
+  const ctx = canvas.getContext('2d');
+  const btnConfirm = document.getElementById('btn-confirm-crop');
+  const btnCancel = document.getElementById('btn-cancel-crop');
+
+  let img = null;
+  let cropX = 0, cropY = 0, cropW = 0, cropH = 0;
+  let isDragging = false, isResizing = false;
+  let dragStartX = 0, dragStartY = 0;
+  let resizeCorner = '';
+  const MIN_SIZE = 40;
+  const FIXED_SIZE = 200;
+
+  function loadImage(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const image = new Image();
+      image.onload = function() {
+        img = image;
+        const maxW = 360, maxH = 320;
+        let scale = Math.min(maxW / image.width, maxH / image.height, 1);
+        canvas.width = Math.round(image.width * scale);
+        canvas.height = Math.round(image.height * scale);
+        cropX = Math.round(canvas.width * 0.1);
+        cropY = Math.round(canvas.height * 0.1);
+        cropW = Math.round(canvas.width * 0.8);
+        cropH = cropW; // square
+        if (cropW < MIN_SIZE) { cropW = MIN_SIZE; cropH = MIN_SIZE; }
+        draw();
+        cropArea.classList.remove('hidden');
+      };
+      image.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function draw() {
+    if (!img) return;
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    // Draw image
+    ctx.drawImage(img, 0, 0, w, h);
+    // Dark overlay outside crop
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, 0, w, cropY);
+    ctx.fillRect(0, cropY + cropH, w, h - cropY - cropH);
+    ctx.fillRect(0, cropY, cropX, cropH);
+    ctx.fillRect(cropX + cropW, cropY, w - cropX - cropW, cropH);
+    // Crop border
+    ctx.strokeStyle = '#c9a84c';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(cropX, cropY, cropW, cropH);
+    // Corner handles
+    const hs = 8;
+    ctx.fillStyle = '#c9a84c';
+    [
+      [cropX - hs/2, cropY - hs/2],
+      [cropX + cropW - hs/2, cropY - hs/2],
+      [cropX - hs/2, cropY + cropH - hs/2],
+      [cropX + cropW - hs/2, cropY + cropH - hs/2],
+    ].forEach(function(p) {
+      ctx.fillRect(p[0], p[1], hs, hs);
+    });
+    // Center guide
+    ctx.strokeStyle = 'rgba(201,168,76,0.3)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(w * 0.5, cropY); ctx.lineTo(w * 0.5, cropY + cropH);
+    ctx.moveTo(cropX, h * 0.5); ctx.lineTo(cropX + cropW, h * 0.5);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function getCorner(mx, my) {
+    const d = 12;
+    if (Math.abs(mx - cropX) < d && Math.abs(my - cropY) < d) return 'nw';
+    if (Math.abs(mx - (cropX + cropW)) < d && Math.abs(my - cropY) < d) return 'ne';
+    if (Math.abs(mx - cropX) < d && Math.abs(my - (cropY + cropH)) < d) return 'sw';
+    if (Math.abs(mx - (cropX + cropW)) < d && Math.abs(my - (cropY + cropH)) < d) return 'se';
+    return '';
+  }
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
+    };
+  }
+
+  canvas.addEventListener('mousedown', function(e) {
+    const p = getPos(e);
+    const corner = getCorner(p.x, p.y);
+    if (corner) {
+      isResizing = true;
+      resizeCorner = corner;
+      dragStartX = p.x;
+      dragStartY = p.y;
+    } else if (p.x >= cropX && p.x <= cropX + cropW && p.y >= cropY && p.y <= cropY + cropH) {
+      isDragging = true;
+      dragStartX = p.x - cropX;
+      dragStartY = p.y - cropY;
+    }
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    const p = getPos(e);
+    // Cursor style
+    const corner = getCorner(p.x, p.y);
+    canvas.style.cursor = corner ? (corner.includes('n') && corner.includes('w') ? 'nw-resize' :
+      corner.includes('n') && corner.includes('e') ? 'ne-resize' :
+      corner.includes('s') && corner.includes('w') ? 'sw-resize' :
+      'se-resize') :
+      (p.x >= cropX && p.x <= cropX + cropW && p.y >= cropY && p.y <= cropY + cropH && !isResizing ? 'move' : 'crosshair');
+
+    if (isDragging) {
+      let nx = p.x - dragStartX;
+      let ny = p.y - dragStartY;
+      nx = Math.max(0, Math.min(canvas.width - cropW, nx));
+      ny = Math.max(0, Math.min(canvas.height - cropH, ny));
+      cropX = Math.round(nx);
+      cropY = Math.round(ny);
+      draw();
+    } else if (isResizing) {
+      let dx = p.x - dragStartX;
+      let dy = p.y - dragStartY;
+      let nx = cropX, ny = cropY, nw = cropW, nh = cropH;
+      if (resizeCorner.includes('e')) { nw = Math.max(MIN_SIZE, cropW + dx); }
+      if (resizeCorner.includes('w')) { nw = Math.max(MIN_SIZE, cropW - dx); nx = cropX + cropW - nw; }
+      if (resizeCorner.includes('s')) { nh = Math.max(MIN_SIZE, cropH + dy); }
+      if (resizeCorner.includes('n')) { nh = Math.max(MIN_SIZE, cropH - dy); ny = cropY + cropH - nh; }
+      // Keep square
+      const side = Math.max(nw, nh);
+      nw = side; nh = side;
+      if (resizeCorner.includes('w')) nx = cropX + cropW - side;
+      if (resizeCorner.includes('n')) ny = cropY + cropH - side;
+      if (nx < 0) { nx = 0; }
+      if (ny < 0) { ny = 0; }
+      if (nx + side > canvas.width) { nx = canvas.width - side; }
+      if (ny + side > canvas.height) { ny = canvas.height - side; }
+      cropX = Math.round(nx);
+      cropY = Math.round(ny);
+      cropW = Math.round(side);
+      cropH = Math.round(side);
+      draw();
+    }
+  });
+
+  window.addEventListener('mouseup', function() {
+    isDragging = false;
+    isResizing = false;
+  });
+
+  btnConfirm.addEventListener('click', function() {
+    if (!img) return;
+    // Create output canvas at fixed size
+    const outCanvas = document.createElement('canvas');
+    outCanvas.width = FIXED_SIZE;
+    outCanvas.height = FIXED_SIZE;
+    const outCtx = outCanvas.getContext('2d');
+    // Scale from display coords to image coords
+    const sx = img.width / canvas.width;
+    const sy = img.height / canvas.height;
+    outCtx.drawImage(img,
+      Math.round(cropX * sx), Math.round(cropY * sy),
+      Math.round(cropW * sx), Math.round(cropH * sy),
+      0, 0, FIXED_SIZE, FIXED_SIZE
+    );
+    outCanvas.toBlob(function(blob) {
+      const formData = new FormData();
+      formData.append('file', blob, 'avatar.png');
+      btnConfirm.textContent = '上传中...';
+      btnConfirm.disabled = true;
+      fetch('/character/upload-avatar', { method: 'POST', body: formData })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.url) {
+            urlInput.value = data.url;
+            if (urlInputGlobal) urlInputGlobal.value = data.url;
+            preview.innerHTML = '<img src="' + data.url + '" class="w-20 h-20 rounded object-cover">';
+            cropArea.classList.add('hidden');
+            filenameLabel.textContent = '裁剪完成';
+          }
+        })
+        .catch(function() { alert('上传失败'); })
+        .finally(function() {
+          btnConfirm.textContent = '确认裁剪';
+          btnConfirm.disabled = false;
+        });
+    }, 'image/png');
+  });
+
+  btnCancel.addEventListener('click', function() {
+    cropArea.classList.add('hidden');
+    fileInput.value = '';
+    filenameLabel.textContent = '';
+    urlInput.value = '';
+    if (urlInputGlobal) urlInputGlobal.value = '';
+    preview.innerHTML = '无';
+  });
+
+  fileInput.addEventListener('change', function() {
+    if (this.files && this.files[0]) {
+      filenameLabel.textContent = this.files[0].name;
+      loadImage(this.files[0]);
+    }
+  });
+
+  // Restore existing avatar on step load
+  (function() {
+    var existingUrl = urlInputGlobal ? urlInputGlobal.value : '';
+    if (existingUrl) {
+      urlInput.value = existingUrl;
+      preview.innerHTML = '<img src="' + existingUrl + '" class="w-20 h-20 rounded object-cover">';
+    }
+  })();
+
+  // Restore basic info fields from hidden form
+  (function() {
+    var el;
+    el = document.querySelector('#step-content input[name="name"]'); if (el) { var f = document.getElementById('char-name'); if (f && f.value) el.value = f.value; }
+    el = document.querySelector('#step-content input[name="age"]'); if (el) { var f = document.getElementById('char-age'); if (f && f.value) el.value = f.value; }
+    el = document.querySelector('#step-content select[name="gender"]'); if (el) { var f = document.getElementById('char-gender'); if (f && f.value) el.value = f.value; }
+    el = document.querySelector('#step-content textarea[name="appearance"]'); if (el) { var f = document.getElementById('char-appearance'); if (f && f.value) el.value = f.value; }
+    el = document.querySelector('#step-content textarea[name="description"]'); if (el) { var f = document.getElementById('char-description'); if (f && f.value) el.value = f.value; }
+  })();
+
+  // Also support paste from clipboard
+  document.addEventListener('paste', function(e) {
+    const items = e.clipboardData && e.clipboardData.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          // Create a FileList-like input
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          fileInput.files = dataTransfer.files;
+          filenameLabel.textContent = 'clipboard.png';
+          loadImage(file);
+        }
+        break;
+      }
+    }
+  });
+})();
+</script>
+
+  <div class="mb-4">
+    <label class="block text-xs text-gray-500 mb-1">外貌描述 <span class="text-gray-700">(输入 /llm 自动生成)</span></label>
+    <textarea name="appearance" id="input-appearance" rows="2" placeholder="外貌描述..."
+              class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300 focus:border-aged-gold focus:outline-none resize-none"></textarea>
+  </div>
+  <div class="mb-6">
+    <label class="block text-xs text-gray-500 mb-1">个人描述 <span class="text-gray-700">(输入 /llm 自动生成)</span></label>
+    <textarea name="description" id="input-description" rows="2" placeholder="个人描述..."
+              class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300 focus:border-aged-gold focus:outline-none resize-none"></textarea>
+  </div>
+
+  <h2 class="text-lg text-aged-gold mb-4 border-l-2 border-aged-gold pl-3">属性掷骰</h2>
+  <button hx-post="/character/roll" hx-target="#roll-result" hx-swap="innerHTML"
+          hx-on--after-request="charStoreStats()"
+          class="px-6 py-2 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30 mb-4">
+    掷骰生成
+  </button>
+  <div id="roll-result" class="mb-6">
+    <p class="text-sm text-gray-600">点击上方按钮生成属性</p>
+  </div>
+
+<script>
+document.addEventListener('input', function(e) {
+  if (e.target.id === 'input-appearance' || e.target.id === 'input-description') {
+    var v = e.target.value;
+    if (v.endsWith('/llm')) {
+      e.target.value = v.slice(0, -4).trim();
+      var type = e.target.id === 'input-appearance' ? 'appearance' : 'description';
+      var prompt = e.target.value || type;
+      var fd = new FormData();
+      fd.append('type', type);
+      fd.append('prompt', prompt);
+      fetch('/character/generate-description', { method: 'POST', body: fd })
+        .then(function(r) { return r.text(); })
+        .then(function(text) { e.target.value = text; })
+        .catch(function() { e.target.value = '[生成失败]'; });
+    }
+  }
+});
+</script>
+
+  <div class="flex justify-end">
+    <button hx-get="/character/step/2" hx-target="#step-content" hx-swap="innerHTML"
+            onclick="charSyncAllFields();document.getElementById('step-dot-1').className='text-sm px-4 py-1 rounded text-gray-600';document.getElementById('step-dot-2').className='text-sm px-4 py-1 rounded text-aged-gold bg-aged-brown/20 border border-aged-gold/30'"
+            class="px-6 py-2 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30">
+      下一步 →
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('input', function(e) {
+  if (e.target.id === 'input-appearance' || e.target.id === 'input-description') {
+    const val = e.target.value;
+    if (val.endsWith('/llm')) {
+      e.target.value = val.slice(0, -4).trim();
+      const type = e.target.id === 'input-appearance' ? 'appearance' : 'description';
+      const prompt = e.target.value || type;
+      const formData = new FormData();
+      formData.append('type', type);
+      formData.append('prompt', prompt);
+      fetch('/character/generate-description', { method: 'POST', body: formData })
+        .then(r => r.text())
+        .then(text => { e.target.value = text; })
+        .catch(() => { e.target.value = '[生成失败]'; });
+    }
+  }
+});
+</script>

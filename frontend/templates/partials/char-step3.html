@@ -1,0 +1,136 @@
+<div>
+  <h2 class="text-lg text-aged-gold mb-4 border-l-2 border-aged-gold pl-3">预览与导出</h2>
+  <div class="mb-4">
+    <label class="block text-xs text-gray-500 mb-1">背景故事</label>
+    <textarea name="backstory" id="input-backstory" rows="4" placeholder="调查员背景故事..."
+              class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300 focus:border-aged-gold focus:outline-none resize-none"></textarea>
+  </div>
+
+  {# Avatar #}
+  <div class="flex items-center gap-4 mb-4">
+    <div id="preview-avatar" class="w-20 h-20 rounded bg-gray-800 border border-gray-600 flex items-center justify-center text-gray-500 text-xs shrink-0 overflow-hidden">无</div>
+    <div>
+      <div id="preview-name" class="text-lg text-aged-gold font-bold">调查员</div>
+      <div id="preview-occ" class="text-sm text-gray-400">未选择职业</div>
+      <div id="preview-basic" class="text-xs text-gray-500"></div>
+    </div>
+  </div>
+
+  {# Stats #}
+  <div class="mb-4">
+    <div class="text-xs text-gray-500 font-bold border-b border-gray-800 pb-1 mb-2">属性</div>
+    <div id="preview-stats" class="grid grid-cols-3 gap-1 text-xs text-gray-400"></div>
+  </div>
+
+  {# Derived #}
+  <div class="mb-4">
+    <div class="text-xs text-gray-500 font-bold border-b border-gray-800 pb-1 mb-2">衍生值</div>
+    <div id="preview-derived" class="grid grid-cols-3 gap-1 text-xs text-gray-400"></div>
+  </div>
+
+  {# Skills #}
+  <div class="mb-4">
+    <div class="text-xs text-gray-500 font-bold border-b border-gray-800 pb-1 mb-2">技能</div>
+    <div id="preview-skills" class="grid grid-cols-2 gap-x-4 gap-y-0 text-xs text-gray-500"></div>
+  </div>
+
+  {# Descriptions #}
+  <div class="mb-4">
+    <div id="preview-appearance" class="text-xs text-gray-500 mb-1"></div>
+    <div id="preview-description" class="text-xs text-gray-500"></div>
+  </div>
+
+  {# Rebuild preview from hidden fields #}
+  <script>
+  (function() {
+    var form = document.getElementById('char-form');
+
+    function g(id) { return document.getElementById('char-' + id); }
+    function v(id) { var el = g(id); return el ? el.value : ''; }
+
+    // Basic info
+    var name = v('name') || '调查员';
+    var age = v('age') || '25';
+    var gender = v('gender') || '';
+    var occ = v('occupation') || '';
+    document.getElementById('preview-name').textContent = name;
+    document.getElementById('preview-occ').textContent = occ || '未选择职业';
+    document.getElementById('preview-basic').textContent = '年龄 ' + age + (gender ? ' | ' + gender : '');
+    document.getElementById('input-backstory').value = v('backstory');
+
+    // Avatar
+    var avatarUrl = document.getElementById('avatar-url-input-global');
+    if (avatarUrl && avatarUrl.value) {
+      document.getElementById('preview-avatar').innerHTML = '<img src="' + avatarUrl.value + '" class="w-20 h-20 rounded object-cover">';
+    }
+
+    // Stats
+    var statLabels = {STR:'力量',CON:'体质',SIZ:'体型',DEX:'敏捷',APP:'外貌',INT:'智力',POW:'意志',EDU:'教育',LUCK:'幸运'};
+    var statNames = ['STR','CON','SIZ','DEX','APP','INT','POW','EDU','LUCK'];
+    var statHtml = '';
+    statNames.forEach(function(s) {
+      var el = document.getElementById('stat-' + s);
+      var val = el && el.value ? el.value : '-';
+      statHtml += '<div>' + statLabels[s] + ': <span class="text-aged-gold">' + val + '</span></div>';
+    });
+    document.getElementById('preview-stats').innerHTML = statHtml;
+
+    // Derived
+    var derHtml = '';
+    ['HP','MP','SAN','DODGE','DB','BUILD'].forEach(function(d) {
+      var el = document.getElementById('stat-' + d);
+      var val = el && el.value ? el.value : '-';
+      derHtml += '<div>' + d + ': <span class="text-aged-gold">' + val + '</span></div>';
+    });
+    document.getElementById('preview-derived').innerHTML = derHtml;
+
+    // Skills
+    var skillsJson = document.getElementById('skills-json');
+    var skillHtml = '';
+    if (skillsJson && skillsJson.value) {
+      try {
+        var skillsObj = JSON.parse(skillsJson.value);
+        var names = Object.keys(skillsObj);
+        names.sort();
+        names.forEach(function(n) {
+          skillHtml += '<div>' + n + ': <span class="text-gray-400">' + skillsObj[n] + '%</span></div>';
+        });
+      } catch(e) {}
+    }
+    document.getElementById('preview-skills').innerHTML = skillHtml || '暂无技能数据';
+
+    // Descriptions
+    var appear = v('appearance');
+    var desc = v('description');
+    if (appear) document.getElementById('preview-appearance').innerHTML = '外貌: <span class="text-gray-400">' + appear + '</span>';
+    if (desc) document.getElementById('preview-description').innerHTML = '描述: <span class="text-gray-400">' + desc + '</span>';
+
+    // Poll periodically for data from previous steps (HTMX may load step 3 before hidden fields are populated)
+    var polls = 0;
+    var timer = setInterval(function() {
+      polls++;
+      // Check if stats populated
+      var statEl = document.getElementById('stat-STR');
+      if (statEl && statEl.value && document.getElementById('preview-stats').querySelector('.text-aged-gold')?.textContent === '-') {
+        // Rebuild all
+        document.getElementById('preview-stats').innerHTML = '';
+        clearInterval(timer);
+      }
+      // Also check for restored fields when navigating back to step 1 and forward
+      if (polls > 20) clearInterval(timer);
+    }, 500);
+  })();
+  </script>
+
+  <div class="flex justify-between mt-6">
+    <button hx-get="/character/step/2" hx-target="#step-content" hx-swap="innerHTML"
+            onclick="document.getElementById('step-dot-3').className='text-sm px-4 py-1 rounded text-gray-600';document.getElementById('step-dot-2').className='text-sm px-4 py-1 rounded text-aged-gold bg-aged-brown/20 border border-aged-gold/30'"
+            class="px-6 py-2 border border-gray-700 rounded text-sm text-gray-400 hover:text-aged-gold">
+      ← 上一步
+    </button>
+    <button onclick="exportCharacter()"
+            class="px-6 py-2 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30">
+      导出角色卡 (.zip)
+    </button>
+  </div>
+</div>

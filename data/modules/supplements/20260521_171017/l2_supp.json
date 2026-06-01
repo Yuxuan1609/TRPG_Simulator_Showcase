@@ -1,0 +1,273 @@
+{
+  "scenes": {
+    "SS1_镜中虚空": {
+      "description": "你发现自己悬浮在一片漆黑虚空中，四周漂浮着锐利的镜子碎片，每一块都映照着不同的影像：电车的昏暗车厢、一个男人的苍白面孔、扭曲的肢体。一个低沉而无从辨别的声音在你脑中回响。",
+      "interactions": [
+        {
+          "id": "SI1",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中虚空",
+          "name": "观察碎片",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "镜子碎片漂浮在虚空中，你试图仔细查看。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你无法从碎片中获取任何有用信息。",
+            "on_regular": "你观察到碎片中映出一间实验室和手术台的影像。",
+            "on_hard": "你看到碎片中映出一个穿白大褂的人正在做实验，实验体身上束缚着镜子。",
+            "on_extreme": "你注意到一块碎片中有一个钥匙孔的倒影，位置在角落的黑镜上。"
+          }
+        },
+        {
+          "id": "SI2",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中虚空",
+          "name": "回答“为了真相”",
+          "type": "无",
+          "requirement": "",
+          "trigger": "那个声音在你脑中回响，等待着你的答案。",
+          "result": "你坚定地回答：‘为了真相。’ 瞬间，一块最大的碎片如巨口般将你吸入。",
+          "side_effects": []
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT1",
+          "entity_type": "auto_trigger",
+          "scene": "SS1_镜中虚空",
+          "name": "声音回响",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你进入SS1_镜中虚空",
+          "result": "一个低沉而无从辨别的声音在你脑中回响：‘你为何窥视深渊？若不付出代价，便无法前行。’",
+          "side_effects": []
+        }
+      ],
+      "from_here": [
+        {
+          "target": "SS2_霍桑实验室",
+          "method": "被最大碎片吸入",
+          "requirement": "SI2"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "test_room",
+          "method": "凝视裂痕镜子，意识被拽入镜面",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS2_霍桑实验室": {
+      "description": "你置身于一间泛黄的实验室，空气弥漫着腐败与药水的味道。一个穿白大褂的人——霍桑——正俯身对着手术台，将一面相似的镜子固定在一个被束缚的人脸上。他喃喃自语：“灵魂剥离实验记录：第七次，对象意识消失，镜中出现独立实体。” 脚边渗出黑色液体正在蔓延。",
+      "interactions": [
+        {
+          "id": "SI3",
+          "entity_type": "interaction",
+          "scene": "SS2_霍桑实验室",
+          "name": "躲藏在台面下",
+          "type": "潜行",
+          "requirement": "",
+          "trigger": "黑色液体向四周蔓延，你感到危险，决定躲藏在手术台下方。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "hard",
+          "graded_result": {
+            "on_failure": "你躲藏时发出响声，霍桑转头看向你的方向，但似乎没有发现你，液体仍在你脚边蔓延。",
+            "on_regular": "你成功躲藏在台面下，黑色液体从你旁边流过，没有触及你。",
+            "on_hard": "你敏捷地躲入台底，连呼吸都屏住，霍桑完全没有察觉。",
+            "on_extreme": "你完美隐匿，同时观察到霍桑实验台上另一面小镜子上映出黑镜闪光的征兆。"
+          }
+        },
+        {
+          "id": "SI4",
+          "entity_type": "interaction",
+          "scene": "SS2_霍桑实验室",
+          "name": "触碰镜子干扰实验",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你决定触碰手术台上固定的镜子以干扰实验。",
+          "result": "你伸手触碰镜子，镜面泛起涟漪，实验受到干扰，霍桑愤怒地转头，黑色液体加速蔓延。",
+          "side_effects": []
+        },
+        {
+          "id": "SI5",
+          "entity_type": "interaction",
+          "scene": "SS2_霍桑实验室",
+          "name": "使用钥匙开启镜门",
+          "type": "无",
+          "requirement": "SAT3 || 必须持有钥匙1把",
+          "trigger": "黑镜上出现钥匙孔，你掏出钥匙。",
+          "result": "你插入钥匙转动，镜门应声打开，露出通向黑暗的短廊。",
+          "side_effects": [
+            "@consume_item(item_name=\"钥匙\", quantity=1, narrative=\"你插入钥匙转动\")"
+          ]
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT2",
+          "entity_type": "auto_trigger",
+          "scene": "SS2_霍桑实验室",
+          "name": "黑色液体蔓延",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你进入SS2_霍桑实验室",
+          "result": "脚边渗出的黑色液体开始快速蔓延。",
+          "side_effects": []
+        },
+        {
+          "id": "SAT3",
+          "entity_type": "auto_trigger",
+          "scene": "SS2_霍桑实验室",
+          "name": "黑镜闪光",
+          "type": "无",
+          "requirement": "SI3 OR SI4",
+          "trigger": "在你躲藏或触碰之后，黑镜突然闪光。",
+          "result": "角落的一面黑镜突然闪光，钥匙孔显现。",
+          "side_effects": []
+        }
+      ],
+      "from_here": [
+        {
+          "target": "SS3_回廊囚笼",
+          "method": "穿过镜门进入短廊",
+          "requirement": "SI5"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS1_镜中虚空",
+          "method": "被最大碎片吸入",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS3_回廊囚笼": {
+      "description": "你穿过短廊，来到一个四壁皆是镜子的狭窄空间。你的倒影并不跟随你动作，而是各自低语、做出诡异姿势。其中一个倒影开口：‘离开这里，否则你将永远困于此。’ 你想起测试房间那盏忽明忽暗的白炽灯，那是你唯一的锚点。",
+      "interactions": [
+        {
+          "id": "SI6",
+          "entity_type": "interaction",
+          "scene": "SS3_回廊囚笼",
+          "name": "与倒影对话",
+          "type": "话术",
+          "requirement": "",
+          "trigger": "一个倒影开口说话，你可以尝试与他交流。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你的话语被倒影扭曲，他不再理睬你，只是低语。",
+            "on_regular": "倒影告诉你：‘这里是意识困镜，只有强烈的锚点才能脱离。’",
+            "on_hard": "你成功说服倒影透露更多：‘那盏忽明忽暗的灯是你在现实世界的锚点，集中精神回想它。’",
+            "on_extreme": "倒影认同你的决心，他提醒你：‘钥匙是通往深处的关键，但任何门都有代价。’"
+          }
+        },
+        {
+          "id": "SI7",
+          "entity_type": "interaction",
+          "scene": "SS3_回廊囚笼",
+          "name": "闭眼回想白炽灯",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你想起测试房间那盏忽明忽暗的白炽灯，你决定闭眼集中精神回想。",
+          "result": "你闭眼集中精神回想那灯光，周围镜子的低语逐渐消失。你感觉到测试房间的灯光成为锚点，你知道可以借此离开这里。",
+          "side_effects": []
+        },
+        {
+          "id": "SI8",
+          "entity_type": "interaction",
+          "scene": "SS3_回廊囚笼",
+          "name": "观察镜子倒影",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "四壁镜子的倒影异常，你决定仔细查看。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你只觉得倒影令人眩晕，无法聚焦。",
+            "on_regular": "你注意到每个倒影的动作都不同，其中有一个倒影一直在重复抚摸脸部的动作。",
+            "on_hard": "你发现有一个倒影与其他不同，它似乎在暗示你钥匙孔的方向。",
+            "on_extreme": "你从倒影的嘴唇动作读出‘不要再次凝视’的警告。"
+          }
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT4",
+          "entity_type": "auto_trigger",
+          "scene": "SS3_回廊囚笼",
+          "name": "倒影警告",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你进入SS3_回廊囚笼",
+          "result": "其中一个倒影开口：‘离开这里，否则你将永远困于此。’",
+          "side_effects": []
+        }
+      ],
+      "from_here": [
+        {
+          "target": "test_room",
+          "method": "闭眼回想灯光，脱离镜中世界",
+          "requirement": "SI7"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS2_霍桑实验室",
+          "method": "穿过镜门短廊",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [],
+  "npc_profiles": {},
+  "dependency_graph": {
+    "nodes": {
+      "SI1": {},
+      "SI2": {},
+      "SAT1": {},
+      "SI3": {},
+      "SI4": {},
+      "SAT2": {},
+      "SAT3": {},
+      "SI5": {},
+      "SI6": {},
+      "SI7": {},
+      "SI8": {},
+      "SAT4": {}
+    },
+    "edges": [
+      {
+        "source": "SAT3",
+        "target": "SI3",
+        "condition": "completed"
+      },
+      {
+        "source": "SAT3",
+        "target": "SI4",
+        "condition": "completed"
+      },
+      {
+        "source": "SI5",
+        "target": "SAT3",
+        "condition": "completed"
+      }
+    ]
+  },
+  "_scene_names": {
+    "SS1_镜中虚空": "SS1_镜中虚空",
+    "SS2_霍桑实验室": "SS2_霍桑实验室",
+    "SS3_回廊囚笼": "SS3_回廊囚笼"
+  },
+  "_phase1": {}
+}

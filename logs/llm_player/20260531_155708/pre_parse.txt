@@ -1,0 +1,99 @@
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要查看车门上的白色便签和旁边的电车示意地图",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要仔细搜索6号车厢的长椅和地面，寻找所谓的'第三个箱子'。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走向7号车厢，同时用手电筒照亮前方。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家环顾7号车厢，寻找其他出口或可用物品，同时保持警惕。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想用手电筒照亮前方巨口，观察其全貌和周围环境。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家打开手电筒照亮前方的巨口，试图看清其全貌和周围环境。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家打开手电筒照亮前方的巨口，试图观察其全貌和周围环境。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家后退离开7号车厢，同时用手电筒照亮身后，确认来路状况。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要后退离开7号车厢，同时用手电筒照亮身后以确认来路状况。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要拿起报纸并查看内容",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿出手机，检查时间、信号、未读信息和报警记录。",
+  "resolved_text": "",
+  "question": ""
+}
+

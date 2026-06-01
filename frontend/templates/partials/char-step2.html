@@ -1,0 +1,47 @@
+<div>
+  <h2 class="text-lg text-aged-gold mb-4 border-l-2 border-aged-gold pl-3">职业与技能</h2>
+  <div class="mb-4">
+    <label class="block text-xs text-gray-500 mb-1">职业</label>
+    <select name="occupation" id="select-occupation"
+            hx-get="/character/skills-list"
+            hx-trigger="change"
+            hx-target="#skills-list"
+            hx-swap="innerHTML"
+            hx-include="this"
+            hx-params="occupation"
+            hx-on--htmx-before-request="charSyncAllFields()"
+            class="w-full bg-[#1a150c] border border-[#4a3820] rounded px-3 py-2 text-sm text-gray-300">
+      <option value="">选择职业...</option>
+      {% for occ in occupations %}
+      <option value="{{ occ.name }}">{{ occ.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div id="skills-list" class="text-sm text-gray-600 max-h-[60vh] overflow-y-auto">
+    选择职业后显示所有技能（职业技能已高亮）
+  </div>
+
+  <script>
+  (function() {
+    var el = document.getElementById('select-occupation');
+    var f = document.getElementById('char-occupation');
+    if (el && f && f.value) {
+      el.value = f.value;
+      el.dispatchEvent(new Event('change', {bubbles: true}));
+    }
+  })();
+  </script>
+
+  <div class="flex justify-between mt-6">
+    <button hx-get="/character/step/1" hx-target="#step-content" hx-swap="innerHTML"
+            onclick="document.getElementById('step-dot-2').className='text-sm px-4 py-1 rounded text-gray-600';document.getElementById('step-dot-1').className='text-sm px-4 py-1 rounded text-aged-gold bg-aged-brown/20 border border-aged-gold/30'"
+            class="px-6 py-2 border border-gray-700 rounded text-sm text-gray-400 hover:text-aged-gold">
+      ← 上一步
+    </button>
+    <button hx-get="/character/step/3" hx-target="#step-content" hx-swap="innerHTML"
+            onclick="charSyncAllFields();document.getElementById('step-dot-2').className='text-sm px-4 py-1 rounded text-gray-600';document.getElementById('step-dot-3').className='text-sm px-4 py-1 rounded text-aged-gold bg-aged-brown/20 border border-aged-gold/30'"
+            class="px-6 py-2 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30">
+      下一步 →
+    </button>
+  </div>
+</div>

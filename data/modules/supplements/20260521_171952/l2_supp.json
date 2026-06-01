@@ -1,0 +1,199 @@
+{
+  "scenes": {
+    "SS1_镜中回廊": {
+      "description": "你跌落在一条延伸的昏暗走廊里，墙壁是黑色的金属，地面覆盖着一层薄薄的积水。头顶的管道滴落着不明液体，远处的拐角透出微弱的红光。走廊两侧有紧闭的铁门，上面用绿漆标注着难以辨识的编号。你感到有什么东西在你视野边缘移动——一闪而过的影子，像是被拉长的人形。远处传来模糊的呼唤声：“霍桑……霍桑的研究……”",
+      "interactions": [
+        {
+          "id": "SI1",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "调查走廊",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你开始仔细检查走廊的每个角落。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "走廊过于昏暗，你只能看到积水和滴水，没有其他显著特征。",
+            "on_regular": "你注意到铁门上的编号似乎与某种系统对应，且积水中有拖曳的痕迹。",
+            "on_hard": "你发现编号“β-7”的门与其他不同，且红光源来自走廊尽头破裂的灯管，呼唤声似乎从“β-7”门后传来更清晰。",
+            "on_extreme": "你捕捉到影子的一瞬，它似乎是人形但缺少一只手臂，同时你注意到铁门底部有微弱的荧光标记，像是某种符号。"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI2",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "聆听呼唤",
+          "type": "聆听",
+          "requirement": "",
+          "trigger": "你侧耳倾听那模糊的呼唤声。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你只听到滴水和远处低沉的嗡鸣。",
+            "on_regular": "你确定呼唤声来自右侧第三扇铁门，声音模糊但持续。",
+            "on_hard": "你分辨出声音中夹杂着“霍桑”和“研究”，似乎是某人在寻求帮助。",
+            "on_extreme": "你几乎能听到完整句子：“找到钥匙……我在实验室里……”，并且确定那扇门没有锁。"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI3",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "检查铁门",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你走近一扇铁门，仔细检查。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "门上的编号完全模糊，你无法识别。",
+            "on_regular": "你看到一扇门上标有“β-7”，门把手有经常使用的痕迹。",
+            "on_hard": "你发现门缝透出微光，并听到机器声来自门内。",
+            "on_extreme": "你发现门没有锁，甚至有一条缝，可以直接推开。"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI4",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "循声推开铁门",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你决定循着呼唤声的方向，推开那扇铁门。",
+          "result": "你推开标有β-7的铁门，进入一个布满灰尘的实验室。室内昏暗，中央桌子上的投影设备仍在运转，投射出影像。你注意到墙角有一面椭圆形镜子，表面如水波动。",
+          "side_effects": []
+        }
+      ],
+      "auto_triggers": [],
+      "from_here": [
+        {
+          "target": "SS2_镜像实验室",
+          "method": "推开β-7铁门",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "test_room",
+          "method": "被吸入镜中",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS2_镜像实验室": {
+      "description": "你推开铁门，进入一个布满灰尘的实验室。中央的桌子上摆着一台依然运转的投影设备，胶片上循环播放着一段影像：霍桑研究员正对着镜头疯狂涂写公式，背景是一面与test_room相同的镜子。影像扭曲，他的脸忽然贴近屏幕，低声说：“别碰那面镜子——它已经知道你了。” 随后，影像碎裂，设备冒烟停止。你注意到墙角有一面完整的椭圆形镜子，镜面如水面般波动。镜中倒映的不是这间实验室，而是test_room的景象。",
+      "interactions": [
+        {
+          "id": "SI5",
+          "entity_type": "interaction",
+          "scene": "SS2_镜像实验室",
+          "name": "检查投影设备",
+          "type": "计算机使用",
+          "requirement": "",
+          "trigger": "你靠近已经冒烟的投影设备，试图获得信息。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "设备已完全损坏，你无法获得任何有用信息。",
+            "on_regular": "你看到烧毁的胶片上残留着一些公式碎片，似乎是关于镜子共振的计算。",
+            "on_hard": "你从影像最后画面中看到霍桑的口型，似乎在重复“别碰那面镜子”。",
+            "on_extreme": "你发现在胶片旋转轴下藏着一张小纸条，上面写着“钥匙是倒数第二扇门”的线索。"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI6",
+          "entity_type": "interaction",
+          "scene": "SS2_镜像实验室",
+          "name": "注视椭圆形镜子",
+          "type": "心理学",
+          "requirement": "",
+          "trigger": "你盯着那面波动的椭圆形镜面，试图看穿它。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "镜面反光强烈，你无法看清任何东西，只感到头晕。",
+            "on_regular": "镜中逐渐浮现一个苍白的身影，形销骨立，正是霍桑。他用口型说：“找到钥匙……把我带出去……但要小心，它也在找出口。”",
+            "on_hard": "你不仅看到霍桑，还看到镜中映射的test_room里你的身体，同时你感到实验室开始隐约震动，似乎不稳定。",
+            "on_extreme": "你与霍桑产生短暂精神连接，得知钥匙是“β-7”背后的密码，并且实验室随时可能坍塌，你必须立即通过镜子返回。"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "id": "SI7",
+          "entity_type": "interaction",
+          "scene": "SS2_镜像实验室",
+          "name": "触摸镜子逃离",
+          "type": "无",
+          "requirement": "SI6",
+          "trigger": "你伸出手，触碰那面波动的镜面。",
+          "result": "你的手穿过冰冷的水膜，整个实验室开始剧烈震动，天花板落下碎石。你被迫向前冲刺，身体穿过镜子，跌回test_room，撞翻了金属桌。镜子裂痕蔓延，几乎无法映照。你的手边多了一张泛黄的纸片。",
+          "side_effects": [
+            "@item_gain(item_name=\"泛黄的纸片\", quantity=1)"
+          ]
+        }
+      ],
+      "auto_triggers": [],
+      "from_here": [
+        {
+          "target": "test_room",
+          "method": "触摸椭圆形镜子逃离",
+          "requirement": "SI6"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS1_镜中回廊",
+          "method": "推开β-7铁门",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [],
+  "npc_profiles": {},
+  "dependency_graph": {
+    "nodes": {
+      "SI1": {
+        "id": "SI1"
+      },
+      "SI2": {
+        "id": "SI2"
+      },
+      "SI3": {
+        "id": "SI3"
+      },
+      "SI4": {
+        "id": "SI4"
+      },
+      "SI5": {
+        "id": "SI5"
+      },
+      "SI6": {
+        "id": "SI6"
+      },
+      "SI7": {
+        "id": "SI7"
+      }
+    },
+    "edges": [
+      {
+        "source": "SI7",
+        "target": "SI6",
+        "condition": "completed"
+      }
+    ]
+  },
+  "_scene_names": {
+    "SS1_镜中回廊": "SS1_镜中回廊",
+    "SS2_镜像实验室": "SS2_镜像实验室"
+  },
+  "_phase1": {}
+}

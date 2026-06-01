@@ -1,0 +1,49 @@
+{
+  "module_meta": {
+    "title": "常暗之箱",
+    "author": "86式",
+    "era": "2013",
+    "theme": "梦境逃生",
+    "expected_duration": "60分钟",
+    "player_count": 2,
+    "estimated_duration": 60,
+    "comms_interval": 8,
+    "starting_time_of_day": "夜间"
+  },
+  "scenes": [
+    "6号车厢",
+    "7号车厢",
+    "5号车厢",
+    "4号车厢",
+    "3号车厢",
+    "2号车厢",
+    "先头车厢"
+  ],
+  "characters": [
+    {
+      "name": "京山 人吉",
+      "id": "NPC_1",
+      "role": "乘务员",
+      "scenes": [
+        "4号车厢"
+      ],
+      "can_follow": true,
+      "follow_condition": "急救成功使乘务员苏醒，并请求帮助"
+    }
+  ],
+  "boss_encounters": [
+    {
+      "boss_ref": "吞噬之口",
+      "scene": "7号车厢",
+      "description": "从车尾吞噬车厢的巨口，奈亚的化身"
+    }
+  ],
+  "enemies": [
+    {
+      "enemy_ref": "Clicker",
+      "min_count": 1,
+      "max_count": 3
+    }
+  ],
+  "weapons": []
+}

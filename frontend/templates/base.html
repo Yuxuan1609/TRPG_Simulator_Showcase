@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}TRPG 调查员助手{% endblock %}</title>
+  {# Static compiled Tailwind CSS (no CDN) #}
+  <link rel="stylesheet" href="/static/css/tailwind-built.css">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    /* Base body — warm dark background, high-contrast text (design doc: #0d0d0d) */
+    body { background: #0d0d0d; color: #c8c0b8; font-family: 'Noto Serif SC', 'SimSun', serif; }
+    /* Asset background container — fixed behind everything */
+    #asset-bg-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+    .asset-bg-item { position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease-in-out; background-size: cover; background-position: center; }
+    /* Content overlay — ensures text readability over background */
+    #content-overlay { position: fixed; inset: 0; z-index: 1; background: rgba(13,13,13,0.72); pointer-events: none; }
+    /* Main content sits above overlay */
+    #main-content { position: relative; z-index: 2; }
+    /* Crossfade transition for images */
+    .image-crossfade { transition: opacity 0.5s ease-in-out; }
+    .image-crossfade.switching { opacity: 0; }
+    /* Slide-up panel animation */
+    .slide-up-enter { transform: translateY(100%); transition: transform 0.3s ease-out; }
+    .slide-up-enter.active { transform: translateY(0); }
+    /* Highlight flash for new narrative */
+    @keyframes narrative-flash {
+      0% { background: rgba(201,168,76,0.1); }
+      100% { background: transparent; }
+    }
+    .narrative-flash { animation: narrative-flash 1.5s ease-out; }
+    /* line-clamp for Tailwind CDN v4 compatibility */
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    /* Scene info card styles */
+    .scene-card { background: rgba(15,15,15,0.92); border: 1px solid rgba(201,160,96,0.25); backdrop-filter: blur(8px); }
+    .scene-card-expanded { background: rgba(15,15,15,0.95); border: 1px solid rgba(201,160,96,0.35); backdrop-filter: blur(12px); }
+    /* Scene panel glass effect */
+    .scene-glass { background: rgba(15,15,15,0.92); border-right: 1px solid rgba(201,160,96,0.2); backdrop-filter: blur(8px); }
+    /* Character card glass effect */
+    .char-glass { background: rgba(15,15,15,0.92); border-left: 1px solid rgba(201,160,96,0.2); backdrop-filter: blur(8px); }
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col" data-asset-context="{% block asset_context %}game{% endblock %}">
+  {# Background layers injected by AssetCarousel #}
+  {# Content readability overlay #}
+  <div id="content-overlay"></div>
+  {# Main content wrapper #}
+  <div id="main-content">
+    {% block body %}{% endblock %}
+  </div>
+  {# File browser modal — shared across all pages #}
+  <div id="file-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center"
+       onclick="if(event.target===this)closeFileModal()">
+    <div class="bg-[#141414] border border-gray-600 rounded-lg p-4 w-[550px] max-h-[70vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-sm text-gray-300">选择文件</span>
+        <button class="text-gray-400 hover:text-gray-200 text-lg" onclick="closeFileModal()">&times;</button>
+      </div>
+      <div id="file-browser-content" class="file-listing-container">
+        <p class="text-sm text-gray-500">加载中...</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Global file picker — available in all pages
+    function openFileBrowser() {
+      const modal = document.getElementById('file-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+    function closeFileModal() {
+      const modal = document.getElementById('file-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+    function pickFile(path, targetId) {
+      if (targetId) {
+        const input = document.getElementById(targetId);
+        if (input) { input.value = path; input.dispatchEvent(new Event('change')); }
+      }
+      closeFileModal();
+    }
+  </script>
+  {# Asset carousel background system #}
+  <script src="/static/js/assets.js"></script>
+</body>
+</html>

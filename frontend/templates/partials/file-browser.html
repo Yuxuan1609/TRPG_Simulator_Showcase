@@ -1,0 +1,12 @@
+{# Reusable file/directory browser component. #}
+{# Expected context: browser_id (unique string), start_dir (path string) #}
+{# Optional: allow_files (bool default true), allow_dirs (bool default true), multi_select (bool default false) #}
+<div id="{{ browser_id }}-container"
+     hx-get="/api/files?dir={{ start_dir }}"
+     hx-trigger="load"
+     hx-swap="innerHTML">
+  <div class="text-sm text-gray-500">加载中...</div>
+</div>
+
+{# Hidden input to store selection #}
+<input type="hidden" id="{{ browser_id }}-value" name="{{ browser_id }}" value="">

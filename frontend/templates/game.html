@@ -1,0 +1,1119 @@
+{% extends "base.html" %}
+{% block title %}TRPG 游戏{% endblock %}
+{% block asset_context %}game{% endblock %}
+{% block body %}
+
+{# ==================== SETUP SCREEN ==================== #}
+<div id="game-setup" class="h-screen flex">
+  <nav class="w-56 border-r border-gray-800/60 bg-[#0f0f0f]/90 flex flex-col p-4 gap-3">
+    <h1 class="text-lg text-aged-gold font-bold tracking-wider border-b border-gray-800 pb-3">游戏设置</h1>
+    <a href="/" class="block px-3 py-2 text-sm text-gray-400 hover:text-aged-gold hover:bg-[#1a1a1a] rounded">返回启动页</a>
+  </nav>
+  <div class="flex-1 overflow-y-auto p-6">
+    <h2 class="text-xl text-aged-gold mb-6 border-b border-gray-800 pb-3">快速开始</h2>
+    <form id="init-form" class="space-y-5 max-w-2xl" onsubmit="initGame(event)">
+      <fieldset class="border border-gray-700 rounded-lg p-4">
+        <legend class="text-sm text-aged-gold px-2">模组文件</legend>
+        <div class="space-y-3">
+          {% for label, id, placeholder in [
+            ('L2 KP 守秘人层', 'l2-path', 'data/modules/更新模组0526v2/l2_keeper.json'),
+            ('L1 玩家可见层', 'l1-path', 'data/modules/更新模组0526v2/l1_player.json'),
+            ('L3 设计者层', 'l3-path', 'data/modules/更新模组0526v2/l3_designer.json'),
+          ] %}
+          <div><label class="block text-xs text-gray-300 mb-1">{{ label }}</label>
+            <input type="text" id="{{ id }}" name="{{ id.replace('-', '_') }}" placeholder="{{ placeholder }}"
+                   class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+          </div>{% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="border border-gray-700 rounded-lg p-4">
+        <legend class="text-sm text-aged-gold px-2">调查员（留空使用默认）</legend>
+        <input type="text" id="char-path" name="char_path" placeholder="investigator/test_character.json"
+               class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+      </fieldset>
+      <button type="submit" class="px-8 py-2.5 bg-aged-brown text-parchment rounded hover:bg-[#7a4a2c] text-sm border border-aged-gold/30 font-bold">开始游戏</button>
+      <span id="init-error" class="text-red-400 text-sm"></span>
+    </form>
+  </div>
+</div>
+
+{# ==================== GAME SCREEN ==================== #}
+<div id="game-screen" style="display:none" class="h-screen flex overflow-hidden relative">
+
+  {# -- Left Panel: Scene Info (like character card) -- #}
+  <div id="scene-panel" class="w-64 border-r border-gray-800/60 scene-glass flex flex-col overflow-y-auto shrink-0">
+    {# Collapsed state -- #}
+    <div id="scene-panel-collapsed" class="p-3 cursor-pointer" onclick="toggleSceneCard()">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-aged-gold shrink-0 border border-gray-700 overflow-hidden">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div id="scene-panel-name" class="text-sm text-aged-gold font-bold truncate">--</div>
+          <div id="scene-panel-time" class="text-[10px] text-gray-500 font-mono">--:--</div>
+        </div>
+      </div>
+    </div>
+    {# Expanded state -- #}
+    <div id="scene-panel-expanded" class="hidden flex flex-col h-full">
+      {# 可点击的收起头部 -- #}
+      <div class="flex items-center justify-between p-3 border-b border-gray-800/60 cursor-pointer hover:bg-[#1a1a1a]/50" onclick="toggleSceneCard()">
+        <span id="scene-card-name-expanded" class="text-sm text-aged-gold font-bold">--</span>
+        <div class="flex items-center gap-2">
+          <span id="scene-card-time-full" class="text-[10px] text-gray-500 font-mono">--</span>
+          <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+        </div>
+      </div>
+      <div class="p-3 space-y-3 overflow-y-auto flex-1">
+        {# 场景描述 -- #}
+        <div id="scene-card-desc" class="text-xs text-gray-400 leading-relaxed">--</div>
+        {# 出口 -- #}
+        <div id="scene-card-exits-wrap" class="hidden">
+          <div class="text-[10px] text-gray-500 font-bold mb-1">出口</div>
+          <div id="scene-card-exits" class="flex flex-wrap gap-1"></div>
+        </div>
+        {# NPC -- #}
+        <div id="scene-card-npcs-wrap" class="hidden">
+          <div class="text-[10px] text-gray-500 font-bold mb-1">在场角色</div>
+          <div id="scene-card-npcs" class="space-y-2"></div>
+        </div>
+        {# 场景敌人 -- #}
+        <div id="scene-card-enemies-wrap" class="hidden">
+          <div class="text-[10px] text-gray-500 font-bold mb-1">敌对生物</div>
+          <div id="scene-card-enemies" class="space-y-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# -- Left Panel: Combat Overlay (replaces scene-panel during combat) -- #}
+  <div id="combat-panel" class="w-64 border-r border-gray-800/60 scene-glass flex flex-col overflow-y-auto shrink-0 hidden">
+    {# Header -- #}
+    <div class="flex items-center justify-between p-3 border-b border-gray-800/60">
+      <span class="text-sm text-aged-gold font-bold flex items-center gap-1">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>
+        战斗
+      </span>
+      <button onclick="toggleCombatPanel()" class="text-gray-500 hover:text-aged-gold" title="折叠">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg>
+      </button>
+    </div>
+    <div id="combat-panel-inner" class="p-3 space-y-3 overflow-y-auto flex-1">
+      {# Player status -- #}
+      <div>
+        <div class="text-[10px] text-gray-500 font-bold mb-1">调查员</div>
+        <div id="combat-player-name" class="text-xs text-gray-300 mb-1">--</div>
+        <div class="space-y-1.5">
+          <div><div class="flex justify-between text-[10px] text-gray-500"><span>HP</span><span id="combat-hp-text">?/?</span></div>
+            <div class="h-1.5 bg-gray-800 rounded overflow-hidden"><div id="combat-hp-bar" class="h-full bg-coc-green rounded transition-all duration-500" style="width:100%"></div></div>
+          </div>
+          <div><div class="flex justify-between text-[10px] text-gray-500"><span>SAN</span><span id="combat-san-text">?</span></div>
+            <div class="h-1.5 bg-gray-800 rounded overflow-hidden"><div id="combat-san-bar" class="h-full bg-aged-gold rounded transition-all duration-500" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+      {# Enemies -- #}
+      <div>
+        <div class="text-[10px] text-gray-500 font-bold mb-1">敌人</div>
+        <div id="combat-enemies" class="space-y-1.5"></div>
+      </div>
+      {# Action buttons -- #}
+      <div>
+        <div class="text-[10px] text-gray-500 font-bold mb-1">动作</div>
+        <div id="combat-actions" class="grid grid-cols-3 gap-1.5"></div>
+      </div>
+      {# Weapon / Target selection (shown when attack selected) -- #}
+      <div id="combat-weapon-section" class="hidden">
+        <div class="text-[10px] text-gray-500 font-bold mb-1">武器</div>
+        <select id="combat-weapon-select" class="w-full bg-[#1a150c] border border-gray-600 rounded px-2 py-1 text-xs text-gray-200 focus:border-aged-gold focus:outline-none"></select>
+      </div>
+      <div id="combat-target-section" class="hidden">
+        <div class="text-[10px] text-gray-500 font-bold mb-1">目标 (点击同一目标多次分配攻击次数)</div>
+        <div id="combat-targets" class="flex flex-wrap gap-1"></div>
+        <div id="combat-target-hint" class="text-[10px] text-gray-600 mt-1"></div>
+      </div>
+      {# Extra intent -- #}
+      <div>
+        <div class="text-[10px] text-gray-500 font-bold mb-1">额外意图（可选）</div>
+        <input type="text" id="combat-extra" placeholder="如：攻击核心..." class="w-full bg-[#1a150c] border border-gray-600 rounded px-2 py-1 text-xs text-gray-200 focus:border-aged-gold focus:outline-none">
+      </div>
+      {# Execute button -- #}
+      <button id="combat-execute-btn" onclick="executeCombatRound()" class="w-full px-4 py-2 bg-aged-brown text-parchment text-sm rounded hover:bg-[#7a4a2c] border border-aged-gold/30 font-bold flex items-center justify-center gap-2">
+        <span>执行回合</span>
+      </button>
+      {# Combat log -- #}
+      <div>
+        <div class="text-[10px] text-gray-500 font-bold mb-1">战斗日志</div>
+        <div id="combat-log" class="space-y-1 text-[10px]"></div>
+      </div>
+    </div>
+  </div>
+
+  {# -- Center Panel: Narrative + Input -- #}
+  <div class="flex-1 flex flex-col min-w-0">
+
+    {# Top bar (simplified) -- #}
+    <div class="flex justify-between items-center px-4 py-2 border-b border-gray-800/60 bg-[#0f0f0f]/80 shrink-0">
+      <div class="flex gap-3 items-center text-[10px]">
+        <span id="step-indicator" class="text-gray-500 font-mono"></span>
+      </div>
+      <div class="flex gap-3 items-center">
+        <button class="text-[10px] text-gray-500 hover:text-aged-gold flex items-center gap-1" onclick="document.getElementById('help-panel').classList.toggle('hidden')">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          帮助
+        </button>
+      </div>
+    </div>
+
+    {# Narrative area -- #}
+    <div class="flex-1 overflow-y-auto px-4 py-3 space-y-3" id="narrative-area">
+      {# Help panel -- #}
+      <div id="help-panel" class="hidden text-xs text-gray-500 border border-gray-700 rounded p-3 bg-[#0f0f0f]/90">
+        <b class="text-gray-300">命令</b><br>
+        /scene | /char | /flags | /events<br>
+        /do 动作 | /save 槽位 | /load 槽位<br>
+        /reset | /help
+      </div>
+      {# Inline chat history toggle -- #}
+      <div class="flex justify-end">
+        <button onclick="toggleInlineChat()" class="text-[10px] text-gray-500 hover:text-aged-gold flex items-center gap-1 px-2 py-1 rounded hover:bg-[#1a1a1a]">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          <span id="inline-chat-label">对话记录</span>
+        </button>
+      </div>
+      <div id="chat-history-inline" class="hidden border border-gray-800 rounded bg-[#0f0f0f]/90 max-h-48 overflow-y-auto px-3 py-2 space-y-2"></div>
+      {# Turn output container -- #}
+      <div id="turn-output" class="space-y-3">
+        <div class="turn-empty text-sm text-gray-500 italic">游戏就绪。输入 /help 查看命令。</div>
+      </div>
+    </div>
+
+    {# Input bar -- #}
+    <div id="input-bar" class="px-4 py-3 border-t border-gray-800/60 bg-[#0f0f0f]/80 flex gap-2 shrink-0">
+      <input type="text" id="user-input" placeholder="输入你的行动..." autocomplete="off"
+             class="flex-1 bg-transparent border-none text-sm text-gray-300 placeholder-gray-600 focus:outline-none">
+      <button onclick="sendTurn()" class="px-6 py-1.5 bg-aged-brown text-parchment text-sm rounded hover:bg-[#7a4a2c] border border-aged-gold/30 flex items-center gap-1">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+        行动
+      </button>
+    </div>
+
+    {# Last turn summary (above input bar) -- #}
+    <div id="last-turn-summary" class="hidden px-4 py-1.5 border-t border-gray-800/40 bg-[#0f0f0f]/60 text-[10px] text-gray-500 truncate"></div>
+  </div>
+
+  {# -- Right Panel: Character Card (Optimized) -- #}
+  <div class="w-96 border-l border-gray-800/60 char-glass flex flex-col overflow-y-auto shrink-0" id="char-panel">
+    {# Collapsed state -- #}
+    <div id="char-panel-collapsed" class="p-3 cursor-pointer" onclick="toggleCharCard()">
+      <div class="flex items-center gap-3">
+        <div id="char-avatar" class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-gray-500 text-xs shrink-0 border border-gray-700 overflow-hidden">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div id="char-name" class="text-sm text-aged-gold font-bold truncate">调查员</div>
+          <div id="char-occupation" class="text-[10px] text-gray-500">--</div>
+          <div class="flex gap-2 mt-1.5">
+            <div class="flex-1">
+              <div class="flex justify-between text-[9px] text-gray-500 mb-0.5"><span>HP</span><span id="char-hp-text">?/?</span></div>
+              <div class="h-1.5 bg-gray-800 rounded overflow-hidden">
+                <div id="char-hp-bar" class="h-full bg-coc-green rounded transition-all duration-500" style="width:100%"></div>
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="flex justify-between text-[9px] text-gray-500 mb-0.5"><span>SAN</span><span id="char-san-text">?</span></div>
+              <div class="h-1.5 bg-gray-800 rounded overflow-hidden">
+                <div id="char-san-bar" class="h-full bg-aged-gold rounded transition-all duration-500" style="width:100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {# Expanded state -- #}
+    <div id="char-panel-expanded" class="hidden p-3 border-t border-gray-800/60 space-y-3"></div>
+  </div>
+
+</div>
+
+{# Freeze overlay — shown when game_frozen signal received #}
+<div id="freeze-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="bg-[#1a1410] border-2 border-red-600 rounded-lg p-6 max-w-lg mx-4 text-center">
+    <div class="text-red-400 text-lg font-bold mb-3">&#9888; 游戏已暂停</div>
+    <div id="freeze-message" class="text-gray-400 text-sm leading-relaxed"></div>
+    <div class="mt-4 flex gap-3 justify-center">
+      <button onclick="location.href='/'" class="px-4 py-1.5 text-xs border border-gray-600 rounded text-gray-400 hover:bg-gray-800">
+        返回启动页
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // == Scene Info Panel ==
+  let sceneCardExpanded = false;
+  function toggleSceneCard() {
+    sceneCardExpanded = !sceneCardExpanded;
+    const expanded = document.getElementById('scene-panel-expanded');
+    const collapsed = document.getElementById('scene-panel-collapsed');
+    if (sceneCardExpanded) {
+      expanded.classList.remove('hidden');
+      collapsed.classList.add('hidden');
+    } else {
+      expanded.classList.add('hidden');
+      collapsed.classList.remove('hidden');
+    }
+  }
+
+  function updateSceneCard(snap) {
+    if (!snap) return;
+    // Time — clock.to_dict() returns {"game_time": int, "time_context": str}
+    var timeStr = '';
+    if (snap.time && snap.time.game_time !== undefined) {
+      var gt = snap.time.game_time;
+      var day = Math.floor(gt / 1440);
+      var hour = Math.floor((gt % 1440) / 60);
+      var min = gt % 60;
+      if (day) timeStr += '第' + day + '天 ';
+      timeStr += (hour < 10 ? '0' : '') + hour + ':' + (min < 10 ? '0' : '') + min;
+    }
+
+    // Collapsed
+    document.getElementById('scene-panel-name').textContent = snap.scene_name || '--';
+    document.getElementById('scene-panel-time').textContent = timeStr || '--:--';
+
+    // Expanded
+    document.getElementById('scene-card-name-expanded').textContent = snap.scene_name || '--';
+    document.getElementById('scene-card-desc').textContent = snap.scene_description || '（无场景描述）';
+    document.getElementById('scene-card-time-full').textContent = timeStr || '--';
+
+    // Exits
+    var exitsWrap = document.getElementById('scene-card-exits-wrap');
+    var exitsEl = document.getElementById('scene-card-exits');
+    var exits = snap.exits || [];
+    if (exits.length > 0) {
+      exitsWrap.classList.remove('hidden');
+      exitsEl.innerHTML = exits.map(function(e) {
+        return '<span class="text-[10px] px-1.5 py-0.5 bg-gray-800 rounded text-gray-400 border border-gray-700">' + (e.target || '?') + '<span class="text-gray-600"> · ' + (e.method || '?') + '</span></span>';
+      }).join('');
+    } else {
+      exitsWrap.classList.add('hidden');
+    }
+
+    // NPCs
+    var npcsWrap = document.getElementById('scene-card-npcs-wrap');
+    var npcsEl = document.getElementById('scene-card-npcs');
+    var npcs = snap.npcs || [];
+    if (npcs.length > 0) {
+      npcsWrap.classList.remove('hidden');
+      npcsEl.innerHTML = npcs.map(function(n) {
+        return '<div class="text-[10px] text-gray-400">' +
+          '<span class="text-aged-gold font-bold">' + (n.name || '?') + '</span>' +
+          (n.demeanor ? ' <span class="text-gray-500">(' + n.demeanor + ')</span>' : '') +
+          (n.brief ? '<div class="text-gray-500 mt-0.5 leading-relaxed">' + n.brief + '</div>' : '') +
+          '</div>';
+      }).join('');
+    } else {
+      npcsWrap.classList.add('hidden');
+    }
+
+    // Enemies (scene-level, non-combat)
+    var enemiesWrap = document.getElementById('scene-card-enemies-wrap');
+    var enemiesEl = document.getElementById('scene-card-enemies');
+    var enemies = snap.enemies || [];
+    if (enemies.length > 0) {
+      enemiesWrap.classList.remove('hidden');
+      enemiesEl.innerHTML = enemies.map(function(e) {
+        var qty = (e.quantity || 1) > 1 ? ' ×' + e.quantity : '';
+        return '<div class="text-[10px] text-gray-400">' +
+          '<span class="text-red-400 font-bold">' + (e.enemy_ref || '?') + qty + '</span>' +
+          (e.status ? ' <span class="text-gray-500">[' + e.status + ']</span>' : '') +
+          '</div>';
+      }).join('');
+    } else {
+      enemiesWrap.classList.add('hidden');
+    }
+
+  }
+
+  // == Character panel toggle ==
+  function toggleCharCard() {
+    const expanded = document.getElementById('char-panel-expanded');
+    if (expanded.classList.contains('hidden')) {
+      htmx.ajax('GET', '/api/game/character-card', '#char-panel-expanded');
+      expanded.classList.remove('hidden');
+    } else {
+      expanded.classList.add('hidden');
+    }
+  }
+
+  function updateCharHUD(data) {
+    if (!data) return;
+    const hp = data.hp || 0;
+    const hpMax = data.hp_max || hp || 10;
+    const san = data.san || 0;
+    document.getElementById('char-name').textContent = data.name || '调查员';
+    document.getElementById('char-hp-text').textContent = hp + '/' + hpMax;
+    document.getElementById('char-san-text').textContent = san;
+    document.getElementById('char-hp-bar').style.width = (hpMax > 0 ? (hp / hpMax * 100) : 0) + '%';
+    document.getElementById('char-san-bar').style.width = (san > 0 ? (san / 99 * 100) : 0) + '%';
+    if (data.avatar_url) {
+      document.getElementById('char-avatar').innerHTML = '<img src="' + data.avatar_url + '" class="w-12 h-12 rounded-full object-cover" onerror="this.parentElement.innerHTML=\'<svg class=\\\'w-6 h-6\\\' fill=\\\'none\\\' stroke=\\\'currentColor\\\' viewBox=\\\'0 0 24 24\\\'><path stroke-linecap=\\\'round\\\' stroke-linejoin=\\\'round\\\' stroke-width=\\\'1.5\\\' d=\\\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\\\'/></svg>\'">';
+    }
+    if (data.occupation) {
+      document.getElementById('char-occupation').textContent = data.occupation;
+    } else {
+      document.getElementById('char-occupation').textContent = data.name || '--';
+    }
+  }
+
+  // == Game init ==
+  async function initGame(e) {
+    console.log('[initGame] begin');
+    e.preventDefault();
+    const form = document.getElementById('init-form');
+    const fd = new FormData(form);
+    fd.append('weapon_path', '');
+    fd.append('enemy_path', '');
+    fd.append('boss_path', '');
+    const errEl = document.getElementById('init-error');
+    errEl.textContent = '';
+    for (const id of ['l2-path', 'l1-path', 'l3-path']) {
+      if (!document.getElementById(id).value.trim()) {
+        errEl.textContent = '请填写所有模组文件路径';
+        console.log('[initGame] validation failed: empty', id);
+        return;
+      }
+    }
+    try {
+      console.log('[initGame] sending POST /api/game/init');
+      const resp = await fetch('/api/game/init', { method: 'POST', body: fd });
+      console.log('[initGame] response status:', resp.status);
+      const text = await resp.text();
+      if (!resp.ok) { errEl.textContent = '初始化失败: ' + text; console.log('[initGame] init failed:', text); return; }
+      const data = JSON.parse(text);
+      console.log('[initGame] init success, location:', data.location);
+      updateCharHUD({ name: data.name, hp: data.hp, hp_max: data.hp, san: data.san, avatar_url: '', occupation: '' });
+      document.getElementById('game-setup').style.display = 'none';
+      document.getElementById('game-screen').style.display = '';
+      document.getElementById('user-input').focus();
+      // Initial turn output
+      var turnHtml = '';
+      if (data.initial_brief) {
+        turnHtml += '<div class="turn-brief px-3 py-2 text-xs text-gray-500 border-l-2 border-gray-700 bg-[#0f0f0f]/50 rounded-r">' + data.initial_brief + '</div>';
+      }
+      if (data.initial_narrative) {
+        turnHtml += '<div class="turn-narrative px-4 py-3 text-sm text-parchment border-l-2 border-aged-gold bg-[#1a1410]/60 rounded-r narrative-flash leading-relaxed">' + data.initial_narrative + '</div>';
+      }
+      document.getElementById('turn-output').innerHTML = turnHtml || '<div class="turn-empty text-sm text-gray-500 italic">游戏已就绪</div>';
+      connectWS();
+      console.log('[initGame] game screen shown');
+    } catch(e) { console.error('[initGame] error:', e); errEl.textContent = '网络错误: ' + e.message; }
+  }
+
+  // == Inline chat toggle ==
+  let inlineChatVisible = false;
+  function toggleInlineChat() {
+    inlineChatVisible = !inlineChatVisible;
+    const panel = document.getElementById('chat-history-inline');
+    const label = document.getElementById('inline-chat-label');
+    if (inlineChatVisible) {
+      panel.classList.remove('hidden');
+      label.textContent = '隐藏记录';
+      refreshInlineChat();
+    } else {
+      panel.classList.add('hidden');
+      label.textContent = '对话记录';
+    }
+  }
+  function refreshInlineChat() {
+    const panel = document.getElementById('chat-history-inline');
+    if (!panel || panel.classList.contains('hidden')) return;
+    panel.innerHTML = chatMessages.slice(-20).join('') || '<div class="text-xs text-gray-600 italic">暂无记录</div>';
+    panel.scrollTop = panel.scrollHeight;
+  }
+
+  // == Chat history ==
+  let chatMessages = [];
+  function addToHistory(userMsg, responseHtml) {
+    if (userMsg) chatMessages.push('<div class="history-user px-3 py-1 text-xs text-gray-600 border-l-2 border-gray-700 mb-1">&gt; ' + userMsg + '</div>');
+    if (responseHtml) chatMessages.push(responseHtml);
+    if (chatMessages.length > 200) chatMessages = chatMessages.slice(-200);
+    refreshInlineChat();
+  }
+
+  // == Parse turn_dynamic_text into HTML ==
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  function renderTurnDynamic(text) {
+    if (!text) return '';
+    var blocks = text.split('\n\n');
+    var html = [];
+    blocks.forEach(function(block) {
+      block = block.trim();
+      if (!block) return;
+      if (block.startsWith('[时间]')) {
+        var content = block.replace('[时间]', '').trim();
+        html.push('<div class="turn-time text-[10px] text-gray-500 font-mono px-3 py-1">' + escapeHtml(content) + '</div>');
+      } else if (block.startsWith('[战斗]')) {
+        var lines = block.split('\n');
+        var title = lines[0].replace('[战斗]', '').trim();
+        var narrative = lines.slice(1).join('\n').trim();
+        var outcomeColor = title === '胜利' ? 'text-coc-green' : title === '败北' ? 'text-coc-red' : 'text-yellow-400';
+        html.push('<div class="turn-combat px-3 py-2 border-l-2 border-yellow-600/60 bg-[#1a1400]/60 rounded-r">' +
+          '<div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>' +
+          '<span class="text-sm font-bold ' + outcomeColor + '">战斗 ' + escapeHtml(title) + '</span></div>' +
+          (narrative ? '<div class="text-gray-400 text-xs mt-1 leading-relaxed">' + escapeHtml(narrative) + '</div>' : '') +
+          '</div>');
+      } else if (block.startsWith('[技能检定]')) {
+        var lines = block.split('\n').slice(1);
+        var skillsHtml = lines.map(function(line) {
+          line = line.trim();
+          if (!line) return '';
+          var m = line.match(/^\[(OK|FAIL)\]\s+(\S+)\s+\[(\S+)\]\s+(.*)$/);
+          if (!m) return '<div class="text-xs text-gray-400">' + escapeHtml(line) + '</div>';
+          var status = m[1];
+          var eid = m[2];
+          var tier = m[3];
+          var rest = m[4];
+          var diceMatch = rest.match(/D100=(\d+)\/(\d+)/);
+          var diceInfo = diceMatch ? 'D100=' + diceMatch[1] + '/' + diceMatch[2] : '';
+          var enhText = rest.replace(diceInfo, '').trim();
+          var tierColor = tier === 'extreme' ? 'text-yellow-300' : tier === 'hard' ? 'text-coc-green' : tier === 'regular' ? 'text-gray-300' : 'text-red-400';
+          return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] border ' +
+            (status === 'OK' ? 'border-coc-green/40 bg-coc-green/10 text-coc-green' : 'border-coc-red/40 bg-coc-red/10 text-coc-red') + '">' +
+            '<span class="font-bold">' + status + '</span>' +
+            '<span class="text-gray-400">' + escapeHtml(eid) + '</span>' +
+            '<span class="' + tierColor + '">[' + tier + ']</span>' +
+            (diceInfo ? '<span class="text-gray-500">' + diceInfo + '</span>' : '') +
+            (enhText ? '<span class="text-yellow-400">' + escapeHtml(enhText) + '</span>' : '') +
+            '</span>';
+        }).filter(Boolean).join('');
+        html.push('<div class="turn-skills flex flex-wrap gap-1.5 px-1">' + skillsHtml + '</div>');
+      } else if (block.startsWith('[概要]')) {
+        var content = block.replace('[概要]', '').trim();
+        html.push('<div class="turn-brief px-3 py-2 text-xs text-gray-500 border-l-2 border-gray-700 bg-[#0f0f0f]/50 rounded-r">' + escapeHtml(content) + '</div>');
+      } else if (block.startsWith('[叙事]')) {
+        var content = block.replace('[叙事]', '').trim();
+        html.push('<div class="turn-narrative px-4 py-3 text-sm text-parchment border-l-2 border-aged-gold bg-[#1a1410]/60 rounded-r narrative-flash leading-relaxed">' + escapeHtml(content).replace(/\n/g, '<br>') + '</div>');
+      } else {
+        html.push('<div class="text-xs text-gray-400 px-3 py-1">' + escapeHtml(block) + '</div>');
+      }
+    });
+    return html.join('');
+  }
+
+  // == Handle turn response ==
+  function handleTurnResponse(userText, data) {
+    if (data.game_frozen) {
+      var overlay = document.getElementById('freeze-overlay');
+      var msg = document.getElementById('freeze-message');
+      if (overlay && msg) {
+        msg.textContent = data.frozen_message || '系统异常，游戏已暂停。';
+        overlay.classList.remove('hidden');
+      }
+      var input = document.getElementById('user-input');
+      if (input) input.disabled = true;
+      var sendBtn = document.getElementById('send-btn');
+      if (sendBtn) sendBtn.disabled = true;
+      document.getElementById('step-indicator').innerHTML = '';
+      return;
+    }
+
+    var snap = data.player_snapshot;
+
+    // Update scene card
+    if (snap) updateSceneCard(snap);
+
+    // If combat_init is present and no combat result yet, enter interactive combat mode
+    if (data.combat_init && !data.combat) {
+      enterCombatMode(data.combat_init);
+      // Still show the narrative from this turn above the combat panel
+      if (data.narrative) {
+        var outputArea = document.getElementById('turn-output');
+        outputArea.innerHTML = '<div class="turn-narrative px-4 py-3 text-sm text-parchment border-l-2 border-aged-gold bg-[#1a1410]/60 rounded-r narrative-flash leading-relaxed">' + escapeHtml(data.narrative).replace(/\n/g, '<br>') + '</div>';
+      }
+      addToHistory(userText, data.narrative || '');
+      return;
+    }
+
+    // Build turn output HTML
+    var turnParts = [];
+
+    // Use turn_dynamic_text if available (new format from format_turn_dynamic)
+    if (data.turn_dynamic_text) {
+      var dynamicHtml = renderTurnDynamic(data.turn_dynamic_text);
+      if (dynamicHtml) {
+        turnParts.push(dynamicHtml);
+      }
+    } else {
+      // Legacy fallback: build from individual fields
+      // Combat
+      var combatData = (snap && snap.combat) || data.combat;
+      if (combatData) {
+        var outcomeLabel = combatData.outcome === 'win' ? '胜利' : combatData.outcome === 'loss' ? '败北' : combatData.outcome;
+        var outcomeColor = combatData.outcome === 'win' ? 'text-coc-green' : combatData.outcome === 'loss' ? 'text-coc-red' : 'text-yellow-400';
+        turnParts.push('<div class="turn-combat px-3 py-2 border-l-2 border-yellow-600/60 bg-[#1a1400]/60 rounded-r">' +
+          '<div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>' +
+          '<span class="text-sm font-bold ' + outcomeColor + '">战斗 ' + outcomeLabel + '</span></div>' +
+          (combatData.narrative ? '<div class="text-gray-400 text-xs mt-1 leading-relaxed">' + combatData.narrative + '</div>' : '') +
+          '</div>');
+      }
+
+      // Skill checks from snapshot
+      var skillChecks = (snap && snap.skill_checks) || data.skill_results || [];
+      if (skillChecks.length > 0) {
+        var skillsHtml = skillChecks.map(function(sc) {
+          var eid = sc.entity_id || '?';
+          var tier = sc.tier || 'regular';
+          var success = sc.success !== false;
+          var tierColor = tier === 'extreme' ? 'text-yellow-300' : tier === 'hard' ? 'text-coc-green' : tier === 'regular' ? 'text-gray-300' : 'text-red-400';
+          var diceInfo = sc.raw_roll ? ('D100=' + sc.raw_roll + '/' + sc.target) : '';
+          var enh = sc.enhancement;
+          var enhText = '';
+          if (enh) enhText = ' ' + (enh.detail_override || (enh.tier ? '→' + enh.tier : ''));
+          return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] border ' +
+            (success ? 'border-coc-green/40 bg-coc-green/10 text-coc-green' : 'border-coc-red/40 bg-coc-red/10 text-coc-red') + '">' +
+            '<span class="font-bold">' + (success ? 'OK' : 'FAIL') + '</span>' +
+            '<span class="text-gray-400">' + eid + '</span>' +
+            '<span class="' + tierColor + '">[' + tier + ']</span>' +
+            (diceInfo ? '<span class="text-gray-500">' + diceInfo + '</span>' : '') +
+            (enhText ? '<span class="text-yellow-400">' + enhText + '</span>' : '') +
+            '</span>';
+        }).join('');
+        turnParts.push('<div class="turn-skills flex flex-wrap gap-1.5 px-1">' + skillsHtml + '</div>');
+      }
+
+      // Brief
+      if (data.brief) {
+        turnParts.push('<div class="turn-brief px-3 py-2 text-xs text-gray-500 border-l-2 border-gray-700 bg-[#0f0f0f]/50 rounded-r">' + data.brief + '</div>');
+      }
+      // Narrative
+      if (data.narrative) {
+        turnParts.push('<div class="turn-narrative px-4 py-3 text-sm text-parchment border-l-2 border-aged-gold bg-[#1a1410]/60 rounded-r narrative-flash leading-relaxed">' + data.narrative + '</div>');
+      }
+    }
+
+    // Fallback if nothing
+    if (turnParts.length === 0 && data.narrative_html) {
+      turnParts.push(data.narrative_html);
+    }
+    if (turnParts.length === 0) {
+      turnParts.push('<div class="turn-empty text-sm text-gray-500 italic">（没有返回叙事内容）</div>');
+    }
+
+    var turnHtml = '<div class="turn-card space-y-2 pb-3 border-b border-gray-800/40">' + turnParts.join('') + '</div>';
+
+    // Replace output area with current turn only
+    var outputArea = document.getElementById('turn-output');
+    outputArea.innerHTML = turnHtml;
+    outputArea.scrollTop = 0;
+
+    addToHistory(userText, turnHtml);
+
+    // Update last-turn summary above input bar
+    var summaryEl = document.getElementById('last-turn-summary');
+    if (userText) {
+      summaryEl.textContent = '> ' + userText;
+      summaryEl.classList.remove('hidden');
+    }
+
+    // Game over
+    if (data.game_over) {
+      var endingText = data.ending ? data.ending.name + ': ' + data.ending.narrative : '游戏结束';
+      setTimeout(function() {
+        outputArea.insertAdjacentHTML('beforeend',
+          '<div class="turn-ending px-4 py-3 text-sm text-aged-gold border-l-2 border-aged-gold bg-[#1a1410]/80 mt-2">' +
+          '<div class="font-bold mb-1">结局</div>' + endingText + '</div>');
+        document.getElementById('user-input').disabled = true;
+        var summaryEl = document.getElementById('last-turn-summary');
+        if (summaryEl) summaryEl.classList.add('hidden');
+      }, 500);
+    }
+  }
+
+  // == Send turn ==
+  async function sendTurn() {
+    const input = document.getElementById('user-input');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    input.disabled = true;
+    document.getElementById('step-indicator').innerHTML = '<span class="text-gray-500">思考中...</span>';
+    try {
+      const fd = new FormData(); fd.append('user_input', text);
+      const resp = await fetch('/api/game/turn', { method: 'POST', body: fd });
+      const ct = resp.headers.get('content-type') || '';
+      if (!resp.ok) {
+        const errText = await resp.text();
+        var errHtml = '<div class="turn-error px-3 py-2 text-sm text-red-400 border-l-2 border-red-500 bg-[#1a0a0a]/80">服务器错误 (' + resp.status + '): ' + errText + '</div>';
+        document.getElementById('turn-output').innerHTML = errHtml;
+        throw new Error('Server error: ' + resp.status);
+      }
+      if (ct.includes('application/json')) {
+        handleTurnResponse(text, await resp.json());
+      } else {
+        const html = await resp.text();
+        document.getElementById('turn-output').innerHTML =
+          '<div class="turn-card pb-3 border-b border-gray-800/40">' + html + '</div>';
+        addToHistory(text, html);
+      }
+      try {
+        const psResp = await fetch('/api/game/player-status?format=json');
+        if (psResp.ok) updateCharHUD(await psResp.json());
+      } catch(e) {}
+    } catch(e) {
+      document.getElementById('turn-output').innerHTML =
+        '<div class="turn-error px-3 py-2 text-sm text-red-400 border-l-2 border-red-500 bg-[#1a0a0a]/80">网络错误: ' + e.message + '</div>';
+    }
+    document.getElementById('step-indicator').innerHTML = '';
+    input.disabled = false;
+    input.focus();
+  }
+
+  // == Enter key ==
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.id === 'user-input') sendTurn();
+  });
+
+  // == WebSocket ==
+  let ws = null, wsRetry = 0;
+  function connectWS() {
+    if (ws) { try { ws.close(); } catch(e) {} }
+    const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+    ws = new WebSocket(protocol + '//' + location.host + '/api/game/progress');
+    ws.onopen = function() { wsRetry = 0; };
+    ws.onmessage = function(e) {
+      const data = JSON.parse(e.data);
+      const indicator = document.getElementById('step-indicator');
+      if (data.step === 'heartbeat') return;
+      if (data.step === 'complete') indicator.innerHTML = '<span class="text-aged-gold">完成</span>';
+      else indicator.innerHTML = data.step + ' <span class="' + (data.status === 'done' ? 'text-coc-green' : 'text-gray-500') + '">' + (data.status === 'done' ? '[OK]' : '...') + '</span>';
+    };
+    ws.onerror = function() {};
+    ws.onclose = function() {
+      ws = null;
+      if (document.getElementById('game-screen').style.display !== 'none') {
+        wsRetry++;
+        const delay = Math.min(1000 * Math.pow(2, wsRetry), 30000);
+        setTimeout(connectWS, delay);
+      }
+    };
+  }
+
+  // == Auto-detect initialized game on page load ==
+  (async function() {
+    try {
+      const resp = await fetch('/api/game/state');
+      if (!resp.ok) return;
+      const state = await resp.json();
+      if (state.location && state.name) {
+        updateCharHUD({ name: state.name, hp: state.hp, hp_max: state.hp, san: state.san });
+        document.getElementById('game-setup').style.display = 'none';
+        document.getElementById('game-screen').style.display = '';
+        document.getElementById('user-input').focus();
+        document.getElementById('turn-output').innerHTML = '<div class="turn-empty text-sm text-gray-500 italic">' + state.location + ' — 游戏已就绪</div>';
+        connectWS();
+      }
+    } catch(e) {}
+  })();
+
+  // ═══════════════════════════════════════════════════════
+  //  COMBAT SYSTEM — Interactive frontend combat panel
+  // ═══════════════════════════════════════════════════════
+
+  let combatSession = null;   // {session_id, state, actions, combatInit}
+  let combatSelections = { actionId: null, weaponId: null, targetCounts: {}, playerExtra: '' };
+  let combatPanelCollapsed = false;
+
+  function enterCombatMode(combatInit) {
+    combatSession = { combatInit: combatInit, sessionId: null, state: null, actions: [] };
+    combatSelections = { actionId: null, weaponId: null, targetCounts: {}, playerExtra: '' };
+    combatPanelCollapsed = false;
+
+    // Switch panels
+    document.getElementById('scene-panel').classList.add('hidden');
+    document.getElementById('combat-panel').classList.remove('hidden');
+    document.getElementById('combat-panel').classList.remove('hidden');
+
+    // Lock main input
+    document.getElementById('user-input').disabled = true;
+    document.getElementById('user-input').placeholder = '战斗中...';
+
+    // Start combat session on backend
+    fetch('/api/combat/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ combat_init: combatInit })
+    }).then(function(r) { return r.json(); }).then(function(data) {
+      if (data.error) {
+        alert('战斗初始化失败: ' + data.error);
+        exitCombatMode();
+        return;
+      }
+      combatSession.sessionId = data.session_id;
+      combatSession.state = data.state;
+      combatSession.actions = data.actions;
+      renderCombatPanel();
+    }).catch(function(e) {
+      console.error('combat start error', e);
+      alert('战斗初始化失败');
+      exitCombatMode();
+    });
+  }
+
+  function toggleCombatPanel() {
+    combatPanelCollapsed = !combatPanelCollapsed;
+    var inner = document.getElementById('combat-panel-inner');
+    if (combatPanelCollapsed) {
+      inner.classList.add('hidden');
+    } else {
+      inner.classList.remove('hidden');
+    }
+  }
+
+  function renderCombatPanel() {
+    if (!combatSession || !combatSession.state) return;
+    var st = combatSession.state;
+
+    // Player name
+    var pName = document.getElementById('char-name').textContent || '调查员';
+    document.getElementById('combat-player-name').textContent = pName;
+
+    // Player HP/SAN bars
+    var hpPct = st.player_hp_max > 0 ? (st.player_hp / st.player_hp_max * 100) : 0;
+    var sanPct = st.player_san > 0 ? (st.player_san / 99 * 100) : 0;
+    document.getElementById('combat-hp-text').textContent = st.player_hp + '/' + st.player_hp_max;
+    document.getElementById('combat-san-text').textContent = st.player_san;
+    document.getElementById('combat-hp-bar').style.width = hpPct + '%';
+    document.getElementById('combat-san-bar').style.width = sanPct + '%';
+
+    // Enemies
+    var enemiesEl = document.getElementById('combat-enemies');
+    var enemiesHtml = '';
+    var aliveEnemies = [];
+    (st.enemies || []).forEach(function(e) {
+      if (e.hp <= 0 || e.status === 'dead' || e.status === 'defeated') return;
+      aliveEnemies.push(e);
+      var eHpPct = e.hp_max > 0 ? (e.hp / e.hp_max * 100) : 0;
+      var eHpColor = eHpPct > 50 ? 'bg-red-500' : eHpPct > 20 ? 'bg-red-600' : 'bg-red-800';
+      enemiesHtml += '<div class="text-xs">' +
+        '<div class="flex justify-between text-gray-400"><span>' + (e.enemy_ref || '?') + '</span><span>' + e.hp + '/' + e.hp_max + '</span></div>' +
+        '<div class="h-1 bg-gray-800 rounded overflow-hidden"><div class="h-full ' + eHpColor + ' rounded transition-all duration-500" style="width:' + eHpPct + '%"></div></div>' +
+        '</div>';
+    });
+    if (!enemiesHtml) enemiesHtml = '<div class="text-xs text-gray-500">无存活敌人</div>';
+    enemiesEl.innerHTML = enemiesHtml;
+
+    // Action buttons
+    var actionsEl = document.getElementById('combat-actions');
+    var actionButtons = [
+      {id: 'attack', label: '攻击', icon: '⚔'},
+      {id: 'dodge', label: '回避', icon: '🛡'},
+      {id: 'flee', label: '逃跑', icon: '🏃'},
+      {id: 'conceal', label: '隐蔽', icon: '👤'},
+      {id: 'aim', label: '瞄准', icon: '🎯'},
+      {id: 'charge', label: '蓄力', icon: '⚡'},
+    ];
+    actionsEl.innerHTML = actionButtons.map(function(a) {
+      var selected = combatSelections.actionId === a.id ? 'border-aged-gold bg-aged-gold/20' : 'border-gray-700 bg-[#1a150c]';
+      return '<button onclick="selectCombatAction(\'' + a.id + '\')" class="px-2 py-1.5 rounded border text-xs text-gray-300 hover:text-aged-gold hover:border-aged-gold/50 ' + selected + '">' + a.icon + ' ' + a.label + '</button>';
+    }).join('');
+
+    // Weapon section (shown only for attack)
+    var weaponSection = document.getElementById('combat-weapon-section');
+    var targetSection = document.getElementById('combat-target-section');
+    if (combatSelections.actionId === 'attack') {
+      weaponSection.classList.remove('hidden');
+      targetSection.classList.remove('hidden');
+
+      // Weapon select
+      var weaponSelect = document.getElementById('combat-weapon-select');
+      var weaponActions = (combatSession.actions || []).filter(function(a) { return a.id && a.id.startsWith('weapon:'); });
+      var baseActions = [{id: 'punch', label: '拳击'}, {id: 'kick', label: '踢击'}];
+      var allWeapons = baseActions.concat(weaponActions.map(function(w) { return {id: w.id, label: w.label}; }));
+      var weaponHtml = allWeapons.map(function(w) {
+        return '<option value="' + w.id + '"' + (combatSelections.weaponId === w.id ? ' selected' : '') + '>' + w.label + '</option>';
+      }).join('');
+      weaponSelect.innerHTML = weaponHtml;
+      if (!combatSelections.weaponId && allWeapons.length > 0) {
+        combatSelections.weaponId = allWeapons[0].id;
+      }
+      weaponSelect.onchange = function() { combatSelections.weaponId = this.value; renderCombatTargetButtons(); };
+
+      // Target buttons
+      renderCombatTargetButtons(aliveEnemies);
+    } else {
+      weaponSection.classList.add('hidden');
+      targetSection.classList.add('hidden');
+    }
+
+    // Update execute button state
+    var executeBtn = document.getElementById('combat-execute-btn');
+    if (!combatSelections.actionId) {
+      executeBtn.disabled = true;
+      executeBtn.classList.add('opacity-50');
+    } else {
+      executeBtn.disabled = false;
+      executeBtn.classList.remove('opacity-50');
+    }
+  }
+
+  function renderCombatTargetButtons(aliveEnemies) {
+    var targetsEl = document.getElementById('combat-targets');
+    var hintEl = document.getElementById('combat-target-hint');
+    if (!aliveEnemies) {
+      // Reconstruct from current state
+      var st = combatSession.state;
+      aliveEnemies = [];
+      (st.enemies || []).forEach(function(e) {
+        if (e.hp > 0 && e.status !== 'dead' && e.status !== 'defeated') aliveEnemies.push(e);
+      });
+    }
+
+    // Get multi_attack count for selected weapon
+    var multiAttack = 1;
+    if (combatSelections.weaponId) {
+      var weaponAction = (combatSession.actions || []).find(function(a) { return a.id === combatSelections.weaponId; });
+      if (weaponAction) multiAttack = weaponAction.multi_attack || 1;
+    }
+
+    // Build target buttons with counts
+    var totalAssigned = 0;
+    var buttonsHtml = aliveEnemies.map(function(e) {
+      var count = combatSelections.targetCounts[e.instance_id] || 0;
+      totalAssigned += count;
+      var cls = count > 0 ? 'bg-aged-gold/30 border-aged-gold text-aged-gold' : 'border-gray-700 text-gray-400';
+      return '<button onclick="selectCombatTarget(\'' + e.instance_id + '\', ' + multiAttack + ')" class="px-2 py-1 rounded border text-xs ' + cls + '">' +
+        (e.enemy_ref || '?') + (count > 0 ? ' ×' + count : '') + '</button>';
+    }).join('');
+    targetsEl.innerHTML = buttonsHtml;
+
+    // Hint
+    var remaining = multiAttack - totalAssigned;
+    if (remaining > 0) {
+      hintEl.textContent = '还可分配 ' + remaining + ' 次攻击';
+      hintEl.className = 'text-[10px] text-yellow-400 mt-1';
+    } else if (totalAssigned > multiAttack) {
+      hintEl.textContent = '攻击次数超出，将只使用前 ' + multiAttack + ' 个';
+      hintEl.className = 'text-[10px] text-red-400 mt-1';
+    } else {
+      hintEl.textContent = '攻击次数已分配完毕';
+      hintEl.className = 'text-[10px] text-coc-green mt-1';
+    }
+  }
+
+  function selectCombatAction(actionId) {
+    combatSelections.actionId = actionId;
+    combatSelections.targetCounts = {};
+    if (actionId === 'attack') {
+      // Default select first weapon
+      var weaponActions = (combatSession.actions || []).filter(function(a) { return a.id && a.id.startsWith('weapon:'); });
+      if (weaponActions.length > 0) {
+        combatSelections.weaponId = weaponActions[0].id;
+      } else {
+        combatSelections.weaponId = 'punch';
+      }
+    } else {
+      combatSelections.weaponId = null;
+    }
+    renderCombatPanel();
+  }
+
+  function selectCombatTarget(instanceId, multiAttack) {
+    var current = combatSelections.targetCounts[instanceId] || 0;
+    var total = Object.values(combatSelections.targetCounts).reduce(function(a, b) { return a + b; }, 0);
+    if (current > 0) {
+      // Increment if under limit, else reset to 0
+      if (total < multiAttack) {
+        combatSelections.targetCounts[instanceId] = current + 1;
+      } else {
+        // Deselect if at limit and clicking the same
+        combatSelections.targetCounts[instanceId] = 0;
+      }
+    } else {
+      // Select for first time
+      if (total < multiAttack) {
+        combatSelections.targetCounts[instanceId] = 1;
+      }
+    }
+    // Clean zeros
+    if (combatSelections.targetCounts[instanceId] === 0) {
+      delete combatSelections.targetCounts[instanceId];
+    }
+    renderCombatPanel();
+  }
+
+  async function executeCombatRound() {
+    if (!combatSession || !combatSession.sessionId) return;
+    if (!combatSelections.actionId) return;
+
+    var btn = document.getElementById('combat-execute-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span>执行中...</span>';
+
+    // Determine action_id and target_ids
+    var actionId = combatSelections.actionId;
+    if (actionId === 'attack') {
+      actionId = combatSelections.weaponId || 'punch';
+    }
+
+    // Build target list from counts (repeat according to count)
+    var targetIds = [];
+    var st = combatSession.state;
+    var alive = [];
+    (st.enemies || []).forEach(function(e) {
+      if (e.hp > 0 && e.status !== 'dead' && e.status !== 'defeated') alive.push(e);
+    });
+    // Sort by instance_id to keep order consistent
+    alive.sort(function(a, b) { return a.instance_id.localeCompare(b.instance_id); });
+    alive.forEach(function(e) {
+      var count = combatSelections.targetCounts[e.instance_id] || 0;
+      for (var i = 0; i < count; i++) targetIds.push(e.instance_id);
+    });
+    // If no targets selected for attack, default to first alive enemy
+    if (actionId.startsWith('weapon:') || actionId === 'punch' || actionId === 'kick') {
+      if (targetIds.length === 0 && alive.length > 0) {
+        targetIds.push(alive[0].instance_id);
+      }
+    }
+
+    var playerExtra = document.getElementById('combat-extra').value.trim();
+
+    try {
+      var resp = await fetch('/api/combat/round', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: combatSession.sessionId,
+          action_id: actionId,
+          target_ids: targetIds,
+          player_extra: playerExtra
+        })
+      });
+      var data = await resp.json();
+      if (data.error) {
+        alert('战斗回合失败: ' + data.error);
+        btn.disabled = false;
+        btn.innerHTML = '<span>执行回合</span>';
+        return;
+      }
+      handleCombatRoundResponse(data);
+    } catch(e) {
+      console.error('combat round error', e);
+      alert('战斗回合请求失败');
+      btn.disabled = false;
+      btn.innerHTML = '<span>执行回合</span>';
+    }
+  }
+
+  function handleCombatRoundResponse(data) {
+    // Update state
+    combatSession.state = data.state;
+
+    // Append to combat log
+    var logEl = document.getElementById('combat-log');
+    var roundHeader = '<div class="text-gray-500 font-bold mt-2">—— 第' + (data.round - 1) + '轮 ——</div>';
+    var roundEntries = '';
+    (data.round_log || []).forEach(function(a) {
+      var actor = a.actor === 'player' ? '调查员' : a.actor;
+      var color = a.actor === 'player' ? 'text-coc-green' : 'text-red-400';
+      var detail = '';
+      if (a.action_type === 'attack') {
+        detail = a.weapon + ' D100=' + a.roll + ' ' + (a.success ? '命中' : '未命中');
+        if (a.success && a.damage > 0) detail += ' 造成' + a.damage + '点伤害';
+      } else if (a.action_type === 'flee') {
+        detail = '逃跑 ' + (a.success ? '成功' : '失败');
+      } else {
+        detail = a.action_type;
+      }
+      roundEntries += '<div class="' + color + '">' + actor + ' | ' + detail + '</div>';
+    });
+    if (data.round_narrative) {
+      roundEntries += '<div class="text-gray-500 italic">' + escapeHtml(data.round_narrative).replace(/\n/g, '<br>') + '</div>';
+    }
+    logEl.innerHTML += roundHeader + roundEntries;
+
+    // Check finished
+    if (data.finished) {
+      finishCombat(data);
+      return;
+    }
+
+    // Reset selections for next round
+    combatSelections.actionId = null;
+    combatSelections.weaponId = null;
+    combatSelections.targetCounts = {};
+    document.getElementById('combat-extra').value = '';
+
+    // Render updated panel
+    renderCombatPanel();
+
+    // Restore button
+    var btn = document.getElementById('combat-execute-btn');
+    btn.disabled = false;
+    btn.innerHTML = '<span>执行回合</span>';
+  }
+
+  function finishCombat(data) {
+    // Build combat result summary
+    var outcomeLabel = data.outcome === 'win' ? '胜利' : data.outcome === 'loss' ? '败北' : data.outcome === 'flee' ? '逃跑成功' : data.outcome === 'draw' ? '平局' : data.outcome;
+    var outcomeColor = data.outcome === 'win' ? 'text-coc-green' : data.outcome === 'loss' ? 'text-coc-red' : 'text-yellow-400';
+    var summaryHtml = '<div class="px-3 py-2 border-l-2 border-yellow-600/60 bg-[#1a1400]/60 rounded-r mt-2">' +
+      '<div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg>' +
+      '<span class="text-sm font-bold ' + outcomeColor + '">战斗 ' + outcomeLabel + '</span></div>';
+    if (data.round_narrative) {
+      summaryHtml += '<div class="text-gray-400 text-xs mt-1 leading-relaxed">' + escapeHtml(data.round_narrative).replace(/\n/g, '<br>') + '</div>';
+    }
+    if (data.combat_narrative) {
+      summaryHtml += '<div class="text-aged-gold text-xs mt-2 pt-2 border-t border-gray-700/50 leading-relaxed">' + escapeHtml(data.combat_narrative).replace(/\n/g, '<br>') + '</div>';
+    }
+    if (data.combat_completed_narrative) {
+      summaryHtml += '<div class="text-parchment text-sm mt-3 pt-2 border-t border-aged-gold/30 leading-relaxed narrative-flash">' + escapeHtml(data.combat_completed_narrative).replace(/\n/g, '<br>') + '</div>';
+    }
+    summaryHtml += '</div>';
+
+    // Insert into narrative area
+    var outputArea = document.getElementById('turn-output');
+    outputArea.innerHTML = summaryHtml;
+    outputArea.scrollTop = 0;
+
+    // Update character HUD
+    fetch('/api/game/player-status?format=json')
+      .then(function(r) { return r.json(); })
+      .then(function(d) { updateCharHUD(d); })
+      .catch(function() {});
+
+    // Exit combat mode UI
+    exitCombatMode();
+
+    // If game over from combat
+    if (data.game_over) {
+      document.getElementById('user-input').disabled = true;
+      setTimeout(function() {
+        outputArea.insertAdjacentHTML('beforeend',
+          '<div class="turn-ending px-4 py-3 text-sm text-aged-gold border-l-2 border-aged-gold bg-[#1a1410]/80 mt-2">' +
+          '<div class="font-bold mb-1">游戏结束</div>你在战斗中倒下...</div>');
+      }, 500);
+    }
+  }
+
+  function exitCombatMode() {
+    // Hide combat panel, restore scene panel
+    document.getElementById('combat-panel').classList.add('hidden');
+    document.getElementById('scene-panel').classList.remove('hidden');
+
+    // Unlock input
+    document.getElementById('user-input').disabled = false;
+    document.getElementById('user-input').placeholder = '输入你的行动...';
+    document.getElementById('user-input').focus();
+
+    // Clear session
+    combatSession = null;
+    combatSelections = { actionId: null, weaponId: null, targetCounts: {}, playerExtra: '' };
+  }
+</script>
+{% endblock %}

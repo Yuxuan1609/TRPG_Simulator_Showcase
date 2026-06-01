@@ -1,0 +1,335 @@
+{
+  "module": "常暗之厢_0531",
+  "player": "战斗测试员",
+  "turns": 9,
+  "total_elapsed_s": 304.7,
+  "game_over": null,
+  "profile": {
+    "test_mode": "exploration",
+    "player_strategy": [
+      "NPC",
+      "Enemy",
+      "Boss",
+      "Combat",
+      "TimeAgent",
+      "Author"
+    ],
+    "audit_targets": [
+      "NPC",
+      "Enemy",
+      "Boss",
+      "Combat",
+      "TimeAgent",
+      "Author",
+      "IntentDetector",
+      "SideEffects",
+      "Memory",
+      "DependencyGraph",
+      "Judge",
+      "Narrator"
+    ],
+    "player_config": {
+      "max_turns": 60,
+      "max_duration_s": 300,
+      "memory_compress_interval": 5,
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "module_name": "常暗之厢_0531"
+    },
+    "combat_testing": {
+      "mode": "normal"
+    },
+    "audit_config": {
+      "anomaly_thresholds": {
+        "other_rate_max": 0.3,
+        "enrich_degrade_max": 2,
+        "consecutive_fail_alert": 3,
+        "combat_max_duration_turns": 10,
+        "intent_detect_false_positive_max": 3
+      }
+    }
+  },
+  "turns_detail": [
+    {
+      "turn": 1,
+      "input": "先查看车门上的白色便签和旁边的电车示意地图。",
+      "reasoning": "探索场景中的明显线索",
+      "brief": "玩家查看了白色便签，正面写着「只管前进吧 已经没有退路了」，背面有「第三个箱子里有藏着钥匙」；电车地图上7号车厢及以后被涂抹刮花。",
+      "narrative": "你凑近那张白色便签，惨白灯光下，正面字迹清晰而决绝。翻到背面，一行小字像秘密低语。旁边的地图上，7号车厢之后一片模糊刮痕，仿佛刻意隐瞒什么。你感到寒意从脊背升起——退路已断，前方未知。",
+      "skill_results": [],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 16.4,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 3
+      },
+      "time_agent": {
+        "time_delta": 3,
+        "narrative_hint": "你快速查看了白色便签和电车示意地图，花费了大约3分钟。"
+      }
+    },
+    {
+      "turn": 2,
+      "input": "仔细搜索6号车厢的长椅和地面，看看有没有所谓的'第三个箱子'。",
+      "reasoning": "根据便签线索寻找钥匙，搜索车厢内物品。",
+      "brief": "你在6号车厢长椅下发现了两件武器：试作型裁决者和试作型湮灭者。",
+      "narrative": "你蹲下身，手指探入座椅下的阴影。指尖触到冰冷的金属，你屏息将其拉出——银白与幽蓝的光芒在惨淡灯光下闪烁。两把风格迥异的武器静静躺在你掌心，仿佛在等待一个选择。\n\n（你发现了试作型裁决者、试作型湮灭者。是否拾取？（是/否））",
+      "skill_results": [
+        {
+          "entity_id": "SEARCH",
+          "entity_type": "search",
+          "tier": "regular",
+          "success": true,
+          "raw_check": "[SEARCH] 侦查检定 | 等级=failure | 失败\n  侦查检定：D100=77/75 > 失败\n  [特质修正] failure → regular：调查员为全属性强化型，搜索行为与侦查技能高度匹配，且行动描述为仔细搜索，给予-5点调整。原始D100=77，虚拟D100=72，≤技能值75，等级从failure提升至regular。",
+          "enhancement": {
+            "tier": "regular",
+            "detail_override": null,
+            "reason": "调查员为全属性强化型，搜索行为与侦查技能高度匹配，且行动描述为仔细搜索，给予-5点调整。原始D100=77，虚拟D100=72，≤技能值75，等级从failure提升至regular。",
+            "prompt": "你是 TRPG 规则辅助裁判。根据调查员的特质和本轮行动描述，判断是否应修正技能检定结果。\n\n【调查员】\n描述：全属性强化调查员，用于压力测试。\n本轮输入：仔细搜索6号车厢的长椅和地面，看看有没有所谓的'第三个箱子'。\n\n【当前检定】\n  实体：搜索\n  技能：侦查\n  技能值：75\n  原始骰子：D100=77\n  基础等级：failure（failure < regular < hard < extreme）\n  原始结果描述：侦查检定：D100=77/75 > 失败\n  检定上下文：搜索侦查\n\n【分级结果参考】\n（无分级结果）\n\nCOC 7th 规则：极难≤技能值/5=15，困难≤技能值/2=37，常规≤技能值=75，否则失败。大成功=1，大失败≥96。\n\n请判断：基于调查员的特质描述和本轮实际行为，是否应修正检定结果？\n\n修正逻辑（内部思考，不输出）：\n- **有明确特殊规则说明的按特殊规则结算（如 #必成/#必败 测试指令）**\n- **修正流程：先确定虚拟骰子值 = 原始D100 ± 调整量，再用下方COC规则映射到最终等级。严禁跳过骰子步骤直接选择等级。**\n- 特质与技能和行为高度匹配且有优势 → 骰子下浮（更容易成功），最多-20点\n- 特质与行为冲突或劣势 → 骰子上浮（更难成功），最多+20点\n- 特质无关 → 不修正（调整量为0）\n- 根据玩家的本轮输入额外考量。整体原则：行动越认真越容易成功反之同理。修正不超过±10点\n- 两个来源的调整叠加时取合理折中（如特质下浮但行动敷衍→总分下浮减半或取消）\n- 映射规则：虚拟骰子代入 COC 公式——≤技能值/5=极难(extreme) | ≤技能值/2=困难(hard) | ≤技能值=常规(regular) | >技能值=失败(failure)。大成功=1，大失败≥96。\n\n示例：\n- \"观察力极其优秀\" 的玩家在昏暗环境侦查，输入\"我凑近仔细查看\" → 特质-10 + 行动认真-5 → 总计-15，若技能50原始D100=20(regular)→虚拟D100=5≤25→hard\n- \"胆小如鼠\" 的玩家试图恐吓怪物，输入\"我大喊一声站住\" → 特质+10 + 行动敷衍+5 → 总计+15，若技能50原始D100=20(hard)→虚拟D100=35→regular\n- \"精通机械\" 的工程师修理引擎，骰子62刚好超出技能60 → 特质-5 → 虚拟D100=57≤60→regular\n- \"锐利目光\" 的玩家只是随意扫了一眼 → 特质-10 但行动敷衍+8 → 折中取-3\n- 仔细搜索场景，骰子可下调5点\n返回 JSON：\n{\n  \"tier\": \"failure\",\n  \"detail_override\": null,\n  \"reason\": \"修正或不修正的理由（包含虚拟骰子调整量）\"\n}\n\n额外规则：\n- tier 是修正后的等级，只能是 failure / regular / hard / extreme 之一\n- 若无需修正（虚拟骰子调整量为0），tier 必须严格等于基础等级 \"failure\"，不得改变\n- 不论修正后的结果如何，只要原始结果不是大成功/大失败 新的结果也不能是大成功/大失败，除非玩家有明确的特殊规则。\n- reason 中应提及内部判断的虚拟骰子调整量\n- detail_override 仅在确实需要新的结果描述时填写\n- 直接输出 JSON\n"
+          }
+        }
+      ],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 21.9,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 18
+      },
+      "time_agent": {
+        "time_delta": 15,
+        "narrative_hint": "你花了大约十五分钟仔细搜查长椅和地面。"
+      }
+    },
+    {
+      "turn": 3,
+      "input": "是，我要拾取这两把武器。然后去7号车厢看看。",
+      "reasoning": "获得武器增强战力，沿线索前进",
+      "brief": "你拾起了试作型裁决者、试作型湮灭者。",
+      "narrative": "",
+      "skill_results": [],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 1.2,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 18
+      },
+      "time_agent": null
+    },
+    {
+      "turn": 4,
+      "input": "我走向7号车厢，同时用手电筒照亮前方。",
+      "reasoning": "跟进线索，探索新区域。",
+      "brief": "战斗测试员推开通往7号车厢的门，看到车厢内遍布人类残肢和鲜血，深处一只巨口正在啃噬车厢，同时后方黑暗正加速逼近。",
+      "narrative": "你推开门，浓重的血腥味令人窒息。手电筒光束扫过，照亮了满地的断肢和血泊。车厢深处，一张巨大的嘴巴正缓慢咀嚼着车体边缘，发出令人牙酸的声响。身后的灯光正被黑暗吞噬，你必须向前奔逃！",
+      "skill_results": [],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 42.3,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 21
+      },
+      "time_agent": {
+        "time_delta": 3,
+        "narrative_hint": "你花了大约3分钟打开通往7号车厢的门，并用手电筒照亮前方，稳步走向7号车厢。"
+      }
+    },
+    {
+      "turn": 5,
+      "input": "我快速环顾7号车厢，寻找其他可能的出口或可用的物品，同时保持警惕。",
+      "reasoning": "观察环境寻找逃生机会",
+      "brief": "你在7号车厢内迅速环顾，确认了前方巨口和散落的残肢，并注意到可能查看时间线索。",
+      "narrative": "你快速扫视车厢，惨淡灯光下，残肢与血迹触目惊心。前方巨口啃噬声在死寂中格外刺耳。你瞥了一眼手表——时间似乎不对，列车早已该到站了。这异常让你背脊发凉。",
+      "skill_results": [
+        {
+          "entity_id": "SEARCH",
+          "entity_type": "search",
+          "tier": "regular",
+          "success": true,
+          "raw_check": "[SEARCH] 侦查检定 | 等级=regular | 成功\n  侦查检定：D100=54/75 ≤ 75 成功（regular级）",
+          "enhancement": {
+            "tier": "regular",
+            "detail_override": null,
+            "reason": "调查员为全属性强化，但无具体特质说明与搜索行为高度匹配；本轮输入为常规搜索行为，无特别认真或敷衍描述。因此不修正，虚拟骰子调整量为0。",
+            "prompt": "你是 TRPG 规则辅助裁判。根据调查员的特质和本轮行动描述，判断是否应修正技能检定结果。\n\n【调查员】\n描述：全属性强化调查员，用于压力测试。\n本轮输入：我快速环顾7号车厢，寻找其他可能的出口或可用的物品，同时保持警惕。\n\n【当前检定】\n  实体：搜索\n  技能：侦查\n  技能值：75\n  原始骰子：D100=54\n  基础等级：regular（failure < regular < hard < extreme）\n  原始结果描述：侦查检定：D100=54/75 ≤ 75 成功（regular级）\n  检定上下文：搜索侦查\n\n【分级结果参考】\n（无分级结果）\n\nCOC 7th 规则：极难≤技能值/5=15，困难≤技能值/2=37，常规≤技能值=75，否则失败。大成功=1，大失败≥96。\n\n请判断：基于调查员的特质描述和本轮实际行为，是否应修正检定结果？\n\n修正逻辑（内部思考，不输出）：\n- **有明确特殊规则说明的按特殊规则结算（如 #必成/#必败 测试指令）**\n- **修正流程：先确定虚拟骰子值 = 原始D100 ± 调整量，再用下方COC规则映射到最终等级。严禁跳过骰子步骤直接选择等级。**\n- 特质与技能和行为高度匹配且有优势 → 骰子下浮（更容易成功），最多-20点\n- 特质与行为冲突或劣势 → 骰子上浮（更难成功），最多+20点\n- 特质无关 → 不修正（调整量为0）\n- 根据玩家的本轮输入额外考量。整体原则：行动越认真越容易成功反之同理。修正不超过±10点\n- 两个来源的调整叠加时取合理折中（如特质下浮但行动敷衍→总分下浮减半或取消）\n- 映射规则：虚拟骰子代入 COC 公式——≤技能值/5=极难(extreme) | ≤技能值/2=困难(hard) | ≤技能值=常规(regular) | >技能值=失败(failure)。大成功=1，大失败≥96。\n\n示例：\n- \"观察力极其优秀\" 的玩家在昏暗环境侦查，输入\"我凑近仔细查看\" → 特质-10 + 行动认真-5 → 总计-15，若技能50原始D100=20(regular)→虚拟D100=5≤25→hard\n- \"胆小如鼠\" 的玩家试图恐吓怪物，输入\"我大喊一声站住\" → 特质+10 + 行动敷衍+5 → 总计+15，若技能50原始D100=20(hard)→虚拟D100=35→regular\n- \"精通机械\" 的工程师修理引擎，骰子62刚好超出技能60 → 特质-5 → 虚拟D100=57≤60→regular\n- \"锐利目光\" 的玩家只是随意扫了一眼 → 特质-10 但行动敷衍+8 → 折中取-3\n- 仔细搜索场景，骰子可下调5点\n返回 JSON：\n{\n  \"tier\": \"regular\",\n  \"detail_override\": null,\n  \"reason\": \"修正或不修正的理由（包含虚拟骰子调整量）\"\n}\n\n额外规则：\n- tier 是修正后的等级，只能是 failure / regular / hard / extreme 之一\n- 若无需修正（虚拟骰子调整量为0），tier 必须严格等于基础等级 \"regular\"，不得改变\n- 不论修正后的结果如何，只要原始结果不是大成功/大失败 新的结果也不能是大成功/大失败，除非玩家有明确的特殊规则。\n- reason 中应提及内部判断的虚拟骰子调整量\n- detail_override 仅在确实需要新的结果描述时填写\n- 直接输出 JSON\n"
+          }
+        }
+      ],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 17.3,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 23
+      },
+      "time_agent": {
+        "time_delta": 2,
+        "narrative_hint": "你迅速扫视了7号车厢，大约花费了2分钟。"
+      }
+    },
+    {
+      "turn": 6,
+      "input": "我迅速打开手电筒，将光束对准前方那张布满利齿的巨口，想看清它的全貌和周围的环境。",
+      "reasoning": "上回合搜索，这回合尝试互动观察危险源",
+      "brief": "你打开手电筒，光束照出前方巨口的全貌：无数利齿沾满液体，正缓慢啃噬车体。",
+      "narrative": "手电筒的光束刺破黑暗，你清晰地看到那张巨口——无数排参差不齐的利齿，沾满暗红色液体，正缓慢而坚定地咬合着，金属在牙齿间碎裂。巨口内部是无尽的黑暗，仿佛连光线都被吞噬。你的心脏狂跳，恐惧在胸腔中蔓延。",
+      "skill_results": [],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 92.7,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 29
+      },
+      "time_agent": {
+        "time_delta": 2,
+        "narrative_hint": "你点亮手电，光束扫过布满利齿的巨口，模糊地照亮了周围的空间。"
+      }
+    },
+    {
+      "turn": 7,
+      "input": "我迅速后退，离开7号车厢，同时用手电筒照向身后，确认来路的状况。",
+      "reasoning": "巨口危险，优先撤退保命。",
+      "brief": "调查员从7号车厢快速后退，通过6号车厢回到5号车厢，用手电确认来路安全，并注意到列车行车时间可能异常。",
+      "narrative": "你疾步后退，手电光扫过身后，7号车厢的黑暗缓缓蔓延，却不见巨口踪影。转身穿过6号车厢，进入5号车厢，凌乱的座椅与破碎的玻璃在手电光下显现。你心中不安——时间似乎不对，这趟列车仿佛停滞在过去。",
+      "skill_results": [
+        {
+          "entity_id": "SEARCH",
+          "entity_type": "search",
+          "tier": "regular",
+          "success": true,
+          "raw_check": "[SEARCH] 侦查检定 | 等级=regular | 成功\n  侦查检定：D100=55/75 ≤ 75 成功（regular级）",
+          "enhancement": {
+            "tier": "regular",
+            "detail_override": null,
+            "reason": "调查员为全属性强化，但无具体特质描述与侦查行为直接相关；行动描述为迅速后退并用手电筒照向身后，属于合理但非特别专注的侦查行为，因此不进行修正，虚拟骰子调整量为0。",
+            "prompt": "你是 TRPG 规则辅助裁判。根据调查员的特质和本轮行动描述，判断是否应修正技能检定结果。\n\n【调查员】\n描述：全属性强化调查员，用于压力测试。\n本轮输入：我迅速后退，离开7号车厢，同时用手电筒照向身后，确认来路的状况。\n\n【当前检定】\n  实体：搜索\n  技能：侦查\n  技能值：75\n  原始骰子：D100=55\n  基础等级：regular（failure < regular < hard < extreme）\n  原始结果描述：侦查检定：D100=55/75 ≤ 75 成功（regular级）\n  检定上下文：搜索侦查\n\n【分级结果参考】\n（无分级结果）\n\nCOC 7th 规则：极难≤技能值/5=15，困难≤技能值/2=37，常规≤技能值=75，否则失败。大成功=1，大失败≥96。\n\n请判断：基于调查员的特质描述和本轮实际行为，是否应修正检定结果？\n\n修正逻辑（内部思考，不输出）：\n- **有明确特殊规则说明的按特殊规则结算（如 #必成/#必败 测试指令）**\n- **修正流程：先确定虚拟骰子值 = 原始D100 ± 调整量，再用下方COC规则映射到最终等级。严禁跳过骰子步骤直接选择等级。**\n- 特质与技能和行为高度匹配且有优势 → 骰子下浮（更容易成功），最多-20点\n- 特质与行为冲突或劣势 → 骰子上浮（更难成功），最多+20点\n- 特质无关 → 不修正（调整量为0）\n- 根据玩家的本轮输入额外考量。整体原则：行动越认真越容易成功反之同理。修正不超过±10点\n- 两个来源的调整叠加时取合理折中（如特质下浮但行动敷衍→总分下浮减半或取消）\n- 映射规则：虚拟骰子代入 COC 公式——≤技能值/5=极难(extreme) | ≤技能值/2=困难(hard) | ≤技能值=常规(regular) | >技能值=失败(failure)。大成功=1，大失败≥96。\n\n示例：\n- \"观察力极其优秀\" 的玩家在昏暗环境侦查，输入\"我凑近仔细查看\" → 特质-10 + 行动认真-5 → 总计-15，若技能50原始D100=20(regular)→虚拟D100=5≤25→hard\n- \"胆小如鼠\" 的玩家试图恐吓怪物，输入\"我大喊一声站住\" → 特质+10 + 行动敷衍+5 → 总计+15，若技能50原始D100=20(hard)→虚拟D100=35→regular\n- \"精通机械\" 的工程师修理引擎，骰子62刚好超出技能60 → 特质-5 → 虚拟D100=57≤60→regular\n- \"锐利目光\" 的玩家只是随意扫了一眼 → 特质-10 但行动敷衍+8 → 折中取-3\n- 仔细搜索场景，骰子可下调5点\n返回 JSON：\n{\n  \"tier\": \"regular\",\n  \"detail_override\": null,\n  \"reason\": \"修正或不修正的理由（包含虚拟骰子调整量）\"\n}\n\n额外规则：\n- tier 是修正后的等级，只能是 failure / regular / hard / extreme 之一\n- 若无需修正（虚拟骰子调整量为0），tier 必须严格等于基础等级 \"regular\"，不得改变\n- 不论修正后的结果如何，只要原始结果不是大成功/大失败 新的结果也不能是大成功/大失败，除非玩家有明确的特殊规则。\n- reason 中应提及内部判断的虚拟骰子调整量\n- detail_override 仅在确实需要新的结果描述时填写\n- 直接输出 JSON\n"
+          }
+        }
+      ],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 76.7,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 36
+      },
+      "time_agent": {
+        "time_delta": 3,
+        "narrative_hint": "你迅速后退并用手电筒照亮身后，确认来路安全，整个过程大约花费了3分钟。"
+      }
+    },
+    {
+      "turn": 8,
+      "input": "我走到座椅旁，小心地拿起那份报纸，想看看上面的内容。",
+      "reasoning": "发现线索报纸，检查内容以了解列车情况。",
+      "brief": "你拿起座椅上的报纸，看到关于昨晚末班电车恐怖袭击的新闻，日期标注为“第二天”，报道内容正是当下发生的事。",
+      "narrative": "你弯腰捡起那张报纸，指尖触到粗糙的纸质。标题映入眼帘——昨晚同线路末班电车恐怖袭击，幸存者全送入精神病院。你的目光滑向日期，心脏猛地一缩：那日期赫然写着“第二天”，仿佛这报纸正报道此刻你站立的车厢里发生的一切。",
+      "skill_results": [
+        {
+          "entity_id": "I6",
+          "entity_type": "interaction",
+          "tier": "regular",
+          "success": true,
+          "raw_check": "[I6] 搜索报纸 | 技能=侦查 | 难度=regular | 骰子等级=regular | 成功\n  侦查检定：D100=43/75 ≤ 75 成功（regular级）"
+        }
+      ],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 12.6,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 39
+      },
+      "time_agent": {
+        "time_delta": 3,
+        "narrative_hint": "你踱步到座椅旁，小心拾起那份报纸，目光扫过上面的内容。"
+      }
+    },
+    {
+      "turn": 9,
+      "input": "我拿出手机，想看看现在的时间和是否有信号，顺便检查手机是否有未读信息或报警记录。",
+      "reasoning": "尝试新类型互动，利用现代工具获取信息",
+      "brief": "战斗测试员拿出手机，发现没有信号，时间显示第0天夜间累计39分钟，无未读信息或报警记录。",
+      "narrative": "你掏出手机，屏幕亮起，但信号栏一片空白，仿佛世界已经将你遗忘。时间显示第0天夜间，累计39分钟——但这个数字毫无意义。通知栏寂静无声，没有任何未读信息或报警记录。手机在你手中，冰冷如铁，彻底隔绝了与外界的一切联系。",
+      "skill_results": [],
+      "combat": null,
+      "npc_events": [],
+      "npcs_visible": {
+        "in_scene": [],
+        "following": []
+      },
+      "ending": null,
+      "elapsed_s": 20.6,
+      "time_state": {
+        "day": 0,
+        "hour": 0,
+        "time_of_day": "夜间",
+        "game_time_minutes": 41
+      },
+      "time_agent": {
+        "time_delta": 2,
+        "narrative_hint": "你拿出手机，看了一眼时间，屏幕显示信号微弱，没有未读信息和报警记录。"
+      }
+    }
+  ]
+}

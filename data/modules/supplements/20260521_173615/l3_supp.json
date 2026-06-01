@@ -1,0 +1,63 @@
+{
+  "module_meta": {
+    "name": "test_module",
+    "supplement_of": "test_module",
+    "generated_for": "玩家试图与镜子中的黑暗存在建立联系，并尝试进入镜子内部的世界"
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "梦境法则",
+      "rule": "这列电车所在的整个世界是由奈亚拉托提普创造的噩梦空间，并非现实。物理法则可被扭曲，逻辑可被篡改。",
+      "scope": "整个电车及其外部黑暗空间",
+      "is_absolute": "绝对不可违反"
+    }
+  ],
+  "scene_intents": {
+    "test_room": {
+      "purpose": "Debug and expansion entry point",
+      "emotion": "Unease and curiosity"
+    },
+    "SS1_镜中世界": {
+      "purpose": "探索镜像反转的诡异空间，遭遇不怀好意的镜中倒影，意识到自己被困于奈亚拉托提普的灵魂囚笼，并寻找通往更深层区域的线索。",
+      "key_threat": "镜中倒影的恶意模仿与精神干扰，空间感知颠倒导致的迷失感，以及环境中的铁锈腐臭气息逐渐侵蚀心智。",
+      "notes": "本场景是进入镜中世界的首个区域，重点是通过感官错位与倒影互动制造不安。倒影不会直接攻击，但会用低语、冷笑等行为扰乱玩家判断，并可能透露虚假信息。设计上应突出‘镜像欺骗’主题，为后续揭示‘光是谎言，黑暗才是出口’埋下伏笔。"
+    },
+    "SS2_深渊回廊": {
+      "purpose": "穿越无限延伸的回廊，与被囚禁的灵魂（特别是霍桑研究员）沟通，获取关于出口的关键信息（‘光是谎言，黑暗才是出口’），并最终找到离开镜中世界的方法。",
+      "key_threat": "回廊的无限结构引发空间迷航与幽闭恐惧，囚禁灵魂的尖叫与划镜行为造成精神创伤，霍桑传递的信息可能不完整或需要玩家自行解读其深层含义。",
+      "notes": "核心谜题场景。霍桑研究员会通过模糊的镜像动作或唇语试图告知真相，但完整信息需结合环境中的镜像文字解码。玩家必须主动熄灭所有光源（或制造绝对黑暗）才能触发暗镜的传送机制。建议设计一个简单的触发条件：玩家在暗镜前说出或写下‘黑暗是出口’时，镜子才会回应。"
+    }
+  },
+  "ending_conditions": [],
+  "tone_constraints": {
+    "genre": "Lovecraftian horror",
+    "narrative_style": "Oppressive, with faint hope in despair",
+    "forbidden": [
+      "superpowers",
+      "firearms",
+      "modern communication devices working"
+    ],
+    "recommended": [
+      "tension",
+      "unknown fear",
+      "moral dilemma"
+    ]
+  },
+  "characters": {
+    "conductor": "Injured train conductor, key info provider"
+  },
+  "driving_force": "Keep moving forward in darkness, escape the devouring maw, find hope",
+  "narrative_lines": [
+    {
+      "name": "霍桑研究员的真相",
+      "outline": "从测试房间开始，通过检查桌子上的物品发现霍桑的日志，逐步揭示镜子背后隐藏的实验真相和灵魂囚笼的秘密。",
+      "key_scenes": [
+        "test_room",
+        "car_6"
+      ],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {}
+}

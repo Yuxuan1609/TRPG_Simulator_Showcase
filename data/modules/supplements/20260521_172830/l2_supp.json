@@ -1,0 +1,314 @@
+{
+  "scenes": {
+    "SS1_镜中回廊": {
+      "description": "一条无限延伸的走廊，两侧全是镜子，每一面都反射出不同时空的你。灯光忽明忽暗，尽头有一扇生锈的铁门。",
+      "interactions": [
+        {
+          "id": "SI1",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "检查镜子",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "玩家凝视或检查某面镜子",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你盯着镜子，只看到模糊的倒影，并感到一阵晕眩。",
+            "on_regular": "你看到镜子中的倒影似乎握着什么，仔细看是一把古旧的钥匙。",
+            "on_hard": "你看到钥匙的细节，上面刻有复杂的纹路，倒影示意你取走它。",
+            "on_extreme": "你不仅看到钥匙，还感到镜面如水，可以轻易穿透。"
+          }
+        },
+        {
+          "id": "SI2",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "与倒影对话",
+          "type": "话术",
+          "requirement": "",
+          "trigger": "你尝试与镜中的倒影交流",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "倒影没有回应，或是你听不懂它们在说什么。",
+            "on_regular": "一个倒影开口说话，用破碎的句子告诉你：'钥匙...在手中...霍桑...然后是你...'",
+            "on_hard": "你与倒影进行了短暂的交流，了解到它们都是被囚禁的意识碎片，它们恐惧黑暗存在。",
+            "on_extreme": "你成功安抚了一个倒影，它告诉你霍桑的实验室入口隐藏在镜中某个角落，但被符文封印。"
+          }
+        },
+        {
+          "id": "SI3",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "走向铁门",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你沿着走廊走向尽头的铁门",
+          "result": "你推开铁门，门内是一间圆形囚室，中央立着空镜框，墙上有符文。你已经看清了里面的景象，随时可以进入。",
+          "side_effects": [],
+          "difficulty": null
+        },
+        {
+          "id": "SI10",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中回廊",
+          "name": "取钥匙",
+          "type": "无",
+          "requirement": "SI1",
+          "trigger": "你伸手探向镜子中的钥匙",
+          "result": "你的手穿过了镜面，抓住了那把钥匙。钥匙入手冰凉，你安全地取出了它。",
+          "side_effects": [
+            "@item_gain(item_name='钥匙', quantity=1)"
+          ],
+          "difficulty": null
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT1",
+          "entity_type": "auto_trigger",
+          "scene": "SS1_镜中回廊",
+          "name": "灯光熄灭",
+          "type": "无",
+          "requirement": "",
+          "trigger": "场景加载",
+          "result": "当你凝视那面布满裂痕的镜子时，灯光忽地熄灭，只余你与镜中模糊的倒影。裂痕开始生长，像蛛网般爬满整个镜面。你感到一阵吸力，便发现自己站在了无尽走廊中。",
+          "side_effects": []
+        }
+      ],
+      "from_here": [
+        {
+          "target": "SS2_囚魂之间",
+          "method": "走进铁门",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "test_room",
+          "method": "被镜子吸入",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS2_囚魂之间": {
+      "description": "一间圆形囚室，墙壁刻满鳞片般的符文。中央立着一个空镜框，仿佛有什么东西正在其中凝聚。",
+      "interactions": [
+        {
+          "id": "SI4",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "与存在对话",
+          "type": "说服",
+          "requirement": "",
+          "trigger": "你向黑暗存在说话",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "hard",
+          "graded_result": {
+            "on_failure": "黑暗存在愤怒地咆哮，镜框周围的空间开始扭曲，你感到意志被侵蚀。",
+            "on_regular": "黑暗存在告诉你：'霍桑用这些镜子囚禁了我的碎片，为了他的实验。现在我需要你的帮助释放我。'",
+            "on_hard": "你赢得了它的一丝信任，它透露如果你释放它，它会指引你脱离噩梦。但如果拒绝，你将永远徘徊。",
+            "on_extreme": "你通过话语压制了它的狂乱，观察到它其实是奈亚的一个碎片，极度渴望自由。你了解了霍桑的一些秘密。"
+          }
+        },
+        {
+          "id": "SI5",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "释放存在",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你决定释放黑暗存在（可能通过摧毁镜框或念诵符文）",
+          "result": "你对镜框架施加外力，符文碎裂，黑暗存在化作黑雾腾空而起。它盘旋片刻，低语开辟出一条裂隙。你获得了它的指引。",
+          "side_effects": [
+            "@npc_state_change(npc_name='黑暗存在', new_state='释放')",
+            "@item_gain(item_name='黑暗存在的指引', quantity=1)"
+          ],
+          "difficulty": null
+        },
+        {
+          "id": "SI6",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "拒绝释放",
+          "type": "精神分析",
+          "requirement": "",
+          "trigger": "你拒绝释放黑暗存在，决定依靠自己打开裂隙",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "hard",
+          "graded_result": {
+            "on_failure": "黑暗存在狂怒，你的意志无法集中，你感到自己被困在幻境中，无法逃脱。",
+            "on_regular": "你咬紧牙关，集中意志，一道微小的裂隙在面前展开，你勉强钻了过去，返回了test_room。",
+            "on_hard": "你的精神力量强大，直接撕开了一道稳定裂隙，成功返回。",
+            "on_extreme": "你不仅打开裂隙，还从裂隙中瞥见了镜中空间的核心，获得了一丝奈亚的知识。"
+          }
+        },
+        {
+          "id": "SI7",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "使用钥匙",
+          "type": "无",
+          "requirement": "|| 需要消耗物品：钥匙",
+          "trigger": "你拿出从镜中世界获得的钥匙，划向虚空",
+          "result": "钥匙在空气中划出一道闪光，裂隙骤然展开，你迅速穿过回到了test_room，但钥匙化为粉末消散。",
+          "side_effects": [
+            "@consume_item(item_name='钥匙', quantity=1, narrative='钥匙化为粉末')"
+          ],
+          "difficulty": null
+        },
+        {
+          "id": "SI8",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "调查符文",
+          "type": "神秘学",
+          "requirement": "",
+          "trigger": "你检查墙壁上的鳞片符文",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你认不出这些符文，只感到一阵眩晕。",
+            "on_regular": "你认出部分符文是封印奈亚碎片用的，与霍桑的研究笔记吻合。",
+            "on_hard": "你解读了符文的意义：它们是一个囚笼，只要符文完整，黑暗存在就无法逃脱。同时，你发现符文的一部分可以被用来打开现实裂隙。",
+            "on_extreme": "你不仅理解了符文，还发现你可以通过修改符文将黑暗存在彻底放逐，而无需钥匙或意志。"
+          }
+        },
+        {
+          "id": "SI9",
+          "entity_type": "interaction",
+          "scene": "SS2_囚魂之间",
+          "name": "调查镜框",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你检查中央的空镜框",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "镜框空无一物，只有模糊的影子。",
+            "on_regular": "你看到镜框边缘刻着细微的文字，是霍桑的签名：'掌握虚空者'。",
+            "on_hard": "你发现镜框底部有一个小凹槽，形状很像你所见过的钥匙。",
+            "on_extreme": "你找到了镜框中隐藏的一个小机关，如果结合钥匙，可以彻底关闭这个囚笼。"
+          }
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT2",
+          "entity_type": "auto_trigger",
+          "scene": "SS2_囚魂之间",
+          "name": "存在低语",
+          "type": "无",
+          "requirement": "",
+          "trigger": "场景加载",
+          "result": "黑暗存在从镜框中凝聚，用无数声音低语：'你带来了钥匙，还是灵魂？'",
+          "side_effects": []
+        }
+      ],
+      "from_here": [
+        {
+          "target": "test_room",
+          "method": "跟随黑暗存在的指引",
+          "requirement": "SI5"
+        },
+        {
+          "target": "test_room",
+          "method": "通过意志裂隙",
+          "requirement": "SI6"
+        },
+        {
+          "target": "test_room",
+          "method": "通过钥匙裂隙",
+          "requirement": "SI7"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS1_镜中回廊",
+          "method": "推开铁门",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [],
+  "npc_profiles": {},
+  "dependency_graph": {
+    "nodes": {
+      "SI1": {
+        "entity_type": "interaction",
+        "scene": "SS1_镜中回廊"
+      },
+      "SI2": {
+        "entity_type": "interaction",
+        "scene": "SS1_镜中回廊"
+      },
+      "SI3": {
+        "entity_type": "interaction",
+        "scene": "SS1_镜中回廊"
+      },
+      "SI10": {
+        "entity_type": "interaction",
+        "scene": "SS1_镜中回廊"
+      },
+      "SAT1": {
+        "entity_type": "auto_trigger",
+        "scene": "SS1_镜中回廊"
+      },
+      "SI4": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SI5": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SI6": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SI7": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SI8": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SI9": {
+        "entity_type": "interaction",
+        "scene": "SS2_囚魂之间"
+      },
+      "SAT2": {
+        "entity_type": "auto_trigger",
+        "scene": "SS2_囚魂之间"
+      }
+    },
+    "edges": [
+      {
+        "source": "SI10",
+        "target": "SI1",
+        "condition": "completed"
+      },
+      {
+        "source": "SI7",
+        "target": "SI10",
+        "condition": "completed"
+      }
+    ]
+  },
+  "_scene_names": {
+    "SS1_镜中回廊": "SS1_镜中回廊",
+    "SS2_囚魂之间": "SS2_囚魂之间"
+  },
+  "_phase1": {}
+}

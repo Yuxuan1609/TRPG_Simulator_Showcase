@@ -1,0 +1,67 @@
+{
+  "start_scene": "",
+  "module_meta": {
+    "title": "",
+    "author": "",
+    "era": "1920s",
+    "theme": "",
+    "expected_duration": "",
+    "player_count": ""
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "规则名称",
+      "rule": "规则描述（自然语言）",
+      "scope": "规则适用范围（自然语言描述）",
+      "is_absolute": "规则的刚性程度（自然语言描述）例如：绝对不可违反、一般情况不可违等等"
+    }
+  ],
+  "scene_intents": {
+    "3号车厢": {
+      "purpose": "此场景的设计用途",
+      "key_threat": "核心威胁（可选）",
+      "notes": "设计备注（可选）"
+    }
+  },
+  "ending_conditions": [
+    {
+      "id": "END1",
+      "condition": "触发条件",
+      "narrative": "结局叙事包含结局的主题和叙事性的结果"
+    }
+  ],
+  "tone_constraints": {
+    "genre": "克苏鲁恐怖",
+    "forbidden": ["禁止出现的元素"],
+    "recommended": ["建议包含的元素"],
+    "narrative_style": "叙事风格描述"
+  },
+  "characters": [
+    {
+      "id": "NPC_1",
+      "name": "NPC名称",
+      "behavior": "行为逻辑描述（该NPC在故事中行动的原动力，以及该角色的叙事作用）"
+    }
+  ],
+  "driving_force": "一切事件的底层驱动力（为什么这一切在发生）",
+  "narrative_lines": [
+    {
+      "name": "叙事线名称",
+      "outline": "这条叙事线的大纲（起承转合、关键转折点）",
+      "key_scenes": ["涉及的关键场景"],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {
+    "name": "Boss名称或时间压力名称",
+    "guide": "用自然语言描述给KP的时间压力执行指南：包括正常节奏、加速条件、兜底策略。如：'后方巨嘴持续吞噬车厢。玩家探索推进正常则每30分钟吞噬一节后方车厢。若玩家反复搜索或长时间停留——提示震动加剧、声音逼近。若一个半小时内无实质性推进——强制执行吞噬当前车厢尾部区域。'",
+    "urgency": 0,
+    "urgency_max": 10,
+    "key_signals": [
+      "远处低沉的咀嚼声",
+      "脚下车厢轻微震动",
+      "后方金属撕裂声"
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "学生",
+    "description": "大学生、研究生或学徒",
+    "occupation_skills": ["图书馆使用", "外语", "母语", "历史", "科学", "计算机使用", "心理学"],
+    "credit_rating_min": 5,
+    "credit_rating_max": 10,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "私家侦探",
+    "description": "接受委托调查案件的私人调查员",
+    "occupation_skills": ["侦查", "追踪", "图书馆使用", "心理学", "法律", "潜行", "格斗"],
+    "credit_rating_min": 10,
+    "credit_rating_max": 30,
+    "skill_points_formula": "EDU*2+DEX*2"
+  },
+  {
+    "name": "医生",
+    "description": "执业医师、外科医生、精神科医生等",
+    "occupation_skills": ["急救", "医学", "心理学", "精神分析", "科学", "说服"],
+    "credit_rating_min": 30,
+    "credit_rating_max": 80,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "教授",
+    "description": "大学或研究机构的学者",
+    "occupation_skills": ["图书馆使用", "母语", "外语", "历史", "考古学", "神秘学", "心理学", "说服"],
+    "credit_rating_min": 20,
+    "credit_rating_max": 70,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "记者",
+    "description": "报纸、杂志或电台记者",
+    "occupation_skills": ["图书馆使用", "聆听", "说服", "心理学", "母语", "潜行"],
+    "credit_rating_min": 5,
+    "credit_rating_max": 50,
+    "skill_points_formula": "EDU*2+APP*2"
+  },
+  {
+    "name": "警察",
+    "description": "警员、探员",
+    "occupation_skills": ["格斗", "枪械", "法律", "聆听", "心理学", "侦查", "追踪", "汽车驾驶"],
+    "credit_rating_min": 10,
+    "credit_rating_max": 40,
+    "skill_points_formula": "EDU*2+DEX*2"
+  },
+  {
+    "name": "古董商",
+    "description": "经营古董店的商人",
+    "occupation_skills": ["估价", "历史", "考古学", "图书馆使用", "神秘学", "说服", "话术"],
+    "credit_rating_min": 20,
+    "credit_rating_max": 60,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "神职人员",
+    "description": "牧师、神父、修道士等",
+    "occupation_skills": ["母语", "外语", "历史", "图书馆使用", "神秘学", "说服", "心理学"],
+    "credit_rating_min": 5,
+    "credit_rating_max": 30,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "工程师",
+    "description": "机械、电气、土木工程师",
+    "occupation_skills": ["机械维修", "电气维修", "科学", "图书馆使用", "计算机使用", "操作重型机械"],
+    "credit_rating_min": 20,
+    "credit_rating_max": 60,
+    "skill_points_formula": "EDU*4"
+  },
+  {
+    "name": "罪犯",
+    "description": "职业罪犯、黑帮成员",
+    "occupation_skills": ["格斗", "枪械", "恐吓", "潜行", "锁匠", "妙手", "驾驶"],
+    "credit_rating_min": 0,
+    "credit_rating_max": 20,
+    "skill_points_formula": "EDU*2+DEX*2"
+  },
+  {
+    "name": "自由职业/自定义",
+    "description": "自行定义职业技能",
+    "occupation_skills": [],
+    "credit_rating_min": 0,
+    "credit_rating_max": 99,
+    "skill_points_formula": "EDU*4"
+  }
+]

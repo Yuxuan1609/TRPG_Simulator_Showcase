@@ -1,0 +1,107 @@
+{
+  "scenes": {
+    "6号车厢": {
+      "description": "场景功能性描述（KP用）",
+      "from_here": [{"target": "目标场景", "method": "通行方式", "requirement": "通行前置条件（可选）"}],
+      "to_here": [{"source": "来源场景", "method": "通行方式", "requirement": "通行前置条件（可选）"}],
+      "interactions": [
+        {
+          "id": "I1",
+          "type": "关联技能名，不涉及填\"无\"",
+          "name": "互动名称",
+          "requirement": "硬性前置条件（必须已完成的 interaction ID 或持有特定物品），如：interaction:I3 已完成。无条件填空字符串",
+          "trigger": "触发场景（描述什么情况下玩家可以执行此互动），如：玩家检查抽屉时",
+          "result": "直接结果（互动/事件直接产生的结果），如：抽屉打开了，里面有一把钥匙",
+          "side_effects": ["间接后果（与result不重合的附带影响），如：开抽屉的声响吸引了隔壁车厢的怪物"],
+          "graded_result": {
+            "on_failure": "检定失败时的结果",
+            "on_regular": "常规成功时的结果",
+            "on_hard": "困难成功时的结果",
+            "on_extreme": "极难成功时的结果"
+          },
+          "difficulty": "regular",
+          "time_condition": [],
+          "based_on": null
+        }
+      ],
+      "encounters": [
+        {
+          "enemy_ref": null,
+          "trigger_condition": "触发条件",
+          "initial_behavior": "初始行为",
+          "quantity": 1,
+          "notes": "备注（可选）",
+          "extra": {}
+        }
+      ],
+      "scene_weapons": [
+        {
+          "weapon_ref": null,
+          "location": "位置描述",
+          "discovery_method": "发现方式",
+          "extra": {}
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "AT1",
+          "type": "关联技能名，不涉及填\"无\"",
+          "name": "自动触发名称",
+          "scene": "6号车厢",
+          "requirement": "硬性前置条件（必须已完成的 interaction ID 或持有特定物品），无条件填空字符串||软性条件，如调查员背景或拥有特定技能",
+          "trigger": "触发场景（描述什么情况下此被动事件触发），如：玩家进入场景且 I1 已完成",
+          "result": "直接结果（被动触发直接产生的结果）",
+          "side_effects": ["间接后果（与result不重合的附带影响）"],
+          "graded_result": {
+            "on_failure": "检定失败时的结果",
+            "on_regular": "常规成功时的结果",
+            "on_hard": "困难成功时的结果",
+            "on_extreme": "极难成功时的结果"
+          },
+          "difficulty": "regular",
+          "time_condition": [],
+          "based_on": "I1"
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [
+    {
+      "id": "E1",
+      "type": "关联技能名，不涉及填\"无\"",
+      "name": "事件名称",
+      "requirement": "硬性前置条件（必须已完成的 interaction ID 或持有特定物品），无条件填空字符串",
+      "trigger": "触发场景（描述什么情况下此事件触发），如：I5 完成后此事件触发",
+      "result": "直接结果（事件直接产生的结果，含不可逆影响标注）",
+      "side_effects": ["间接后果（与result不重合的附带影响）"],
+      "graded_result": {
+        "on_failure": "检定失败时的结果",
+        "on_regular": "常规成功时的结果",
+        "on_hard": "困难成功时的结果",
+        "on_extreme": "极难成功时的结果"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": "I1",
+      "extra": {}
+    }
+  ],
+  "npc_profiles": {
+    "NPC名称": {
+      "name": "NPC名称",
+      "role": "在故事中的角色",
+      "appearance": "外貌描述",
+      "what_they_can_do": "NPC能做什么、在什么条件下会做什么（核心行为字段）",
+      "interaction_triggers": ["什么情况下玩家可以与NPC互动"],
+      "personality_notes": "性格和说话风格",
+      "initial_state": "alive",
+      "initial_attitude": "neutral",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": true,
+      "follow_requirements": "I3 AND I5 || NPC信任调查员后愿意跟随",
+      "interact_requirements": ""
+    }
+  }
+}

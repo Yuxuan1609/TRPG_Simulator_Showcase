@@ -1,0 +1,515 @@
+{
+  "interactions": [
+    {
+      "id": "I1",
+      "scene": "6号车厢",
+      "type": "无",
+      "name": "检查白色便签",
+      "requirement": "",
+      "trigger": "玩家调查6号车厢通往7号车厢的门时",
+      "result": "你发现门上贴着一张便签，正面写着「只管前进吧 已经没有退路了」。翻到背面，有一行小字：「第三个箱子里有藏着钥匙」。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I2",
+      "scene": "6号车厢",
+      "type": "无",
+      "name": "观察电车示意地图",
+      "requirement": "",
+      "trigger": "玩家检查门旁墙壁时",
+      "result": "你发现门旁贴着电车的示意地图，但7号车厢及之后的部分被人涂抹刮花了，无法辨认，暗示危险来自后方。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I3",
+      "scene": "6号车厢",
+      "type": "无",
+      "name": "打开通往7号车厢的门",
+      "requirement": "",
+      "trigger": "玩家试图从6号车厢进入7号车厢时",
+      "result": "你推开门，一股浓烈的血腥味扑面而来。车厢内是地狱般的景象：人类残肢散落，地板和座椅浸满鲜血。车厢深处，墙壁和车门已被黑暗取代，一只长满利齿、比电车还大的嘴巴正在缓慢地啃噬着车厢。这恐怖的景象让你的理智受到巨大冲击。",
+      "side_effects": [
+        "如果调查员此前曾因高灵感察觉异常，理智损失更为严重"
+      ],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I4",
+      "scene": "7号车厢",
+      "type": "无",
+      "name": "检查残骸",
+      "requirement": "I3",
+      "trigger": "玩家在7号车厢内检查散落的残肢时",
+      "result": "这些人体残肢非常新鲜，死亡时间就在不久之前，且撕裂痕迹显示出巨大的咬合力。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I5",
+      "scene": "7号车厢",
+      "type": "无",
+      "name": "仔细观察巨口",
+      "requirement": "I3",
+      "trigger": "玩家强作镇定，仔细观察那吞噬车厢的巨口时",
+      "result": "你发现原本的后方门扉已经消失，只剩下一片纯粹的虚无，整个车厢仿佛孤立在无尽的黑暗之中。",
+      "side_effects": [
+        "观察可能会进一步动摇你的理智"
+      ],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I6",
+      "scene": "5号车厢",
+      "type": "侦查",
+      "name": "搜索报纸",
+      "requirement": "",
+      "trigger": "玩家在5号车厢仔细搜索时",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你没能找到任何有价值的信息。",
+        "on_regular": "你发现了一份遗留在座位上的报纸，上面刊登着关于昨晚同线路末班电车遭遇恐怖袭击的新闻，幸存者全都被送入精神病院。报纸的日期竟是“第二天”，报道的正是现在发生的事。",
+        "on_hard": "你迅速找到了报纸，并敏锐地察觉到这似乎是“未来的报纸”，暗示你们正处于错乱的时间或梦境之中。",
+        "on_extreme": "你不仅找到了报纸，还注意到报纸边缘有些许烧焦的痕迹，仿佛曾被用于引火，这绝非普通的印刷品。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I7",
+      "scene": "5号车厢",
+      "type": "无",
+      "name": "察觉后方的消失",
+      "requirement": "I3",
+      "trigger": "当调查员在5号车厢且已知晓后方巨口存在时，观察6号车厢方向",
+      "result": "你惊恐地发现，6号车厢有将近一半的空间已经无声无息地消失了，被那片虚无所吞没。",
+      "side_effects": [
+        "意识到危险正在加速逼近"
+      ],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I8",
+      "scene": "5号车厢",
+      "type": "无",
+      "name": "试图观察后方车厢",
+      "requirement": "",
+      "trigger": "玩家尝试通过车门玻璃看向来时方向时",
+      "result": "车门在你眼前骤然合上，即使隔着玻璃，也只能看到你自己的倒影和一片黑暗。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I9",
+      "scene": "5号车厢",
+      "type": "无",
+      "name": "用光源照射后方",
+      "requirement": "",
+      "trigger": "玩家用光源（如手电筒）照射后方黑暗时",
+      "result": "你透过光柱看到，自己所在车厢的一部分已置身于那张布满獠牙的巨口之中，无法判断下一秒是否就会被彻底吞噬。",
+      "side_effects": [
+        "这景象可能会让你再次受到理智冲击"
+      ],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I10",
+      "scene": "4号车厢",
+      "type": "无",
+      "name": "检查乘务员",
+      "requirement": "",
+      "trigger": "进入4号车厢，你发现地板上倒着一个穿制服的男人",
+      "result": "他身穿电车乘务员制服，侧倒在地，身下渗出一小摊血迹，处于重伤休克状态，若不及时救治很快会丧命。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I11",
+      "scene": "4号车厢",
+      "type": "急救",
+      "name": "对乘务员进行急救",
+      "requirement": "",
+      "trigger": "调查员试图救治重伤倒地的乘务员时",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你未能挽救他，他在你面前停止了呼吸。",
+        "on_regular": "你成功止血并包扎，他猛地抽了一口气，苏醒过来，但仍十分虚弱。他自称是乘务员京山人吉。",
+        "on_hard": "你的急救技术娴熟，他很快醒来，虽然虚弱但能勉强交流。他自称是乘务员京山人吉。",
+        "on_extreme": "你的处理堪称完美，他不仅醒来，甚至能在简单搀扶下缓慢移动。他自称是乘务员京山人吉，并对你感激不尽。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I12",
+      "scene": "4号车厢",
+      "type": "话术",
+      "name": "安抚乘务员情绪",
+      "requirement": "I11",
+      "trigger": "乘务员京山人吉苏醒后情绪激动，调查员尝试让他冷静下来",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "他仍在痛苦和恐惧中挣扎，无法冷静下来回忆更多细节。",
+        "on_regular": "他稍微平静了一些，告诉你：「那些怪物，它们对声音特别敏感！我当时受伤时甩出的东西吸引了它们的注意。」",
+        "on_hard": "他很快冷静下来，详细描述道：「那些像人的怪物没有眼睛，但对声音极度敏感，只要是稍大的声响就会扑过去。」",
+        "on_extreme": "在你的安抚下，他不仅回忆起声音弱点，还提供了一个主意：「或许可以用什么东西制造声响，把它们引开。」"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I13",
+      "scene": "3号车厢",
+      "type": "侦查",
+      "name": "搜索钥匙（无信息）",
+      "requirement": "",
+      "trigger": "玩家在散落一地的行李中翻找驾驶室钥匙，但不知道具体位置",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你翻找了很久，除了垃圾什么也没找到，还弄出了不小的声响。",
+        "on_regular": "经过一番艰苦的搜寻，你终于在一个破旧的皮包下找到了那串钥匙（包括驾驶室门钥匙和操作面板钥匙）。",
+        "on_hard": "你凭借敏锐的目光，在无数杂物中准确找到了钥匙，动作轻巧没有引起注意。",
+        "on_extreme": "你几乎立刻就发现了钥匙，并且在寻找过程中没有发出任何声响，甚至还有时间翻看其他行李。"
+      },
+      "difficulty": "hard",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I14",
+      "scene": "3号车厢",
+      "type": "无",
+      "name": "搜索钥匙（有信息）",
+      "requirement": "I11",
+      "trigger": "玩家根据乘务员提供的线索，在3号车厢前门附近寻找钥匙",
+      "result": "你按照乘务员的描述，轻松地在行李堆中找到了那串钥匙，包括驾驶室门钥匙和操作面板钥匙。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I15",
+      "scene": "3号车厢",
+      "type": "侦查",
+      "name": "搜索个人遗失物品",
+      "requirement": "",
+      "trigger": "玩家在杂乱的行李中搜寻自己可能遗失的物品",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你没能在杂乱的行李中找到任何属于你的物品。",
+        "on_regular": "你找到了自己丢失的一件重要物品（如手电筒或手机）。",
+        "on_hard": "你不仅找到了自己的物品，还发现了一些可能派上用场的小物件（如一枚额外的电池）。",
+        "on_extreme": "你找回了个人物品，同时意外发现了一个满电的备用电源。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I16",
+      "scene": "3号车厢",
+      "type": "潜行",
+      "name": "小心穿过杂物",
+      "requirement": "",
+      "trigger": "玩家试图穿过车厢内堆积如山的行李而不发出声响",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你不小心踢倒了一个玻璃瓶，刺耳的碎裂声在车厢中回荡。",
+        "on_regular": "你小心翼翼地绕过了杂物堆，没有发出明显的声响。",
+        "on_hard": "你像猫一样安静地通过了这片区域。",
+        "on_extreme": "你悄无声息地穿过，甚至没有碰动任何东西。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I17",
+      "scene": "2号车厢",
+      "type": "潜行",
+      "name": "潜行通过2号车厢",
+      "requirement": "",
+      "trigger": "玩家试图在黑暗中不惊动怪物，从2号车厢一端到达另一端",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你踩断了一根骨头，清脆的断裂声让所有喘息声瞬间停止。你听到它们嘶吼着朝你扑来！",
+        "on_regular": "你屏住呼吸，在黑暗中缓慢挪动，终于成功抵达了对面的门，没有惊动它们。",
+        "on_hard": "你极度谨慎，利用怪物的运动节奏，无声地通过了车厢。",
+        "on_extreme": "你不仅安全通过，还记下了怪物的行动模式，或许对回来有用。"
+      },
+      "difficulty": "hard",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I18",
+      "scene": "2号车厢",
+      "type": "投掷",
+      "name": "投掷物品吸引注意",
+      "requirement": "",
+      "trigger": "玩家向远处投掷物品，试图制造声响引开怪物",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你扔出的物品落地声音太小，没能吸引到所有怪物的注意，部分怪物依然徘徊在附近。",
+        "on_regular": "物品在远处发出巨响，怪物们立刻朝那个方向扑去，你趁机快速冲向对门。",
+        "on_hard": "你瞄准了离你最远的角落，怪物们全部被吸引开，为你清出了宽敞且安全的通道。",
+        "on_extreme": "你甚至不需要跑，怪物们全神贯注于你制造的声响，你从容地走了过去。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I19",
+      "scene": "先头车厢",
+      "type": "无",
+      "name": "使用钥匙打开驾驶室门",
+      "requirement": "I13 OR I14",
+      "trigger": "你使用找到的钥匙插入驾驶室门锁",
+      "result": "门打开了，里面是布满仪表盘和拉杆的驾驶室。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I20",
+      "scene": "先头车厢",
+      "type": "无",
+      "name": "使用钥匙解锁控制面板",
+      "requirement": "I19",
+      "trigger": "在驾驶室内，用钥匙开启控制面板",
+      "result": "随着钥匙转动，控制面板上的指示灯亮起，操作拉杆已可被移动。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I21",
+      "scene": "先头车厢",
+      "type": "无",
+      "name": "操作油门加速",
+      "requirement": "I20",
+      "trigger": "你将右侧油门拉杆向下推，使电车加速",
+      "result": "##END_真结局:电车冲出梦境## 电车开始加速冲刺，强烈的白光从前窗涌入，覆盖了一切。你们从6号车厢的座位上惊醒，耳边传来乘务员标准、温柔的到站广播。这只是一场可怕的集体共感噩梦，但一切都结束了，幸存者恢复了神智。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I22",
+      "scene": "先头车厢",
+      "type": "无",
+      "name": "操作油门减速",
+      "requirement": "I20",
+      "trigger": "你将右侧油门拉杆向上拉，使电车减速直至停止",
+      "result": "##END_坏结局:永远的梦魇## 电车逐渐停下，但周围瞬间被至深的黑暗吞没，咀嚼声在身边响起，巨口吞噬了整个空间。你们在座位上醒来，但那被活生生啃食的恐怖记忆已深植脑海，有人发现身边多了一个不属于自己的黑色挎包。你们失去大量理智，但获得了关于克苏鲁神话的禁忌知识。",
+      "side_effects": [],
+      "time_condition": [],
+      "based_on": null
+    },
+    {
+      "id": "I23",
+      "scene": "6号车厢",
+      "type": "侦查",
+      "name": "察觉行车时间异常",
+      "requirement": "",
+      "trigger": "调查员醒来后，试图确认当前时间和列车行驶状况",
+      "result": "##GRADED##",
+      "side_effects": [],
+      "graded_result": {
+        "on_failure": "你不知道已经过了多久，也许只是多坐了几站。",
+        "on_regular": "你意识到列车行驶的时间早已超过了抵达终点站所需的时长，这很不正常。",
+        "on_hard": "你准确推断出已经过去了一个多小时，窗外完全黑暗，说明你们可能不在正常轨道上。",
+        "on_extreme": "你不仅知道时间不对，还回想起自己在末班车上睡着，而现在应该已经是凌晨三四点，正常早已停运。"
+      },
+      "difficulty": "regular",
+      "time_condition": [],
+      "based_on": null
+    }
+  ],
+  "scene_movements": {
+    "6号车厢": {
+      "from_here": [
+        {
+          "target": "7号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "target": "5号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "7号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "source": "5号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ]
+    },
+    "7号车厢": {
+      "from_here": [
+        {
+          "target": "6号车厢",
+          "method": "打开车门步行返回",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "6号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ]
+    },
+    "5号车厢": {
+      "from_here": [
+        {
+          "target": "6号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "target": "4号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "6号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "source": "4号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ]
+    },
+    "4号车厢": {
+      "from_here": [
+        {
+          "target": "5号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "target": "3号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "5号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "source": "3号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ]
+    },
+    "3号车厢": {
+      "from_here": [
+        {
+          "target": "4号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "target": "2号车厢",
+          "method": "打开车门步行进入（前方一片黑暗）",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "4号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "source": "2号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        }
+      ]
+    },
+    "2号车厢": {
+      "from_here": [
+        {
+          "target": "3号车厢",
+          "method": "打开车门步行返回",
+          "requirement": ""
+        },
+        {
+          "target": "先头车厢",
+          "method": "穿过连接部进入",
+          "requirement": "需要光源或夜视能力以通过黑暗区域"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "3号车厢",
+          "method": "打开车门步行进入",
+          "requirement": ""
+        },
+        {
+          "source": "先头车厢",
+          "method": "穿过连接部返回",
+          "requirement": ""
+        }
+      ]
+    },
+    "先头车厢": {
+      "from_here": [
+        {
+          "target": "2号车厢",
+          "method": "打开车门步行返回",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "2号车厢",
+          "method": "穿过连接部进入",
+          "requirement": ""
+        }
+      ]
+    }
+  }
+}

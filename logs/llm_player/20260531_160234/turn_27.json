@@ -1,0 +1,9 @@
+{
+  "turn": 27,
+  "player_input": "我拿出手机，尝试拨打急救电话，看看是否有信号。",
+  "enrich": null,
+  "narrator": {
+    "brief": "（处理中）",
+    "narrative": ""
+  }
+}

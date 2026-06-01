@@ -1,0 +1,97 @@
+{
+  "npc_profiles": {
+    "京山 人吉": {
+      "name": "京山 人吉",
+      "role": "重伤的电车乘务员，掌握关键情报",
+      "appearance": "他身穿电车乘务员制服，侧倒在地，身下渗出一小摊血迹，脸色苍白如纸，呼吸微弱而急促，明显处于重伤休克状态。",
+      "what_they_can_do": "苏醒并情绪稳定后，能告知怪物畏惧强光或巨大声响的弱点、驾驶室钥匙可能藏在第三个箱子里的线索，并坚持必须让电车停下；跟随玩家到达先头车厢后，会基于自身信念强烈反对停车以外的任何行动，成为说服或对抗的焦点。",
+      "personality_notes": "语气虚弱但充满恐惧与偏执，反复强调“必须停下电车”，说话时气息不稳，极度依赖救援者的帮助。",
+      "interaction_triggers": [
+        "乘务员苏醒后，玩家可主动与其交谈",
+        "乘务员情绪稳定后，会主动透露怪物弱点和钥匙线索"
+      ],
+      "initial_state": "alive",
+      "initial_attitude": "wary",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": true,
+      "follow_requirements": "I11 AND I12 || 京山人吉信任调查员并请求协助停下电车",
+      "interact_requirements": "I11 AND I12 || 京山人吉苏醒且情绪稳定",
+      "scene": "4号车厢",
+      "all_scenes": [
+        "4号车厢"
+      ],
+      "bound_interactions": [
+        {
+          "id": "I10",
+          "scene": "4号车厢",
+          "type": "无",
+          "name": "检查乘务员",
+          "requirement": "",
+          "trigger": "进入4号车厢，你发现地板上倒着一个穿制服的男人",
+          "result": "他身穿电车乘务员制服，侧倒在地，身下渗出一小摊血迹，处于重伤休克状态，若不及时救治很快会丧命。",
+          "side_effects": [],
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "4号车厢"
+        },
+        {
+          "id": "I11",
+          "scene": "4号车厢",
+          "type": "急救",
+          "name": "对乘务员进行急救",
+          "requirement": "",
+          "trigger": "调查员试图救治重伤倒地的乘务员时",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你未能挽救他，他在你面前停止了呼吸。",
+            "on_regular": "你成功止血并包扎，他猛地抽了一口气，苏醒过来，但仍十分虚弱。他自称是乘务员京山人吉，并恳求你们快点停下电车逃跑，同时透露自己的钥匙掉落在3号车厢前门附近。",
+            "on_hard": "你的急救技术娴熟，他很快醒来，虽然虚弱但能勉强交流。他自称是乘务员京山人吉，焦急地告诉你们钥匙在3号车厢前门附近，请求你们去停下电车。",
+            "on_extreme": "你的处理堪称完美，他不仅醒来，甚至能在简单搀扶下缓慢移动。他自称是乘务员京山人吉，并对你感激不尽，然后立即提醒你们驾驶室的钥匙掉在了3号车厢前门，必须找回来才能刹车。"
+          },
+          "difficulty": "regular",
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "4号车厢"
+        },
+        {
+          "id": "I12",
+          "scene": "4号车厢",
+          "type": "话术",
+          "name": "安抚乘务员情绪",
+          "requirement": "I11",
+          "trigger": "乘务员京山人吉苏醒后情绪激动，调查员尝试让他冷静下来",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "他仍在痛苦和恐惧中挣扎，无法冷静下来回忆更多细节。",
+            "on_regular": "他稍微平静了一些，告诉你：「那些怪物，它们对声音特别敏感！我当时受伤时甩出的东西吸引了它们的注意。」",
+            "on_hard": "他很快冷静下来，详细描述道：「那些像人的怪物没有眼睛，但对声音极度敏感，只要是稍大的声响就会扑过去。」",
+            "on_extreme": "在你的安抚下，他不仅回忆起声音弱点，还提供了一个主意：「或许可以用什么东西制造声响，把它们引开。」"
+          },
+          "difficulty": "regular",
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "4号车厢"
+        }
+      ],
+      "bound_auto_triggers": [
+        {
+          "id": "AT_4号车厢_进入",
+          "type": "无",
+          "name": "4号车厢进入",
+          "requirement": "",
+          "trigger": "玩家进入4号车厢时",
+          "result": "你看到一名身穿电车乘务员制服的男人侧倒在地，身下渗出一小摊血迹，处于重伤休克状态。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "based_on": "",
+          "scene": "4号车厢",
+          "source_scene": "4号车厢"
+        }
+      ]
+    }
+  }
+}

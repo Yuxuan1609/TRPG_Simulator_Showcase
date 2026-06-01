@@ -1,0 +1,342 @@
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走向车厢连接处的门，仔细查看白色便签上的内容。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走到电车示意地图前，仔细查看上面标注的各车厢名称和顺序。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要彻底搜查6号车厢，包括座椅下面和行李架，寻找有用物品或线索。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "ambiguous",
+  "interpretation": "玩家想打开试作型裁决者的武器箱并检查里面的武器，但当前场景中不存在该物品。",
+  "resolved_text": "",
+  "question": "当前场景中没有'试作型裁决者的武器箱'。你想检查什么？比如你可以说'检查白色便签'或'观察电车示意地图'。"
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走到车厢连接处，试图打开贴着白色便签的门，查看门后情况。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细观察电车示意图，寻找隐藏通道或紧急出口",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家蹲下仔细检查6号车厢的地板和墙壁，寻找警员专用通道入口或隐藏标记。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要仔细查看白色便签和电车示意图，寻找关于行车时间或第三个箱子的线索。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家掏出手机查看当前时间和信号，并尝试拨打紧急电话。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家掏出手机，查看当前时间和信号，并尝试拨打紧急电话。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要走到座椅下方，打开两个武器箱，查看里面的试作型裁决者和试作型湮灭者。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿起试作型裁决者，仔细端详其构造，检查是否有铭文或开关说明。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿起试作型裁决者并仔细端详其构造，寻找铭文或开关说明。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家将试作型裁决者插回武器箱，拿起试作型湮灭者，并侧耳倾听震动方向。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家将试作型裁决者插回武器箱，拿起试作型湮灭者，同时倾听震动方向。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家将试作型裁决者插回武器箱，拿起试作型湮灭者，同时侧耳倾听震动方向。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细端详试作型湮灭者，寻找铭文、开关或任何特征。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细检查试作型湮灭者，寻找铭文、开关或特征。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想仔细检查试作型湮灭者，寻找铭文、开关或特征。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家将试作型湮灭者放回武器箱，然后走向通往5号车厢的警员通道，用手电筒照亮前方。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要前往5号车厢",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照向报纸并蹲下查看，同时侧耳倾听远处嗡鸣声的方向。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照射报纸并蹲下查看内容，同时侧耳倾听嗡鸣声的方向。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家转身用手电筒照射后车门玻璃上的阴影，试图看清其形态。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家握紧武器朝4号车厢方向狂奔，试图逃离正在合拢的巨口。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家快步走到倒地男人身边，蹲下检查他的伤口和呼吸，并尝试与他对话。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查乘务员的口袋，寻找钥匙或对讲机等物品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查乘务员的口袋，寻找钥匙或对讲机等物品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查乘务员的口袋，寻找钥匙或对讲机等物品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家尝试通过拍打脸颊和低声呼唤来唤醒乘务员",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家站起身，用手电筒照亮前方，小心地朝3号车厢走去。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家弯腰用手电筒照射行李堆缝隙，寻找驾驶室钥匙。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家握紧钥匙，小心拨开行李堆，朝3号车厢的前门（即通往4号车厢的门）移动。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家小心翼翼地打开手电筒照亮前方车厢，同时保持安静，试图看清黑暗中的情况。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家后退几步，用手电筒快速扫视周围，寻找是否有其他出口或可以躲藏的地方。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拔出试作型裁决者，对准扑来的Clicker开火。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照射Clicker的尸体，确认其死亡状态，并观察周围是否有其他动静。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家使用手电筒照亮前方阴影以观察潜在危险",
+  "resolved_text": "",
+  "question": ""
+}
+

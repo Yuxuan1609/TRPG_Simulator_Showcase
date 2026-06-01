@@ -1,0 +1,208 @@
+{
+  "nodes": {
+    "I1": {
+      "entity_id": "I1",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I2": {
+      "entity_id": "I2",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I3": {
+      "entity_id": "I3",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I23": {
+      "entity_id": "I23",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I4": {
+      "entity_id": "I4",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I5": {
+      "entity_id": "I5",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I6": {
+      "entity_id": "I6",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I7": {
+      "entity_id": "I7",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I8": {
+      "entity_id": "I8",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I9": {
+      "entity_id": "I9",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I13": {
+      "entity_id": "I13",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I14": {
+      "entity_id": "I14",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I11": {
+      "entity_id": "I11",
+      "entity_type": "",
+      "name": ""
+    },
+    "I15": {
+      "entity_id": "I15",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I16": {
+      "entity_id": "I16",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I17": {
+      "entity_id": "I17",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I18": {
+      "entity_id": "I18",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I19": {
+      "entity_id": "I19",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I20": {
+      "entity_id": "I20",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I21": {
+      "entity_id": "I21",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "I22": {
+      "entity_id": "I22",
+      "entity_type": "interaction",
+      "name": ""
+    },
+    "NPC_FOLLOW_UNLOCK_京山 人吉": {
+      "entity_id": "NPC_FOLLOW_UNLOCK_京山 人吉",
+      "entity_type": "",
+      "name": ""
+    },
+    "I12": {
+      "entity_id": "I12",
+      "entity_type": "",
+      "name": ""
+    },
+    "EV_巨口加速吞噬": {
+      "entity_id": "EV_巨口加速吞噬",
+      "entity_type": "event",
+      "name": ""
+    },
+    "AT_6号车厢_进入": {
+      "entity_id": "AT_6号车厢_进入",
+      "entity_type": "auto_trigger",
+      "name": ""
+    },
+    "AT_3号车厢_进入": {
+      "entity_id": "AT_3号车厢_进入",
+      "entity_type": "auto_trigger",
+      "name": ""
+    },
+    "AT_2号车厢_进入": {
+      "entity_id": "AT_2号车厢_进入",
+      "entity_type": "auto_trigger",
+      "name": ""
+    },
+    "AT_WORLD": {
+      "entity_id": "AT_WORLD",
+      "entity_type": "auto_trigger",
+      "name": ""
+    }
+  },
+  "edges": [
+    {
+      "source": "I4",
+      "target": "I3",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I5",
+      "target": "I3",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I7",
+      "target": "I3",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I14",
+      "target": "I11",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I19",
+      "target": "I13",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I19",
+      "target": "I14",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I20",
+      "target": "I19",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I21",
+      "target": "I20",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "I22",
+      "target": "I20",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "NPC_FOLLOW_UNLOCK_京山 人吉",
+      "target": "I11",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "NPC_FOLLOW_UNLOCK_京山 人吉",
+      "target": "I12",
+      "dep_type": "interaction"
+    },
+    {
+      "source": "EV_巨口加速吞噬",
+      "target": "I3",
+      "dep_type": "interaction"
+    }
+  ],
+  "_circular_cut": false,
+  "_cut_info": null
+}

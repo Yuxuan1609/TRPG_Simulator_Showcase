@@ -1,0 +1,63 @@
+{
+  "module_meta": {
+    "name": "test_module",
+    "supplement_of": "test_module",
+    "generated_for": "尝试通过不存在的镜子与黑暗中的存在沟通并进入镜子内部"
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "梦境法则",
+      "rule": "这列电车所在的整个世界是由奈亚拉托提普创造的噩梦空间，并非现实。物理法则可被扭曲，逻辑可被篡改。",
+      "scope": "整个电车及其外部黑暗空间",
+      "is_absolute": "绝对不可违反"
+    }
+  ],
+  "scene_intents": {
+    "test_room": {
+      "purpose": "Debug and expansion entry point",
+      "emotion": "Unease and curiosity"
+    },
+    "SS1_镜中回廊": {
+      "purpose": "作为进入镜中世界的过渡场景，建立压抑、未知的氛围，提供对后续区域的线索（霍桑的研究）。",
+      "key_threat": "环境威胁与潜在实体威胁：不明腐蚀性液体、闪烁的影子（可能是“它”的初期显现）、心理上的压迫感。",
+      "notes": "重点刻画感官细节（听觉上的呼唤声、视觉上的红光和阴影），让玩家意识到镜子世界并非安全；铁门和编号暗示实验设施的废弃，为实验室铺垫。"
+    },
+    "SS2_镜像实验室": {
+      "purpose": "揭示霍桑的关键信息与核心冲突（“它”也在寻找出口），给予玩家明确目标（找到钥匙救出霍桑），并制造紧迫感（场景崩塌）。",
+      "key_threat": "霍桑的不可靠性与“它”的存在：霍桑可能因长期囚禁而扭曲，其指示可能带有陷阱；“它”作为未知实体正在追猎，同时造成环境不稳定。",
+      "notes": "提供高密度叙事：通讯影像、镜像对话、震动逃离。注意霍桑的口型与纸条上的双重暗示（救赎与毁灭），为后续道德选择埋下伏笔。逃离方式的物理性（穿过波动镜面）应体现可逆性，但留下裂痕说明代价。"
+    }
+  },
+  "ending_conditions": [],
+  "tone_constraints": {
+    "genre": "Lovecraftian horror",
+    "narrative_style": "Oppressive, with faint hope in despair",
+    "forbidden": [
+      "superpowers",
+      "firearms",
+      "modern communication devices working"
+    ],
+    "recommended": [
+      "tension",
+      "unknown fear",
+      "moral dilemma"
+    ]
+  },
+  "characters": {
+    "conductor": "Injured train conductor, key info provider"
+  },
+  "driving_force": "Keep moving forward in darkness, escape the devouring maw, find hope",
+  "narrative_lines": [
+    {
+      "name": "霍桑研究员的真相",
+      "outline": "从测试房间开始，通过检查桌子上的物品发现霍桑的日志，逐步揭示镜子背后隐藏的实验真相和灵魂囚笼的秘密。",
+      "key_scenes": [
+        "test_room",
+        "car_6"
+      ],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {}
+}

@@ -1,0 +1,63 @@
+{
+  "module_meta": {
+    "name": "test_module",
+    "supplement_of": "test_module",
+    "generated_for": "玩家想与镜中黑暗存在交流，并探索镜中空间的可能性"
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "梦境法则",
+      "rule": "这列电车所在的整个世界是由奈亚拉托提普创造的噩梦空间，并非现实。物理法则可被扭曲，逻辑可被篡改。",
+      "scope": "整个电车及其外部黑暗空间",
+      "is_absolute": "绝对不可违反"
+    }
+  ],
+  "scene_intents": {
+    "test_room": {
+      "purpose": "Debug and expansion entry point",
+      "emotion": "Unease and curiosity"
+    },
+    "SS1_镜中回廊": {
+      "purpose": "让玩家进入镜中世界，探索无限回廊，通过镜子反射不同时空的自我碎片，逐步揭示霍桑实验的痕迹，并引导玩家找到通向囚魂之间的入口铁门。",
+      "key_threat": "幻觉与迷失：镜子反射可能具现化玩家的恐惧或错误记忆；灯光闪烁加剧不安，若玩家沉溺于自我审视可能陷入循环或被负面镜像攻击。",
+      "notes": "利用环境叙事展示奈亚碎片视角，走廊反射映出尖叫、阅读日志或被吞噬的自我，暗示多元时间线；可设置互动点（如触碰镜子触发记忆闪回）为后期抉择铺垫。"
+    },
+    "SS2_囚魂之间": {
+      "purpose": "与囚禁的黑暗存在（奈亚碎片）正面交锋，迫使玩家在释放威胁以换取逃脱机会、或拒绝交易并自行寻找出路之间做出关键道德抉择，此抉择将直接影响后续基调。",
+      "key_threat": "黑暗存在的欺骗与灵魂掠夺：其低语可能扭曲玩家感知，许以虚假承诺；若拒绝，它可能直接攻击或召唤镜中幻象；若释放，脱困后裂隙加深，暗示更大危机。",
+      "notes": "高戏剧冲突时刻，符文和多重低语揭示霍桑囚禁奈亚碎片以窥探真相的设定；玩家的意志或手中钥匙（道具）决定能否打开裂隙；选择后镜子裂痕与渗血效应强化长期威胁。"
+    }
+  },
+  "ending_conditions": [],
+  "tone_constraints": {
+    "genre": "Lovecraftian horror",
+    "narrative_style": "Oppressive, with faint hope in despair",
+    "forbidden": [
+      "superpowers",
+      "firearms",
+      "modern communication devices working"
+    ],
+    "recommended": [
+      "tension",
+      "unknown fear",
+      "moral dilemma"
+    ]
+  },
+  "characters": {
+    "conductor": "Injured train conductor, key info provider"
+  },
+  "driving_force": "Keep moving forward in darkness, escape the devouring maw, find hope",
+  "narrative_lines": [
+    {
+      "name": "霍桑研究员的真相",
+      "outline": "从测试房间开始，通过检查桌子上的物品发现霍桑的日志，逐步揭示镜子背后隐藏的实验真相和灵魂囚笼的秘密。",
+      "key_scenes": [
+        "test_room",
+        "car_6"
+      ],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {}
+}

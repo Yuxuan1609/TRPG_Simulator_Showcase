@@ -1,0 +1,18 @@
+模型: json=deepseek-v4-pro, text=deepseek-v4-pro
+思考: True, 强度=high
+温度: json=0.3, text=0.7
+总耗时: 1013.8s
+总 LLM 调用: 12
+
+  [step1a_structured_extract] deepseek-v4-pro | 思考=on | 24.4s
+  [step1b_condense] deepseek-v4-pro | 思考=on | 123.4s
+  [step2a_interactions] deepseek-v4-pro | 思考=on | 324.4s
+  [step2c_l1] deepseek-v4-pro | 思考=on | 57.2s
+  [step2c_l3] deepseek-v4-pro | 思考=on | 103.4s
+  [step2b_combined] deepseek-v4-pro | 思考=on | 197.0s
+  [step25_combined] deepseek-v4-pro | 思考=on | 51.4s
+  [step3a_dedup_conflict] deepseek-v4-pro | 思考=on | 203.5s
+  [step2_boss] deepseek-v4-pro | 思考=on | 17.1s
+  [step3b_link_fill] deepseek-v4-pro | 思考=on | 21.9s
+  [step35_dep_graph] deepseek-v4-pro | 思考=on | 47.6s
+  [phase2_standardize] deepseek-v4-pro | 思考=on | 78.8s

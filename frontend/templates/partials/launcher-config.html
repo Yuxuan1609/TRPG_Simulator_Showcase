@@ -1,0 +1,52 @@
+<h2 class="text-xl text-aged-gold mb-6 border-b border-gray-800 pb-3">其他工具 & 设置</h2>
+<div class="space-y-5 max-w-2xl">
+  <fieldset class="border border-gray-700 rounded-lg p-4">
+    <legend class="text-sm text-aged-gold px-2">工具</legend>
+    <a href="/editor" class="text-sm text-gray-300 hover:text-aged-gold">JSON 编辑器 →</a>
+  </fieldset>
+
+  <form class="space-y-4" hx-post="/api/config/save" hx-target="#config-status" hx-swap="innerHTML">
+    <fieldset class="border border-gray-700 rounded-lg p-4">
+      <legend class="text-sm text-aged-gold px-2">LLM 配置</legend>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">主模型</label>
+          <input type="text" name="model" value="{{ config.get('model','') }}" placeholder="deepseek-v4-pro"
+                 class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">Flash 模型</label>
+          <input type="text" name="flash_model" value="{{ config.get('flash_model','') }}" placeholder="deepseek-v4-flash"
+                 class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">LLM 超时 (ms)</label>
+          <input type="number" name="llm_timeout_ms" value="{{ config.get('llm_timeout_ms','') }}" placeholder="120000"
+                 class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-300 mb-1">推理强度</label>
+          <select name="reasoning_effort"
+                  class="w-full bg-[#1a150c] border border-gray-600 rounded px-3 py-1.5 text-sm text-gray-200 focus:border-aged-gold focus:outline-none">
+            <option value="low" {% if config.get('reasoning_effort','')=='low' %}selected{% endif %}>Low</option>
+            <option value="medium" {% if config.get('reasoning_effort','')=='medium' %}selected{% endif %}>Medium</option>
+            <option value="high" {% if config.get('reasoning_effort','')=='high' %}selected{% endif %}>High</option>
+          </select>
+        </div>
+        <div class="flex gap-4 mt-2">
+          <label class="flex items-center gap-1 text-xs text-gray-300">
+            <input type="checkbox" name="thinking" {% if config.get('thinking',True) %}checked{% endif %}> Thinking
+          </label>
+          <label class="flex items-center gap-1 text-xs text-gray-300">
+            <input type="checkbox" name="combat_llm_enhancement" {% if config.get('combat_llm_enhancement') %}checked{% endif %}> Combat LLM
+          </label>
+          <label class="flex items-center gap-1 text-xs text-gray-300">
+            <input type="checkbox" name="debug_mode" {% if config.get('debug_mode') %}checked{% endif %}> Debug
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <button type="submit" class="px-4 py-1.5 bg-aged-brown text-parchment text-sm rounded hover:bg-[#7a4a2c] border border-aged-gold/30">保存设置</button>
+    <span id="config-status" class="text-xs text-coc-green ml-2"></span>
+  </form>
+</div>

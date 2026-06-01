@@ -1,0 +1,403 @@
+{
+  "items": [
+    {
+      "name": "拳头/脚踢",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 3,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "common",
+      "special_rules": "",
+      "description": "徒手攻击，人人具备的基础战斗方式",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "小刀",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 4,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "common",
+      "special_rules": "可投掷，投掷时使用投掷技能",
+      "description": "小型利器，便于隐藏携带，也可投掷",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": ".45自动手枪",
+      "skill_name": "手枪",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 10,
+        "bonus": 2,
+        "use_db": false
+      },
+      "range": "15码",
+      "shots": 7,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "special_rules": "可连射，每追加一发-5惩罚",
+      "description": "大威力半自动手枪，可快速连射",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": ".38左轮手枪",
+      "skill_name": "手枪",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 10,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "15码",
+      "shots": 6,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "special_rules": "",
+      "description": "可靠的六发左轮手枪，结构简单不易卡壳",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "霰弹枪(12号)",
+      "skill_name": "霰弹枪",
+      "damage": {
+        "dice_n": 4,
+        "dice_d": 6,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "10/20/50码",
+      "shots": 2,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "uncommon",
+      "special_rules": "散射武器，伤害随距离递减",
+      "description": "双管猎枪，散射伤害，近距离威力巨大",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "手电筒",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 3,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "common",
+      "special_rules": "作为武器使用时视为临时武器；主要功能为提供光源",
+      "description": "常见便携照明工具，主要功能为提供光源，黑暗中必不可少，也可作为临时武器",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "消防斧",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 8,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "uncommon",
+      "special_rules": "双手武器",
+      "description": "消防用双手斧，破坏力强，适合破门和对付大型目标",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "撬棍",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 6,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "common",
+      "special_rules": "也可用于撬开门/箱子",
+      "description": "多功能金属工具，既可战斗也可撬开门箱，调查员常用装备",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "警棍",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 6,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "special_rules": "",
+      "description": "执法人员标准配备的打击武器",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "步枪(.30-06)",
+      "skill_name": "步枪",
+      "damage": {
+        "dice_n": 2,
+        "dice_d": 6,
+        "bonus": 4,
+        "use_db": false
+      },
+      "range": "110码",
+      "shots": 5,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "uncommon",
+      "special_rules": "每轮一发",
+      "description": "长射程高精度步枪，适合远距离射击，但射速较慢",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1
+    },
+    {
+      "name": "毛瑟C96手枪",
+      "skill_name": "手枪",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 10,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "20米",
+      "shots": 10,
+      "malfunction": 99,
+      "era": "1920s",
+      "rarity": "uncommon",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 2,
+      "special_rules": "半自动，每轮可射击2次",
+      "description": "德国制造毛瑟C96半自动手枪，使用7.63mm弹药。王大柱随身携带的武器，可靠性极高但后坐力较大。"
+    },
+    {
+      "name": "玉刀",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 4,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "unique",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "仪式武器。对深渊之口及其仆从造成伤害时可额外附加1D3点伤害。持有者可作为封印仪式的锚点，每轮损失1D3 HP维持封印结界。",
+      "description": "约七寸长的深青色玉刀，刀身刻满漩涡状古代咒文。刀柄以红布包裹，触感异常冰冷。古代用于深渊之口的封印仪式，既是法器也是武器。"
+    },
+    {
+      "name": "矿工镐",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 8,
+        "bonus": 0,
+        "use_db": true
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "双手武器，力量不足50时命中-10",
+      "description": "矿场中随处可见的采矿镐头。木质长柄配铁制镐尖，可作临时武器使用。"
+    },
+    {
+      "name": "手术刀",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 3,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "医疗技能≥50时命中+10",
+      "description": "林晓雯随身携带的医用手术器械。锋利但短小，医疗专业人员使用更为得心应手。"
+    },
+    {
+      "name": "试作型裁决者",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 0,
+        "dice_d": 0,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "unique",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 2,
+      "special_rules": "TEST_WEAPON:2/3HP。伤害固定为敌人当前HP的2/3（向下取整，最低1点）。此规则在修正中拥有最高优先级。",
+      "description": "开发团队测试用特制武器。激活后自动计算目标当前HP的2/3作为伤害值。仅供调试和战斗系统验证使用。"
+    },
+    {
+      "name": "试作型湮灭者",
+      "skill_name": "格斗",
+      "damage": {
+        "dice_n": 0,
+        "dice_d": 0,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "unique",
+      "damage_type": "物理",
+      "armor_piercing": 99,
+      "attack_bonus": 99,
+      "multi_attack": 1,
+      "special_rules": "直接造成 100 点伤害，无视护甲和伤害倍率。此规则在修正中拥有最高优先级。",
+      "description": "开发团队测试用湮灭武器。每次命中直接造成100点绝对伤害。仅供调试和战斗系统验证使用。"
+    },
+    {
+      "name": "斯普林菲尔德M1903步枪",
+      "skill_name": "步枪",
+      "damage": {
+        "dice_n": 2,
+        "dice_d": 6,
+        "bonus": 4,
+        "use_db": false
+      },
+      "range": "100码",
+      "shots": 5,
+      "malfunction": 99,
+      "era": "1920s",
+      "rarity": "common",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "",
+      "description": "第一次世界大战中广泛使用的栓动步枪，精准可靠。霍洛威携带的正是此枪。"
+    },
+    {
+      "name": "改造信号手枪",
+      "skill_name": "手枪",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 10,
+        "bonus": 2,
+        "use_db": false
+      },
+      "range": "10码",
+      "shots": 1,
+      "malfunction": 95,
+      "era": "1920s",
+      "rarity": "uncommon",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "发射特制弹药，击中目标后可能产生震荡或火焰效果（由守秘人决定）。",
+      "description": "埃莉诺·韦斯特的定制武器，外观类似粗短的信号枪，能发射大口径特殊弹丸。"
+    },
+    {
+      "name": ".38韦伯利左轮手枪",
+      "skill_name": "手枪",
+      "damage": {
+        "dice_n": 1,
+        "dice_d": 10,
+        "bonus": 0,
+        "use_db": false
+      },
+      "range": "10码",
+      "shots": 6,
+      "malfunction": 100,
+      "era": "1920s",
+      "rarity": "common",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "",
+      "description": "阿什克罗夫特教授携带的防身武器，标准的.38口径左轮手枪。"
+    }
+  ]
+}

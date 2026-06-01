@@ -1,0 +1,288 @@
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走向车厢连接处，查看白色便签。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要查看电车示意地图，了解线路和站点信息。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家在6号车厢内寻找便签上提到的第三个箱子",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家尝试打开通往7号车厢的门，检查是否锁着。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查7号车厢入口附近的可使用物品或逃生出口，并留意身后黑暗的逼近速度。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家向后撤步远离7号车厢，并用手电筒照向身后的黑暗区域以观察其中内容。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细检查6号车厢地板和座椅下，寻找遗漏的箱子或物品，并用手电筒照射车厢连接处寻找出路。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家小心翼翼地靠近后方黑暗，用手电筒照射，观察黑暗的边界和内部情况，同时握紧武器准备随时后撤。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿起手机，检查屏幕上的时间显示是否与腕表异常一致，并留意手机信号或异常信息。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿起手机，检查屏幕上的时间显示是否异常，并注意手机信号和异常信息。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想用手电筒照亮后方黑暗区域，寻找通往5号车厢的通道或线索。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拔出武器并检查其状态，准备应对前方可能存在的威胁（巨口）。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家使用试作型裁决者射击前方的巨口，同时留意后方震动。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家掏出试作型湮灭者并仔细端详，回忆其功能和效果。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家使用试作型湮灭者攻击前方巨口",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照亮6号车厢四周，寻找紧急出口或可用工具，同时注意避开前方的巨口和后方的黑暗。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家蹲下用手电筒检查地板上的血迹和残骸，寻找隐藏的舱门或通风口。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照射7号车厢的巨口，观察其对光的反应或弱点。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想用手电筒照射7号车厢的巨口，观察其对光的反应或弱点。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照射7号车厢的巨口，观察其对光的反应或弱点。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒照射后方的黑暗，试图看清黑暗中的本质。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒仔细检查5号车厢的座椅和天花板，寻找撕裂声来源或异常迹象。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家后退几步，转身走向4号车厢方向，推开车门准备进入4号车厢。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家蹲下用手电筒照亮伤员的脸，轻拍肩膀尝试唤醒，并观察伤口严重程度。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家检查京山人吉的脉搏和呼吸，撕下衬衫下摆为他包扎腿部伤口，并询问他发生了什么。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家检查京山的状况，包括观察面部、瞳孔和呼吸，并尝试唤醒他。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家脱下外套按压在腿部伤口上并呼救，目标明确（腿部伤口，对象为受伤者）。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查京山的身体和周围环境，寻找对讲机、急救包或医疗用品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿出手机尝试拨打急救电话，检查是否有信号。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家将京山扶正平躺并检查其生命体征",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要扫视4号车厢，检查座椅下方和行李架上是否有急救箱或医疗用品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查京山的衣兜和腰带，寻找身份证明、对讲机、钥匙等物品。",
+  "resolved_text": "",
+  "question": ""
+}
+

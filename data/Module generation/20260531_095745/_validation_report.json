@@ -1,0 +1,24 @@
+{
+  "schema": {
+    "L1": {
+      "errors": 0,
+      "warnings": 0,
+      "is_valid": true
+    },
+    "L2": {
+      "errors": 0,
+      "warnings": 0,
+      "is_valid": true
+    },
+    "L3": {
+      "errors": 0,
+      "warnings": 0,
+      "is_valid": true
+    }
+  },
+  "cross_ref": {
+    "errors": 0,
+    "warnings": 1,
+    "is_valid": true
+  }
+}

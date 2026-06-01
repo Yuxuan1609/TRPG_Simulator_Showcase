@@ -1,0 +1,89 @@
+{
+  "events": [
+    {
+      "id": "EV_巨口加速吞噬",
+      "type": "无",
+      "name": "巨口加速吞噬",
+      "requirement": "I3",
+      "trigger": "当调查员完成I3并目睹7号车厢后方的巨口后",
+      "result": "不可逆：后方的巨口开始持续吞噬车厢。后方的车厢将随着时间流逝而逐渐消失，迫使调查员向前移动。",
+      "side_effects": [
+        "每当调查员在非安全区停留过久或折返，可能会触发后方吞噬加速的提醒。"
+      ],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "I3"
+    }
+  ],
+  "auto_triggers": [
+    {
+      "id": "AT_WORLD",
+      "type": "无",
+      "name": "世界初始化",
+      "requirement": "",
+      "trigger": "模组开始时自动触发",
+      "result": "世界环境初始化",
+      "side_effects": [
+        "@spawn_enemy(enemy_ref=\"Clicker\", scene=\"2号车厢\", quantity=3)",
+        "@item_gain(item_name=\"手机\", quantity=1)",
+        "@item_gain(item_name=\"手电筒\", quantity=1)"
+      ],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "",
+      "scene": "world"
+    },
+    {
+      "id": "AT_6号车厢_进入",
+      "type": "无",
+      "name": "6号车厢进入",
+      "requirement": "",
+      "trigger": "玩家在游戏开始时或首次进入6号车厢时",
+      "result": "你们发现自己身处空无一人的电车车厢。窗外是无尽的黑暗。车厢门扉上贴着一张白色便签，旁边挂着电车示意地图。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "",
+      "scene": "6号车厢"
+    },
+    {
+      "id": "AT_4号车厢_进入",
+      "type": "无",
+      "name": "4号车厢进入",
+      "requirement": "",
+      "trigger": "玩家进入4号车厢时",
+      "result": "你看到一名身穿电车乘务员制服的男人侧倒在地，身下渗出一小摊血迹，处于重伤休克状态。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "",
+      "scene": "4号车厢"
+    },
+    {
+      "id": "AT_3号车厢_进入",
+      "type": "无",
+      "name": "3号车厢进入",
+      "requirement": "",
+      "trigger": "玩家进入3号车厢时",
+      "result": "车厢内一片狼藉，乘客遗留的行李箱、手提包、购物袋散落一地，堆成小山，严重阻碍了行动。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "",
+      "scene": "3号车厢"
+    },
+    {
+      "id": "AT_2号车厢_进入",
+      "type": "无",
+      "name": "2号车厢进入",
+      "requirement": "",
+      "trigger": "玩家进入2号车厢时",
+      "result": "这节车厢的照明系统已完全损坏，陷入纯粹的黑暗。空气中弥漫着浓重的血腥与恶臭，混合着非人生物的粗重、潮湿的喘息声。在黑暗中，数个类人的畸形身影正在徘徊——那是“循声者”。地面上满是残破的人类尸体。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "based_on": "",
+      "scene": "2号车厢"
+    }
+  ]
+}

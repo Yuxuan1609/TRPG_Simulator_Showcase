@@ -1,0 +1,63 @@
+{
+  "module_meta": {
+    "name": "test_module",
+    "supplement_of": "test_module",
+    "generated_for": "玩家想与黑暗中的存在互动并尝试进入镜子空间"
+  },
+  "world_rules": [
+    {
+      "id": "WR1",
+      "name": "梦境法则",
+      "rule": "这列电车所在的整个世界是由奈亚拉托提普创造的噩梦空间，并非现实。物理法则可被扭曲，逻辑可被篡改。",
+      "scope": "整个电车及其外部黑暗空间",
+      "is_absolute": "绝对不可违反"
+    }
+  ],
+  "scene_intents": {
+    "test_room": {
+      "purpose": "Debug and expansion entry point",
+      "emotion": "Unease and curiosity"
+    },
+    "SS1_镜中走廊": {
+      "purpose": "让玩家遭遇无面人形并面对必须牺牲记忆才能前进的抉择，同时感受镜子世界的扭曲与低语，建立核心冲突和游戏的代价机制。",
+      "key_threat": "无面人形索求记忆的威胁，以及镜子反射带来的心理压迫和未知黑暗。",
+      "notes": "可以通过描述每一块镜子不同的扭曲映像来营造恐怖氛围；无面人形的心跳与玩家同步，暗示其与玩家的联系；记忆的牺牲可选，拒绝会导致更强的冲突。"
+    },
+    "SS2_灵魂回响": {
+      "purpose": "揭示镜子世界的背景故事（霍桑的实验和镜子的饥饿），并给予玩家一个与无面人形（镜子碎片）合作或对抗的转折点，通过破坏核心推动进程。",
+      "key_threat": "悬浮的核心镜面不断吞噬记忆碎片，空间不稳定；无面人形可能的欺骗或隐藏意图。",
+      "notes": "利用日志文本和旋转碎片展现故事碎片；核心破坏或妥协的后果不同，应准备不同分支（比如拒绝合作导致核心暴走？）；场景崩塌后回到test_room，确保发展连贯。"
+    }
+  },
+  "ending_conditions": [],
+  "tone_constraints": {
+    "genre": "Lovecraftian horror",
+    "narrative_style": "Oppressive, with faint hope in despair",
+    "forbidden": [
+      "superpowers",
+      "firearms",
+      "modern communication devices working"
+    ],
+    "recommended": [
+      "tension",
+      "unknown fear",
+      "moral dilemma"
+    ]
+  },
+  "characters": {
+    "conductor": "Injured train conductor, key info provider"
+  },
+  "driving_force": "Keep moving forward in darkness, escape the devouring maw, find hope",
+  "narrative_lines": [
+    {
+      "name": "霍桑研究员的真相",
+      "outline": "从测试房间开始，通过检查桌子上的物品发现霍桑的日志，逐步揭示镜子背后隐藏的实验真相和灵魂囚笼的秘密。",
+      "key_scenes": [
+        "test_room",
+        "car_6"
+      ],
+      "type": "main"
+    }
+  ],
+  "time_pressure": {}
+}

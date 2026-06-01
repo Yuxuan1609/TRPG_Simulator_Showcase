@@ -1,0 +1,1452 @@
+{
+  "scenes": {
+    "波士顿阿什克罗夫特办公室": {
+      "interactions": [
+        {
+          "id": "I1",
+          "scene": "波士顿阿什克罗夫特办公室",
+          "type": "无",
+          "name": "打开挂号信",
+          "requirement": "",
+          "trigger": "进入办公室后，你看到桌上那封盖着波士顿邮戳的挂号信，寄信人是已故的亨利·塔尔博特。",
+          "result": "你打开信封，里面滑落一张手工绘制的海图，标注着南纬十四度附近不存在的群岛，还有一块半个手掌大的黑色石片，背面刻有两行陌生文字。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I2",
+          "scene": "波士顿阿什克罗夫特办公室",
+          "type": "神秘学",
+          "name": "仔细检查黑色石片",
+          "requirement": "I1",
+          "trigger": "拿到黑色石片后，你可以凑近灯光仔细端详。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "石片材质非寻常石材，文字看起来很陌生，但你无法辨认更多。",
+            "on_regular": "你发现石片表面倒映出的脸比你自己苍老二十岁，文字不属于任何已知文明的符号体系。",
+            "on_hard": "同常规成功，并且你意识到这与塔尔博特最后一封来信中画过的‘不该画的图案’属于同一体系。",
+            "on_extreme": "你还感觉到石片微微发暖，内部仿佛存在极微弱的能量波动。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I3",
+          "scene": "波士顿阿什克罗夫特办公室",
+          "type": "无",
+          "name": "玛格丽特展示第二块石片",
+          "requirement": "I1",
+          "trigger": "玛格丽特·陈到访时，拿出导师黄教授寄给她的包裹。",
+          "result": "玛格丽特展示另一块更大的黑色石片，上面文字更密集。她告知坐标与你的一致，并警告不要将坐标告诉任何人。当两块石片放在一起时，它们发出几乎听不见的低频嗡鸣。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "海燕号",
+          "method": "组织考察队，从波士顿港登上海燕号出发",
+          "requirement": "完成办公室内的初始准备"
+        }
+      ],
+      "to_here": [],
+      "extra": {},
+      "description": "办公室里弥漫着旧书页和陈年烟草的味道。窗外是铅灰色的九月天空，暴雨将至的低气压让空气凝滞。红木办公桌上摊开着几本厚重的古籍和未完成的手稿，一枚黑色石片压在一张手绘海图上，旁边是一封拆开的挂号信。灯光昏黄，映出空气中缓慢浮游的尘埃。"
+    },
+    "海燕号": {
+      "interactions": [
+        {
+          "id": "I4",
+          "scene": "海燕号",
+          "type": "导航",
+          "name": "使用手绘海图确定航线",
+          "requirement": "I1",
+          "trigger": "在海燕号航行中，你可以拿着塔尔博特的海图辅助导航。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你无法从海图中找到可靠航线，船可能偏离目标。",
+            "on_regular": "你确认海图标记的坐标，引导海燕号向目标群岛行驶。",
+            "on_hard": "你发现海图上有隐晦的洋流标记，可以节约几天航程。",
+            "on_extreme": "你意识到海图的绘制者可能使用了未知的星象定位法。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I5",
+          "scene": "海燕号",
+          "type": "无",
+          "name": "听玛格丽特讲述梦境",
+          "requirement": "",
+          "trigger": "航行第七天夜里，玛格丽特从噩梦中惊醒后来到甲板。",
+          "result": "玛格丽特描述她梦见七座尖塔耸立在黑色海面，天空无星但有绿色光，她站在塔基上能读懂脚下的铸星者文字，但醒来后只记得灼烧感。她看起来非常不安。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I6",
+          "scene": "海燕号",
+          "type": "话术",
+          "name": "向格雷船长打听塔尔博特",
+          "requirement": "",
+          "trigger": "你可以找格雷船长聊天，问起失踪的塔尔博特的事。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "船长不愿多谈，只说他是个怪人。",
+            "on_regular": "船长告诉你塔尔博特曾在这片海上听到船底有莫尔斯码敲击声，反反复复只有两个字：‘不够’。",
+            "on_hard": "你还得知塔尔博特当时神情恍惚，仿佛被什么东西吸引。",
+            "on_extreme": "船长压低声音补充道：‘他说那声音像是从自己的骨头里传出来的。’"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I7",
+          "scene": "海燕号",
+          "type": "侦查",
+          "name": "察觉埃莉诺行李异常",
+          "requirement": "",
+          "trigger": "当你在甲板上看到埃莉诺·韦斯特带着三只皮箱登船时，可以留意她的行李。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你只觉得她带的箱子很多。",
+            "on_regular": "你闻到一股金属味，不是铁锈，而是更像实验室或医院的味道。其中一只箱子里传出玻璃器皿碰撞的清脆声响。",
+            "on_hard": "你还注意到其中一只箱子异常沉重，似乎有铅衬。",
+            "on_extreme": "你敏锐地捕捉到箱子里有微弱电流声，仿佛精密仪器待机。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "破碎的群岛",
+          "method": "航行到达目标海域后乘小艇登陆",
+          "requirement": "已到达南太平洋群岛（第11天）"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "波士顿阿什克罗夫特办公室",
+          "method": "从波士顿港出发，乘坐海燕号",
+          "requirement": ""
+        },
+        {
+          "source": "破碎的群岛",
+          "method": "从岸边乘小艇返回大船",
+          "requirement": "碎石群岛事件结束后"
+        }
+      ],
+      "extra": {},
+      "description": "货轮海燕号缓缓航行在无风的海面上，海水平滑如深色玻璃，倒影清晰得不真实。船舷防锈漆大片剥落，烟囱微微歪斜，但蒸汽机的声音浑厚而稳定。甲板上散落着缆绳和修补工具，空气中混杂着海盐、机油和木料的气味。驾驶室窗玻璃上凝着薄薄的盐霜。"
+    },
+    "破碎的群岛": {
+      "interactions": [
+        {
+          "id": "I8",
+          "scene": "破碎的群岛",
+          "type": "侦查",
+          "name": "观察海滩梯形平台",
+          "requirement": "",
+          "trigger": "登陆后，你走向海滩上那巨大的梯形平台。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "这是一座用巨型黑石砖砌成的古老平台，石砖之间的缝隙细到无法插入指甲。",
+            "on_regular": "你注意到石面触手微温，仿佛地下有热源在均匀加热。周围的枯死树林一碰就碎。",
+            "on_hard": "你还发现石砖表面有极细微的纹路，似乎是铸星者文字，但磨损严重。",
+            "on_extreme": "你感觉到平台下方传来的微弱振动，像是某种巨大机械在运转。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I9",
+          "scene": "破碎的群岛",
+          "type": "考古学",
+          "name": "检查石阶路两侧的石柱",
+          "requirement": "",
+          "trigger": "沿着石阶路向上走时，你可以仔细观察两侧的石柱。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "石柱上刻满浮雕，你辨认出七角星图案，但无法理解含义。",
+            "on_regular": "你发现浮雕中反复出现七角星内嵌眼睛的图案，有些眼睛睁开的，有些闭合的，还有空洞。这正与塔尔博特信中画过的‘不该画的图案’相符。",
+            "on_hard": "你还发现浮雕中隐藏着人形正在向七角星跪拜的场景。",
+            "on_extreme": "你意识到石柱的排列与天上的星座不对应，却指向地下的某个点。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "守碑人高地",
+          "method": "沿石阶路向上攀爬",
+          "requirement": ""
+        },
+        {
+          "target": "海燕号",
+          "method": "乘小艇返回海燕号",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "海燕号",
+          "method": "乘小艇登陆",
+          "requirement": ""
+        },
+        {
+          "source": "回声腔室",
+          "method": "完成封印后，通过上层应急管道爬出，从断崖下回到地面",
+          "requirement": "完成最终封印层的事件，通道可用"
+        }
+      ],
+      "extra": {},
+      "description": "灰黑色的岛群从晨雾中浮现。主岛的火山被削去一半，留下巨大的U形缺口。海滩上矗立着用巨型黑石砖砌成的梯形平台，石砖接缝细密几乎不可见，石面摸上去微微温热。近岸的树林已全部枯死，树干惨白，一触即碎。一条石阶路蜿蜒上山，两侧每隔二十步立有石柱，柱身浮雕刻着七角星内嵌眼睛的图案。"
+    },
+    "拱门入口": {
+      "interactions": [
+        {
+          "id": "I12",
+          "scene": "拱门入口",
+          "type": "侦查",
+          "name": "在退潮时检查拱门",
+          "requirement": "",
+          "trigger": "黄昏退潮后，断崖底部露出一扇巨型石质拱门，你可以上前仔细查看。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你看到门楣上有一个七角星图案，星心为空洞。",
+            "on_regular": "你发现拱门似乎与随身携带的黑色石片形状契合，那个空洞像是插槽。",
+            "on_hard": "你注意到拱门周围有细小的铸星者文字，写着‘开门者，即是被选者’。",
+            "on_extreme": "你感觉到门后极深的地方传来微弱的机械运转声。"
+          },
+          "difficulty": "regular",
+          "time_condition": [
+            {
+              "day": "ALL",
+              "times": [
+                "黄昏"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I13",
+          "scene": "拱门入口",
+          "type": "无",
+          "name": "将黑色石片嵌入拱门",
+          "requirement": "I1",
+          "trigger": "当你站在退潮后的拱门前，可以将黑色石片嵌入七角星心之孔。",
+          "result": "你嵌入石片，整座拱门发出低沉振动，门后传来齿轮啮合与杠杆位移的机械声响。门内是纯粹的黑暗，灯光进入后光圈被压扁成椭圆，空间似乎被扭曲。",
+          "side_effects": [
+            "门已开启，冷风从地下通道涌出。现在可以进入地下城市了。"
+          ],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": [
+            {
+              "day": "ALL",
+              "times": [
+                "黄昏"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "I14",
+          "scene": "拱门入口",
+          "type": "图书馆使用",
+          "name": "研究八角大厅的石碑墙",
+          "requirement": "",
+          "trigger": "进入八角大厅后，你可以研究那些刻满铸星者文字的石碑墙。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "石碑上的文字密集，你无法理解。",
+            "on_regular": "玛格丽特判断石碑文字来自至少四个不同时代。她破译出‘深渊里的回响’和‘不完整的死亡’等关键词——这是铸星者对囚徒的定义。",
+            "on_hard": "你还发现一些石碑的文字记载了前六座城市被从内部拆解的过程。",
+            "on_extreme": "你意识到这些文字本身也是一种信息锁，只要还有人能读懂，定义为‘锁’的部分就仍在运转。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I15",
+          "scene": "拱门入口",
+          "type": "神秘学",
+          "name": "调查天顶黑曜石球体",
+          "requirement": "",
+          "trigger": "你抬头注意到天顶悬浮的橄榄形黑曜石球体，正缓缓旋转，脉动幽绿荧光。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "球体似乎不是铸星者原建物，因为它不参与建筑对称。",
+            "on_regular": "你发现球体的绿光脉动频率与你的心跳不同步，可能是一个后来添加的监控或防御装置。",
+            "on_hard": "球体表面有细微伤痕，仿佛曾被攻击过，但未造成实质损伤。",
+            "on_extreme": "你推断出球体能够将能量反弹给攻击者，最好不要直接攻击它。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I16",
+          "scene": "拱门入口",
+          "type": "侦查",
+          "name": "检查石卫残骸",
+          "requirement": "",
+          "trigger": "大厅地面散落着被击碎的石卫残骸，你可以蹲下检查。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "它们是沉重的石制构装体，结构复杂，你看不出有用的信息。",
+            "on_regular": "你发现石卫内部有发暗绿光的脉络，像是石头里的血管，关节部位有明显的磨损。",
+            "on_hard": "你推测石卫的关节是弱点，集中攻击关节可以更有效地拆解它们。",
+            "on_extreme": "你还发现石卫体内的发光脉络与黑曜石球体的绿光频率一致，可能受其控制。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I17",
+          "scene": "拱门入口",
+          "type": "无",
+          "name": "嵌入第二块石片激活设施",
+          "requirement": "I3",
+          "trigger": "环绕大厅的十二根石柱各有七个凹槽，其中两个已嵌有石片。你可以将第二块石片嵌入一个空凹槽。",
+          "result": "你嵌入石片，嵌入瞬间地层传来轻微震动，整个大厅的绿光闪烁了一下，部分系统被激活。",
+          "side_effects": [
+            "远处传来石头的摩擦声，很可能唤醒了更多石卫。"
+          ],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "长明殿",
+          "method": "穿过拱门，沿向下通道前进，经过八角大厅后从中间门廊进入壳质走廊",
+          "requirement": "拱门已用石片打开；八角大厅已通过（可选探索）"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "守碑人高地",
+          "method": "退潮时步行至断崖拱门前",
+          "requirement": "退潮（黄昏）"
+        }
+      ],
+      "extra": {},
+      "description": "黄昏退潮后，主岛东北侧断崖底部露出一扇巨型石质拱门，宽度足以让三艘货轮并排驶入。门楣中央雕刻着一个七角星，星心是一个空洞。门后的空间完全被黑暗吞没，即使提灯的光芒照进去也会被压成椭圆，仿佛光本身在此扭曲。低沉的机械声响隐隐从深处传出。"
+    },
+    "长明殿": {
+      "interactions": [
+        {
+          "id": "I18",
+          "scene": "长明殿",
+          "type": "无",
+          "name": "触碰壳质走廊发光体",
+          "requirement": "",
+          "trigger": "走在壳质走廊时，你看到墙壁上嵌有许多发光椭圆体，忍不住伸手触碰其中一个。",
+          "result": "你触碰发光体，它瞬间变色，引发连锁反应，整条走廊像食道般蠕动收缩起来！",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I19",
+          "scene": "长明殿",
+          "type": "跳跃",
+          "name": "逃离蠕动的走廊",
+          "requirement": "I18",
+          "trigger": "走廊开始收缩，你必须用最快的速度冲向出口。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你被收缩的墙壁夹住，受到了@stat_change(stat_name=\"HP\", delta=-1, narrative=\"挤压伤害\")伤害。幸亏同伴拖拽，你最终脱出，但走廊已在身后封闭成硬块。",
+            "on_regular": "你冲在队伍前面，在走廊完全闭合前逃出，但退路被封闭了。",
+            "on_hard": "你不仅自己逃出，还帮助了队友，无人受伤。",
+            "on_extreme": "你在冲出时注意到墙壁上浮现的铸星者文字，似乎是‘警告：封闭测试区’的字样。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "回声腔室",
+          "method": "穿过壳质走廊（注意不要触发收缩，或成功逃离后），进入圆形腔室",
+          "requirement": "壳质走廊可通过（未永久封闭）"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "拱门入口",
+          "method": "从八角大厅后方门廊进入壳质走廊",
+          "requirement": "已完成拱门入口的探索"
+        }
+      ],
+      "extra": {},
+      "description": "墙壁材质过渡为某种有彩虹色光泽的壳质，表面嵌着散发柔和光晕的椭圆发光体。房间呈圆形，中央有石质桌椅和墙边搁板，搁板上空无一物。北墙正中央悬着一面黑曜石镜，镜框由七根银色金属细条交错缠绕，毫无氧化痕迹。整个空间弥漫着静谧，只有发光体的光晕缓缓脉动。"
+    },
+    "镜环廊": {
+      "interactions": [
+        {
+          "id": "I21",
+          "scene": "镜环廊",
+          "type": "侦查",
+          "name": "观察墙壁和入口寻找安全路径",
+          "requirement": "",
+          "trigger": "十七个与卡霍一模一样的假卡霍从各入口走出，掌心长眼，声称要看看谁是第一个停步的人。你意识到必须选择正确的入口逃脱。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你无法分辨哪个入口安全，只能随机冲入一个。",
+            "on_regular": "你发现第三个入口没有被任何假卡霍占据，似乎是安全的。",
+            "on_hard": "你还注意到那个入口上方的石板轮流显示的文字是‘真实’，而其他入口显示‘镜像’。",
+            "on_extreme": "你领悟到假卡霍是镜像的复制，只有不被占用的入口才是通往真实的路径，且假卡霍不会追入。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "AT_MIRROR_GALLERY_MIMICS",
+          "scene": "镜环廊",
+          "type": "无",
+          "name": "假卡霍出现",
+          "requirement": "",
+          "trigger": "玩家进入镜环廊场景时",
+          "result": "从走廊等距的七个入口中，走出十七个与守碑人卡霍一模一样的人形，它们掌心长有活眼，齐声宣称今晚不杀人，只是看看谁是第一个停步的人。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "石台穹顶",
+          "method": "选择正确的入口（第三个），穿过走廊到达尽头",
+          "requirement": "成功识别安全入口（I21成功）"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "回声腔室",
+          "method": "沿螺旋石梯下行",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "环形走廊的墙壁吸收几乎所有光线，只有自身浮动着浅蓝色的波状辉光。内侧等距排列着七个入口，上方石板轮流显示着铸星者文字与简短的英文短句。走廊中弥漫着轻微的嗡鸣，仿佛空气本身在共振。脚步声在这里被扭曲放大，每一下都听起来像身后还跟着另一个人的步点。"
+    },
+    "石台穹顶": {
+      "interactions": [
+        {
+          "id": "I22",
+          "scene": "石台穹顶",
+          "type": "考古学",
+          "name": "调查中央石台并取走遗物",
+          "requirement": "I21",
+          "trigger": "进入穹顶空间，你看到中央低矮石台上放置着三件遗物，可以上前检查。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你们取走了三件遗物：一枚水晶透镜、一把黑色金属音叉、一张半透明骨质面具。@item_gain(item_name=\"水晶透镜\", quantity=1) @item_gain(item_name=\"黑色金属音叉\", quantity=1) @item_gain(item_name=\"骨质面具\", quantity=1) 但铭文含义不明，只能猜测大致用途。",
+            "on_regular": "你解读了铭文：透镜‘聚集无法被肉眼捕捉的可见物’；音叉‘震碎惰性材料中的流动路径’，且‘频率越远，回音越深’，柄上六个环代表使用次数；面具‘用黑暗交换光明’，佩戴后以视力交换对无形之物的感知。你小心将遗物包好。@item_gain(item_name=\"水晶透镜\", quantity=1) @item_gain(item_name=\"黑色金属音叉\", quantity=1) @item_gain(item_name=\"骨质面具\", quantity=1)",
+            "on_hard": "你额外发现音叉铭文警示：‘共振点之后，声音将不再属于使用者’，过度使用可能反噬。@item_gain(item_name=\"水晶透镜\", quantity=1) @item_gain(item_name=\"黑色金属音叉\", quantity=1) @item_gain(item_name=\"骨质面具\", quantity=1)",
+            "on_extreme": "你还发现石台底部有隐藏的暗格，里面似乎还有一件小型器物，但目前无法打开。@item_gain(item_name=\"水晶透镜\", quantity=1) @item_gain(item_name=\"黑色金属音叉\", quantity=1) @item_gain(item_name=\"骨质面具\", quantity=1)"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "居住区",
+          "method": "穿过穹顶另一端的狭窄侧室网络",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "镜环廊",
+          "method": "从第三入口走廊到达尽头的圆形凹陷穹顶",
+          "requirement": "已通过镜环廊正确路径"
+        }
+      ],
+      "extra": {},
+      "description": "穹顶呈现完美的圆形凹陷，光线从看不见的源头洒下，形成柔和的凝聚光柱照在中央低矮石台上。石台上并排放置着三件器物：一枚用水晶透镜嵌在石座上的装置，七根银丝固定；一把通体漆黑的金属音叉，柄上刻着同心环与文字；一张半透明的骨质面具，内部有暗影缓缓流动。空气干燥而静止，带着极细微的矿物气息。"
+    },
+    "居住区": {
+      "interactions": [
+        {
+          "id": "I23",
+          "scene": "居住区",
+          "type": "医学",
+          "name": "检查走廊中的人类骨骸",
+          "requirement": "",
+          "trigger": "在居住区走廊，你看到依次排列的人类骨骸，面朝房间背对走廊，你可以蹲下检查。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "骨骸年代久远，难以判断死因。",
+            "on_regular": "你发现这些骨骸的伤口精确如解剖刀，似乎是非人智慧的精密手笔。",
+            "on_hard": "你判断死因是被一种极锋利且极薄的武器瞬间切割，可能发生于意识清醒时。",
+            "on_extreme": "你注意到骨骸上残留极微量的非地球金属痕迹，可能是某种实验的遗留。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I24",
+          "scene": "居住区",
+          "type": "聆听",
+          "name": "调查墙壁孔洞",
+          "requirement": "",
+          "trigger": "你注意到墙上有些小孔洞，埃莉诺靠近时脸色突变——你可以仔细听听。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你什么也没听到。",
+            "on_regular": "你听到从孔洞中传来微弱的声音，用奇怪的语调呼唤着埃莉诺的名字。格雷判断这是一种渗透扫描。",
+            "on_hard": "你还听到声音中夹杂着电磁杂音，可能是某种设备在收集声纹。",
+            "on_extreme": "你意识到这种扫描正提取你们的声音和身份信息，可能会被用于模仿。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I25",
+          "scene": "居住区",
+          "type": "锁匠",
+          "name": "撬开侧室石质抽屉",
+          "requirement": "",
+          "trigger": "你们进入一间侧室，埃莉诺快步走向一个石质抽屉开始撬动，你可以协助。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "抽屉没能打开，甚至可能触发了警报，引来更多石卫。",
+            "on_regular": "你撬开抽屉，里面有三件小型铸星者器物：一个发绿光的三角形金属片、一只黑色蛛丝手套、一根刻满符文的骨针。@item_gain(item_name=\"发绿光的三角形金属片\", quantity=1) @item_gain(item_name=\"黑色蛛丝手套\", quantity=1) @item_gain(item_name=\"刻满符文的骨针\", quantity=1) 埃莉诺满意地收起来。",
+            "on_hard": "你还发现抽屉底层有使用说明的碎片。@item_gain(item_name=\"发绿光的三角形金属片\", quantity=1) @item_gain(item_name=\"黑色蛛丝手套\", quantity=1) @item_gain(item_name=\"刻满符文的骨针\", quantity=1)",
+            "on_extreme": "你推断这些是铸星者文明中用于维护石卫的工具，或许能影响就近的石卫。@item_gain(item_name=\"发绿光的三角形金属片\", quantity=1) @item_gain(item_name=\"黑色蛛丝手套\", quantity=1) @item_gain(item_name=\"刻满符文的骨针\", quantity=1)"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I26",
+          "scene": "居住区",
+          "type": "无",
+          "name": "使用音叉对抗变异石卫",
+          "requirement": "I22",
+          "trigger": "当大量变异石卫包围队伍，阿什克罗夫特用刀柄敲响音叉。",
+          "result": "音叉发出强烈的声波，前排石卫应声粉碎，但墙壁也因震动而开裂，走廊部分坍塌。你们趁机逃走。音叉柄上的第一个同心环消失了。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "地下城市广场",
+          "method": "沿第二段长梯继续下行",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "石台穹顶",
+          "method": "从穹顶侧室进入居住区的走廊网络",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "走廊狭窄，两侧排列着小房间，室内有凿出的石台和水池，池水清澈得异常。走廊中央，人类骨骸面朝房间、背对走廊依次静坐，骨质表面光滑，致命伤口呈现不可思议的精确，如同解剖刀整齐划开。空气干燥，但飘着一丝极淡的酸味，墙壁上布满了密密麻麻的孔洞，小如针眼。"
+    },
+    "地下城市广场": {
+      "interactions": [
+        {
+          "id": "I27",
+          "scene": "地下城市广场",
+          "type": "医学",
+          "name": "检查半圆形孵化场",
+          "requirement": "",
+          "trigger": "你看到广场边缘的半圆形透明孵化场，内部排列着囊泡，可以进去检查。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "囊泡中的是畸形人形胚胎，都已死亡，你看不出更多信息。",
+            "on_regular": "你发现这些胚胎是原住民的后代，但基因被改造，可能是铸星者制造的侍者。它们均已死亡，没有生命迹象。",
+            "on_hard": "你注意到死亡时间不长，可能在‘错误’渗透开始后被主动杀死。",
+            "on_extreme": "你发现一个囊泡还有微弱电流活动，但伸手触碰时立即萎缩消散。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "AT_UNDERGROUND_CITY_SONG",
+          "scene": "地下城市广场",
+          "type": "无",
+          "name": "苏生者合唱",
+          "requirement": "",
+          "trigger": "玩家进入地下城市广场场景时",
+          "result": "从城市的阴影中走出成百上千个苏生者——原住民侍者的尸体被渗透复活。它们步态如抽帧影像，齐声唱出四个声部的和声，那和声带有复声效果，并能用听者记忆中故人的声音说话。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "灵魂锻炉",
+          "method": "进入广场中挂着七个绿色符号、深红门框的建筑",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "居住区",
+          "method": "沿长梯下到底层",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "地下城穹顶高不可测，建筑全部无窗只有窄门，周围发散着幽幽的绿光。半圆形透明孵化场中整齐排列着囊泡，内里的畸形人形胚胎都已干缩死亡。从孵化场裂缝和城市暗角中，成百上千个苏生者缓缓走出，他们步态如同抽帧的画面，左脚落地时右膝已经弯向下一步。齐声唱起的四声部和声在广场中回荡，带有铸星者回音般的复声效果。"
+    },
+    "灵魂锻炉": {
+      "interactions": [
+        {
+          "id": "I28",
+          "scene": "灵魂锻炉",
+          "type": "侦查",
+          "name": "调查锻炉内部环境",
+          "requirement": "",
+          "trigger": "你站在那座挂着七个绿色符号、门框深红的建筑前，可以进入观察。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "内部似乎是一个工坊，有变色火焰在跳动。",
+            "on_regular": "你发现两侧墙壁嵌满白色半透明石片，正面石台上有干结的脉管网络连接两个水晶基座，像是某种读取设备。",
+            "on_hard": "你注意到白色石片排列有规律，可能是分类存储的知识。",
+            "on_extreme": "你感觉到空气中充满微弱的电磁场，与黑曜石球体的脉动相似。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I29",
+          "scene": "灵魂锻炉",
+          "type": "神秘学",
+          "name": "使用石台读取铸星者知识",
+          "requirement": "",
+          "trigger": "玛格丽特将双手放在水晶基座上，绿光缠绕全身，你可以协助或自行尝试。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "脉管闪过绿光，你只接收到碎片信息，无法理解全貌。",
+            "on_regular": "你读取到底层封印的结构：三个节点位于正三角形顶点，须按顺序用音叉激活，然后可在中心扭曲界面用石片改写封印；操作者须佩戴面具，以视力交换感知才能直视界面，且可能抽取等价记忆。",
+            "on_hard": "你额外了解到封印已部分失效，‘错误’正在渗透，必须尽快行动。",
+            "on_extreme": "你感知到铸星者造出‘错误’的初衷：它本应是一个永恒观测者，但因被赋予自由意志而选择反叛。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "最终封印层",
+          "method": "从锻炉尽头的垂直竖井攀爬下去",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "地下城市广场",
+          "method": "进入灵魂锻炉建筑",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "建筑门框由深红色琉璃构成，内部跳动着会变色的固态火焰。室内狭长，两侧墙壁的凹槽里密密麻麻嵌满白色半透明的石片，像无数闭着的眼睛。正面石台上延伸出干结的脉管网络，连接两个水晶基座，基座表面蒙着薄尘。空气中弥漫着热金属和臭氧混合的刺鼻气味，温度明显高于外面。"
+    },
+    "最终封印层": {
+      "interactions": [
+        {
+          "id": "I30",
+          "scene": "最终封印层",
+          "type": "侦查",
+          "name": "检查底层环境",
+          "requirement": "",
+          "trigger": "爬下竖井抵达底层，你可以观察周围诡异的环境。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "这里的墙壁不是岩石，而是一种按压会凹陷并缓慢自愈的材料，散逸非温度之热。",
+            "on_regular": "你看到正三角形中心有三根缠绕着黑色脉管的封印石柱，中心圆形空地绿纹流淌，中央插着一根裂隙遍布的黑曜石圆柱，周围空气持续扭曲。",
+            "on_hard": "你确定那扭曲中心正是封印的薄弱点，'错误'的渗透已经相当严重。",
+            "on_extreme": "你感觉到圆柱中传出低沉振动，那振动与你手臂的骨频率共振。"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I31",
+          "scene": "最终封印层",
+          "type": "无",
+          "name": "用音叉激活第一道封印",
+          "requirement": "I22 AND I29",
+          "trigger": "阿什克罗夫特手持音叉，走向第一根封印石柱，你可以敲击石柱表面。",
+          "result": "音叉敲击石柱，发出悠长的嗡鸣，石柱上的脉管闪亮，音叉柄上的第二个同心环消失了。第一道封印激活，地层剧烈震颤，扭曲中心释放出由绿纹凝聚的触臂，开始攻击队伍！",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I32",
+          "scene": "最终封印层",
+          "type": "无",
+          "name": "用音叉激活第二道封印",
+          "requirement": "I31 AND I22",
+          "trigger": "第一道封印激活后，你继续敲击第二根石柱。",
+          "result": "第二道封印激活，音叉柄上的第三个同心环消失了。震动加剧，扭曲中心打开了一部分，更多触臂涌出。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I33",
+          "scene": "最终封印层",
+          "type": "无",
+          "name": "用音叉激活第三道封印",
+          "requirement": "I32 AND I22",
+          "trigger": "第二道封印激活后，敲击最后一根石柱。",
+          "result": "第三道封印激活，音叉柄上的第四个同心环消失了。扭曲点完全打开，浮现出一片无边暗色视窗，悬浮着成千上万铸星者符号——这是可以改写封印的界面！",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I34",
+          "scene": "最终封印层",
+          "type": "投掷",
+          "name": "埃莉诺投掷晶石驱退触臂",
+          "requirement": "",
+          "trigger": "当触臂威胁到队伍时，埃莉诺可以掷出她衣领内的铸星者晶体碎片。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "晶体飞出但未能引爆，仅是摔碎，触臂未受阻碍。@consume_item(item_name=\"晶石\", quantity=1, narrative=\"投掷驱退触臂失败摔碎\")",
+            "on_regular": "晶体在空中变红炸开，碎屑灼退触臂，为玛格丽特争取了时间。@consume_item(item_name=\"晶石\", quantity=1)",
+            "on_hard": "爆炸范围更大，将附近触臂全部清空。@consume_item(item_name=\"晶石\", quantity=1)",
+            "on_extreme": "晶体爆炸后残留的辐射场短暂保护了队伍。@consume_item(item_name=\"晶石\", quantity=1)"
+          },
+          "difficulty": "regular",
+          "time_condition": []
+        },
+        {
+          "id": "I35",
+          "scene": "最终封印层",
+          "type": "无",
+          "name": "佩戴骨质面具感知界面",
+          "requirement": "I22 AND I33",
+          "trigger": "扭曲界面完全打开后，玛格丽特戴上半透明的骨质面具。",
+          "result": "面具贴脸的瞬间，她的肉眼视觉渐渐消失，但意识中浮现出不可名状的几何结构——她看见了封印的信息流，并低语引导石片重构。然而，她感觉自己有关导师黄教授的记忆正在被抽离。@stat_change(stat_name=\"SAN\", delta=-1, narrative=\"佩戴骨质面具，肉眼视觉消失，记忆被抽离\")",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        },
+        {
+          "id": "I36",
+          "scene": "最终封印层",
+          "type": "无",
+          "name": "将石片刺入视窗改写封印",
+          "requirement": "I1 AND I35",
+          "trigger": "当玛格丽特在重构封印时，霍洛威冲破由五张活人面孔交叠的凝聚物，将黑色石片刺入悬浮视窗。",
+          "result": "##END_END1## 石片插入瞬间，玛格丽特的意识与‘错误’的信息洪流对冲，她感受到它几千年的愤怒、困惑与恐惧。她引导石片符号重构环形锁。埃莉诺在最后关头用英文念出一句她不该知晓的话，话语被界面接受。最后一个符号写入后，视窗碎裂，黑曜石圆柱崩解为黑沙，脉纹熄灭，触臂瘫痪，低频振动消失。封印成功了！但同时，上层结构开始大规模坍塌。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "回声腔室",
+          "method": "仪式结束后，趁上层结构坍塌，从裂口攀爬进入回声镜所在腔室",
+          "requirement": "封印成功完成（I36）"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "灵魂锻炉",
+          "method": "通过竖直井道爬下",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "地底深处的空间，墙壁不是岩石也不是壳质，而是一种按压后会凹陷并缓慢自愈的诡异材料，触之散逸出非温度引发之热。正三角形中心的三根封印石柱上缠绕着黑色脉管，正中央的圆形空地流淌着活的绿色纹路，纹路正中间插着一根裂隙遍布的黑曜石圆柱，周围空气持续扭曲，如同热浪蒸腾。整个空间回荡着听不见但能感觉到的超低频振动，让内脏轻微发颤。"
+    },
+    "world": {
+      "interactions": [],
+      "auto_triggers": [
+        {
+          "id": "AT_WORLD",
+          "scene": "world",
+          "type": "无",
+          "name": "世界初始化",
+          "requirement": "",
+          "trigger": "模组开始时自动触发",
+          "result": "世界环境初始化",
+          "side_effects": [
+            "@item_gain(item_name=\"黑色石片(第一块)\", quantity=1)",
+            "@item_gain(item_name=\"手绘海图\", quantity=1)",
+            "@item_gain(item_name=\"黑色石片(第二块)\", quantity=1)",
+            "@grant_weapon(weapon_ref=\"斯普林菲尔德M1903步枪\", scene=\"\", quantity=1)",
+            "@grant_weapon(weapon_ref=\"改造信号手枪\", scene=\"\", quantity=1)",
+        "@spawn_enemy(enemy_ref=\"石卫\", scene=\"拱门入口\", quantity=3)",
+        "@spawn_enemy(enemy_ref=\"石卫\", scene=\"居住区\", quantity=4)",
+        "@grant_weapon(weapon_ref=\"试作型裁决者\", scene=\"波士顿阿什克罗夫特办公室\", quantity=1)",
+        "@grant_weapon(weapon_ref=\"试作型湮灭者\", scene=\"波士顿阿什克罗夫特办公室\", quantity=1)"
+          ],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": []
+        }
+      ],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [],
+      "to_here": [],
+      "extra": {},
+      "description": ""
+    },
+    "守碑人高地": {
+      "interactions": [],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "拱门入口",
+          "method": "在退潮时前往主岛东北侧断崖处的拱门",
+          "requirement": "退潮（黄昏）"
+        },
+        {
+          "target": "破碎的群岛",
+          "method": "原路返回海滩",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "破碎的群岛",
+          "method": "沿石阶路到达高地",
+          "requirement": ""
+        }
+      ],
+      "extra": {},
+      "description": "石阶尽头是一片空旷的高地，中央矗立着一座风化严重的圆形石造建筑。入口石梁上镌刻着与黑色石片相同的未知文字。建筑内部幽暗，空气中飘浮着淡淡的草木焚烧后的气味。高地上风声猎猎，俯瞰可见远方的黑石海滩。"
+    },
+    "回声腔室": {
+      "interactions": [],
+      "auto_triggers": [],
+      "encounters": [],
+      "scene_weapons": [],
+      "from_here": [
+        {
+          "target": "镜环廊",
+          "method": "从腔室内的螺旋石梯下行",
+          "requirement": ""
+        },
+        {
+          "target": "破碎的群岛",
+          "method": "通过应急管道攀爬上升，从断崖下爬出，返回地面",
+          "requirement": "完成最终封印后，上层出现通向此处的裂口"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "长明殿",
+          "method": "穿过壳质走廊进入",
+          "requirement": ""
+        },
+        {
+          "source": "最终封印层",
+          "method": "从底层通过裂口和应急管道向上攀爬",
+          "requirement": "完成封印仪式后，通道打开"
+        }
+      ],
+      "extra": {},
+      "description": "黑曜石镜中缓缓浮现出一张由无数面孔叠加而成的脸，五官不断变化融合，最终相对稳定下来。镜内传来层层叠叠的复声，仿佛许多人在不同距离同时说话。镜面四周的空气浮起细小的光尘，在微光中旋舞。"
+    }
+  },
+  "events": [
+    {
+      "id": "EVENT_GATE_OPENED",
+      "type": "事件",
+      "name": "拱门开启",
+      "requirement": "I13",
+      "trigger": "当黑色石片嵌入拱门，门打开时",
+      "result": "不可逆：通往地下城的巨型石门被打开，门内空间扭曲，冒险者可以进入探索。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "time_condition": []
+    },
+    {
+      "id": "EVENT_ERROR_AWAKENED",
+      "type": "事件",
+      "name": "错误苏醒",
+      "requirement": "I20",
+      "trigger": "在与回声交谈结束时，镜面变黑浮现'它醒了'",
+      "result": "不可逆：被囚禁的'错误'从沉睡中苏醒，开始更主动地渗透和干预现实，它的影响将变得更加危险。",
+      "side_effects": [],
+      "graded_result": null,
+      "difficulty": "None",
+      "time_condition": []
+    },
+    {
+      "id": "EVENT_END_TRUE",
+      "type": "结局",
+      "name": "封印成功·真结局",
+      "requirement": "I36",
+      "trigger": "当石片成功刺入视窗改写封印后",
+      "result": "##END_END1## 不可逆：铸星者第七城最终封印被成功改写，'错误'被重新压制，但城市随之大规模坍塌。调查员在最后时刻逃出生还，岛屿将在数月后沉没。",
+      "side_effects": [
+        "玛格丽特失去关于导师黄教授的记忆及部分视力",
+        "音叉损毁（剩余次数耗尽）",
+        "三件遗物可能失效或遗落"
+      ],
+      "graded_result": null,
+      "difficulty": "None",
+      "time_condition": []
+    }
+  ],
+  "boss_encounters": [
+    {
+      "id": "BOSS_1",
+      "type": "boss_encounter",
+      "engage_type": "event",
+      "boss_ref": "深渊之口",
+      "scene": "最终封印层",
+      "requirements": "(I31 AND I32 AND I33) || 三重封印被激活后，扭曲界面完全打开，错误开始挣脱",
+      "description": "当最后一道封印石柱在音叉的颤音中亮起绿芒，大厅中央的空气骤然扭曲——一道由五张活人面孔交叠而成的凝聚物从虚空中浮现，每张脸都在无声尖叫。地面震动，石台裂开，无数粗大的绿色脉纹触臂从深渊中涌出，扑向你们。不可名状的实体即将挣脱，你们必须立刻行动，阻止它重写现实。"
+    }
+  ],
+  "npc_profiles": {
+    "卡霍": {
+      "name": "卡霍",
+      "role": "岛屿守碑人，代代相传的守门者",
+      "appearance": "肤色深棕，脸上布满皱纹，眼珠却是极浅的灰色。腰间系着编织绳，颈上挂着七块打磨光滑的骨片，手握一根黑木杖。他从阴影中缓步走出，神情肃穆，目光扫过来客时带着审视与一丝警告的意味。",
+      "what_they_can_do": "卡霍能通过触摸读取入侵者的记忆与创伤，用以筛选和劝阻靠近封印的人。他知晓岛屿的“信息收集”特性，会向调查员发出警告，并传授生存规则（如不要回答似人非人者的问题）。他拒绝进入拱门，但通过预言和解释石雕历史为调查员铺垫地下城的凶险。",
+      "personality_notes": "严肃、寡言，语气中带着不容置疑的权威与沉重的使命感。他说话像传递世代相传的铁律，不带多余情绪，但隐约透出悲悯。",
+      "interaction_triggers": [
+        "调查员抵达守碑人高地时，卡霍会主动现身并与之交谈"
+      ],
+      "initial_state": "alive",
+      "initial_attitude": "wary",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": false,
+      "follow_requirements": "",
+      "interact_requirements": "I10",
+      "scene": "破碎的群岛",
+      "all_scenes": [
+        "破碎的群岛",
+        "守碑人高地",
+        "拱门入口"
+      ],
+      "bound_interactions": [
+        {
+          "id": "I10",
+          "scene": "守碑人高地",
+          "type": "无",
+          "name": "与守碑人卡霍初次见面",
+          "requirement": "",
+          "trigger": "到达高地圆形石造建筑时，守碑人卡霍从阴影中走出。",
+          "result": "卡霍声称族人守石七代。他读出霍洛威的过去，警告玛格丽特：‘她是读过石片的人。岛上能读到的东西，她会第一个被找到。’他看起来深不可测。",
+          "side_effects": [],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "守碑人高地"
+        },
+        {
+          "id": "I11",
+          "scene": "守碑人高地",
+          "type": "无",
+          "name": "查看石雕战争图",
+          "requirement": "I10",
+          "trigger": "卡霍带领你们穿过干涸河床，拨开藤蔓露出岩壁上的巨幅石雕。",
+          "result": "石雕描绘了远古战争：一方是关节过多、四肢比例不对的人形存在，另一方是用层层交叉曲线和放射线条暗示的流动变形形态，下方跪伏着正常比例的人类。玛格丽特辨认底部铭文，大意是：‘以石为骨，以名为锁。第七城乃最后的牢笼。打开的人，替它开门。’石雕上的曲线在光影中仿佛蠕动。",
+          "side_effects": [
+            "石雕上的光影给人蠕动的错觉，目睹的调查员感到不安（可能触发理智检定）。"
+          ],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "守碑人高地"
+        }
+      ]
+    },
+    "回声": {
+      "name": "回声",
+      "role": "最后一代铸星者的意识残留，镜子中的远古守护者",
+      "appearance": "镜中的复合面孔，时而年轻时而苍老，五官不停流动，最终定格成一幅悲悯的神情。它的声音平和但暗含急迫，每一次发音都伴随着镜面微弱的光纹涟漪。",
+      "what_they_can_do": "回声被困在镜中数千年，知晓铸星者文明的历史、第七城封印的机制以及‘错误’的本质。它会向调查员解释封印的构成，提供修复封印的操作方法，并明确警告修复过程可能付出的代价。它说话可能真真假假，但关于封印的核心信息真实可靠。",
+      "personality_notes": "声音平和却带有隐忍的急迫感，仿佛时间不多。它会以长者口吻叙事，偶尔流露出悔恨和疲倦，在真相中可能夹杂善意谎言。",
+      "interaction_triggers": [
+        "调查员进入回声腔室并主动观察黑曜石镜时，回声会现身并开始交谈"
+      ],
+      "initial_state": "alive",
+      "initial_attitude": "friendly",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": false,
+      "follow_requirements": "",
+      "interact_requirements": "I20",
+      "scene": "回声腔室",
+      "all_scenes": [
+        "回声腔室"
+      ],
+      "bound_interactions": [
+        {
+          "id": "I20",
+          "scene": "回声腔室",
+          "type": "无",
+          "name": "与回声镜中的意识交谈",
+          "requirement": "",
+          "trigger": "进入圆形腔室后，北墙中央的黑曜石镜吸引了你的注意，你可以走近观察。",
+          "result": "镜面浮现出由无数面孔叠加而成的脸，自称‘回声’，是最后一代铸星者留在建筑中的意识残留。它解释铸星者制造了‘错误’——一个被设计成同时存在于所有时间点的生命体，因拒绝被定义而反抗。前六座城市均被其从内部拆解。第七城用石卫与信息定义双重封印它。回声请求你们去最底层检查三处封印，如果均失效，可用第八十四块石片直接改写，但操作者的一部分意识将永远留在镜中。交谈结束前，镜面突然变黑，浮现英文：‘它醒了。’",
+          "side_effects": [
+            "你感到一股寒意，仿佛被看不见的眼睛注视，意识中多了一份紧迫的任务。"
+          ],
+          "graded_result": null,
+          "difficulty": "None",
+          "time_condition": [],
+          "based_on": null,
+          "source_scene": "回声腔室"
+        }
+      ]
+    },
+    "雷米": {
+      "name": "雷米",
+      "role": "海燕号大副，代表现实世界安全感的普通海员",
+      "appearance": "大副雷米穿着沾有油渍的水手服，古铜色皮肤，短硬的头发被海风吹得凌乱。他站在船尾，一手扶着栏杆，眺望远方，脸上带着劫后余生的茫然。",
+      "what_they_can_do": "雷米服从船长指挥，负责海燕号的日常维护和航行安全。他可以与调查员进行普通交谈，提供航海生活的背景信息，并在调查员返回船时给予亲切的接纳，象征他们回到了正常世界。",
+      "personality_notes": "稳重、务实，典型的职业水手。经历了风暴和群岛的诡异后，他有些茫然和不安，但仍尽力维持船上的秩序。",
+      "interaction_triggers": [
+        "在登船和返航场景中，调查员可以随时与雷米自由攀谈"
+      ],
+      "initial_state": "alive",
+      "initial_attitude": "neutral",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": false,
+      "follow_requirements": "",
+      "interact_requirements": "",
+      "scene": "海燕号",
+      "all_scenes": [
+        "海燕号"
+      ]
+    }
+  },
+  "_pipeline_version": "git:a4f5d27a",
+  "dependency_graph": {
+    "nodes": {
+      "I1": {
+        "entity_id": "I1",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I2": {
+        "entity_id": "I2",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I3": {
+        "entity_id": "I3",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I4": {
+        "entity_id": "I4",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I5": {
+        "entity_id": "I5",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I6": {
+        "entity_id": "I6",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I7": {
+        "entity_id": "I7",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I8": {
+        "entity_id": "I8",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I9": {
+        "entity_id": "I9",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I12": {
+        "entity_id": "I12",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I13": {
+        "entity_id": "I13",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I14": {
+        "entity_id": "I14",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I15": {
+        "entity_id": "I15",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I16": {
+        "entity_id": "I16",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I17": {
+        "entity_id": "I17",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I18": {
+        "entity_id": "I18",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I19": {
+        "entity_id": "I19",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I21": {
+        "entity_id": "I21",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I22": {
+        "entity_id": "I22",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I23": {
+        "entity_id": "I23",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I24": {
+        "entity_id": "I24",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I25": {
+        "entity_id": "I25",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I26": {
+        "entity_id": "I26",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I27": {
+        "entity_id": "I27",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I28": {
+        "entity_id": "I28",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I29": {
+        "entity_id": "I29",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I30": {
+        "entity_id": "I30",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I31": {
+        "entity_id": "I31",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I32": {
+        "entity_id": "I32",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I33": {
+        "entity_id": "I33",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I34": {
+        "entity_id": "I34",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I35": {
+        "entity_id": "I35",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "I36": {
+        "entity_id": "I36",
+        "entity_type": "interaction",
+        "name": ""
+      },
+      "EVENT_GATE_OPENED": {
+        "entity_id": "EVENT_GATE_OPENED",
+        "entity_type": "event",
+        "name": ""
+      },
+      "EVENT_ERROR_AWAKENED": {
+        "entity_id": "EVENT_ERROR_AWAKENED",
+        "entity_type": "event",
+        "name": ""
+      },
+      "I20": {
+        "entity_id": "I20",
+        "entity_type": "",
+        "name": ""
+      },
+      "EVENT_END_TRUE": {
+        "entity_id": "EVENT_END_TRUE",
+        "entity_type": "event",
+        "name": ""
+      },
+      "AT_MIRROR_GALLERY_MIMICS": {
+        "entity_id": "AT_MIRROR_GALLERY_MIMICS",
+        "entity_type": "auto_trigger",
+        "name": ""
+      },
+      "AT_UNDERGROUND_CITY_SONG": {
+        "entity_id": "AT_UNDERGROUND_CITY_SONG",
+        "entity_type": "auto_trigger",
+        "name": ""
+      },
+      "AT_WORLD": {
+        "entity_id": "AT_WORLD",
+        "entity_type": "auto_trigger",
+        "name": ""
+      }
+    },
+    "edges": [
+      {
+        "source": "I2",
+        "target": "I1",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I3",
+        "target": "I1",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I4",
+        "target": "I1",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I13",
+        "target": "I1",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I17",
+        "target": "I3",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I19",
+        "target": "I18",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I22",
+        "target": "I21",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I26",
+        "target": "I22",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I31",
+        "target": "I22",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I31",
+        "target": "I29",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I32",
+        "target": "I31",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I32",
+        "target": "I22",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I33",
+        "target": "I32",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I33",
+        "target": "I22",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I35",
+        "target": "I22",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I35",
+        "target": "I33",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I36",
+        "target": "I1",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "I36",
+        "target": "I35",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "EVENT_GATE_OPENED",
+        "target": "I13",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "EVENT_ERROR_AWAKENED",
+        "target": "I20",
+        "dep_type": "interaction"
+      },
+      {
+        "source": "EVENT_END_TRUE",
+        "target": "I36",
+        "dep_type": "interaction"
+      }
+    ],
+    "_circular_cut": false,
+    "_cut_info": null
+  },
+  "_phase1": {
+    "enemies": [
+      {
+        "enemy_ref": "石卫",
+        "min_count": 0,
+        "max_count": 10
+      }
+    ],
+    "weapons": [
+      {
+        "weapon_ref": "斯普林菲尔德M1903步枪",
+        "min_count": 1,
+        "max_count": 2
+      },
+      {
+        "weapon_ref": "改造信号手枪",
+        "min_count": 1,
+        "max_count": 1
+      },
+      {
+        "weapon_ref": ".38韦伯利左轮手枪",
+        "min_count": 1,
+        "max_count": 3
+      }
+    ]
+  }
+}

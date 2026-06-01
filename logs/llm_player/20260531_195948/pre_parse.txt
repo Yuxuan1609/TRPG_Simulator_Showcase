@@ -1,0 +1,315 @@
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走向车厢连接处的门，仔细查看白色便签。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要查看电车示意地图。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家走向车厢连接处的门，准备前往7号车厢。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家退回一步，警惕地扫视6号车厢，寻找其他可用的物品或出口。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家环视6号车厢，寻找符合便签描述的箱子，并检查异常时钟的位置和细节。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家打开手电筒，仔细检查6号车厢的每个角落，包括座位下和行李架，寻找隐藏线索，特别关注异常时钟。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查手中的试作型裁决者，寻找按钮、开关或铭文以了解其特殊功能。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查试作型湮灭者的握柄下方是否有凹槽或机关。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要环顾6号车厢，并检查通风口和行李架以寻找隐藏物品或线索。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细检查手中试作型裁决者的握柄凹槽，寻找隐藏机关或适配部件。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家靠近7号车厢的门，探头观察里面巨大口器的位置和周围环境，并注意可能的出口或安全区域。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想观察7号车厢内的巨大口器位置和周围环境，寻找出口或安全区域。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家后退到6号车厢中间，警惕地环顾四周，并检查座椅下方和地板是否有异常痕迹或隐藏出口。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查试作型湮灭者的握柄和表面，寻找类似裁决者的凹槽或编号。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要仔细检查试作型湮灭者的握柄和表面，寻找类似裁决者的凹槽或编号。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要仔细检查试作型湮灭者的握柄和表面，寻找类似裁决者的凹槽或编号。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要环顾6号车厢，寻找其他门或出口以及可用物品。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家转身看向后方，握紧武器，准备应对即将到来的威胁。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要转身向前走，寻找通往5号车厢的门并尝试打开它。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家俯身拾起报纸并阅读，同时留意四周动静，这是一个包含动作和目标的清晰行动。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细阅读报纸上的文字，寻找与当前事件相关的信息，同时留意车厢内的声响。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家仔细阅读报纸上的文字，寻找与当前事件相关的信息，同时留意车厢内的任何声响。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要阅读报纸上的文字，寻找与事件相关的信息，同时留意车厢内的声响。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家向车头方向（6号车厢）快速走去，同时握紧手电筒四处照看，试图找到安全出口或可以防御的武器。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查京山人吉的伤势，用手电筒照明并呼喊确认意识。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家在4号车厢寻找急救箱或医疗用品，并留意周围动静。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家撕下衣袖布料按压京山人吉的腿部伤口止血，并大声呼喊其警员编号试图唤醒他。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要检查京山人吉的口袋和身上，寻找钥匙、证件或对讲机等物品，同时留意周围动静。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家拿起染血的纸条，凑近手电筒光仔细辨认模糊的字迹。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想检查染血纸条上的字迹",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家想要移动到3号车厢",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家用手电筒扫视3号车厢，寻找不寻常的线索",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家小心翼翼地走向前门附近，避开碎玻璃，捡起反光物体查看。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家打开手电筒，照向手中反光物体，仔细观察其细节。",
+  "resolved_text": "",
+  "question": ""
+}
+
+
+--- Response ---
+{
+  "clarity": "clear",
+  "interpretation": "玩家打开手电筒，仔细观察手中的反光物体（银币）的细节。",
+  "resolved_text": "",
+  "question": ""
+}
+

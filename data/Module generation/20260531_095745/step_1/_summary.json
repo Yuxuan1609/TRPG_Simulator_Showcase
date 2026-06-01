@@ -1,0 +1,33 @@
+{
+  "scenes": [
+    "6号车厢",
+    "7号车厢",
+    "5号车厢",
+    "4号车厢",
+    "3号车厢",
+    "2号车厢",
+    "先头车厢"
+  ],
+  "characters": [
+    {
+      "name": "京山 人吉",
+      "id": "NPC_1",
+      "role": "乘务员",
+      "scenes": [
+        "4号车厢"
+      ],
+      "can_follow": true,
+      "follow_condition": "急救成功使乘务员苏醒，并请求帮助"
+    }
+  ],
+  "condensed_text_length": 6664,
+  "chapters": [
+    "module_overview",
+    "scenes",
+    "npcs",
+    "enemies",
+    "clues_and_items",
+    "events_summary",
+    "locations_and_map"
+  ]
+}

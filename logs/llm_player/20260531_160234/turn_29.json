@@ -1,0 +1,9 @@
+{
+  "turn": 29,
+  "player_input": "我扫视车厢，检查座椅下方和行李架上是否有急救箱或医疗用品。",
+  "enrich": null,
+  "narrator": {
+    "brief": "（处理中）",
+    "narrative": ""
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "npc_profiles": {
+    "京山 人吉": {
+      "name": "京山 人吉",
+      "role": "重伤的电车乘务员，掌握关键情报",
+      "appearance": "他身穿电车乘务员制服，侧倒在地，身下渗出一小摊血迹，脸色苍白如纸，呼吸微弱而急促，明显处于重伤休克状态。",
+      "what_they_can_do": "苏醒并情绪稳定后，能告知怪物畏惧强光或巨大声响的弱点、驾驶室钥匙可能藏在第三个箱子里的线索，并坚持必须让电车停下；跟随玩家到达先头车厢后，会基于自身信念强烈反对停车以外的任何行动，成为说服或对抗的焦点。",
+      "personality_notes": "语气虚弱但充满恐惧与偏执，反复强调“必须停下电车”，说话时气息不稳，极度依赖救援者的帮助。",
+      "interaction_triggers": [
+        "乘务员苏醒后，玩家可主动与其交谈",
+        "乘务员情绪稳定后，会主动透露怪物弱点和钥匙线索"
+      ],
+      "initial_state": "alive",
+      "initial_attitude": "wary",
+      "initial_following": false,
+      "can_interact": true,
+      "can_follow": true,
+      "follow_requirements": "I11 AND I12 || 京山人吉信任调查员并请求协助停下电车",
+      "interact_requirements": "I11 AND I12 || 京山人吉苏醒且情绪稳定",
+      "bound_entities": [
+        "I10",
+        "I11",
+        "I12",
+        "AT_4号车厢_进入"
+      ]
+    }
+  }
+}

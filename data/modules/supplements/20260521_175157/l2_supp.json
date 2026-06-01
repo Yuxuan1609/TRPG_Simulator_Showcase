@@ -1,0 +1,324 @@
+{
+  "scenes": {
+    "SS1_镜中走廊": {
+      "description": "你跪在一条无限延伸的走廊里。墙壁由无数歪斜的镜子嵌成，每一片都映出同一个你，却各自扭曲：有的在尖叫，有的在衰老，有的已经腐烂。走廊尽头立着一扇门，门上嵌着一只眼睛——瞳孔是转动的齿轮。黑暗从四面八方挤压过来，低语像碎玻璃刮过你的意识：“霍桑……霍桑把钥匙藏在了倒影里……”你意识到，这声音来自你身边——一个无面的人形轮廓，由阴影构成，它的胸膛里跳动着属于你自己的心跳。如果你与它对话，它会索取你的一段记忆来打开那扇门。",
+      "interactions": [
+        {
+          "id": "SI1",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "与无面人形对话",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你选择与无面人形对话",
+          "result": "无面人形缓缓转向你，从体内发出与你心跳同步的声音：“交出你的一段记忆，门就会开启。”",
+          "side_effects": [],
+          "difficulty": ""
+        },
+        {
+          "id": "SI2",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "交出一段记忆",
+          "type": "无",
+          "requirement": "SI1",
+          "trigger": "你决定交出一段珍贵的记忆",
+          "result": "你感到一段温暖的记忆从思绪中被抽离，无面人形的核心泛起光芒。门上的眼睛开始转动，门缓缓打开。",
+          "side_effects": [
+            "@stat_change(stat_name='INT', delta=-1, narrative='你失去了一个珍贵记忆片段，思维变得模糊')"
+          ],
+          "difficulty": ""
+        },
+        {
+          "id": "SI3",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "拒绝交出记忆",
+          "type": "无",
+          "requirement": "SI1",
+          "trigger": "你果断拒绝交出任何记忆",
+          "result": "无面人形发出诡异的笑声，随后分解成烟雾消失在镜墙中。门依然紧闭。",
+          "side_effects": [],
+          "difficulty": ""
+        },
+        {
+          "id": "SI4",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "检查门上眼睛",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你凑近观察门上那只转动的眼睛",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "你只看到眼睛在转动，其他毫无所获。",
+            "on_regular": "你发现瞳孔内的齿轮纹理与镜墙中某个特定倒影的反射角度吻合，似乎指向某块碎片。",
+            "on_hard": "你注意到齿轮的转动频率与你的心跳一致，而且眼睛似乎在跟踪你的移动。",
+            "on_extreme": "你从眼睛的倒影中看到了镜墙中的一个隐藏缝隙，里面似乎藏着什么。"
+          }
+        },
+        {
+          "id": "SI5",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "调查镜墙线索",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你仔细观察镜墙上的扭曲倒影，寻找钥匙的线索",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "镜中倒影杂乱无章，你一无所获。",
+            "on_regular": "你注意到其中一个倒影的手指方向与众不同，指向了头顶某块倾斜的镜片。",
+            "on_hard": "你发现钥匙的轮廓在镜面深处闪烁，位置相当隐蔽。",
+            "on_extreme": "你瞬间看穿了镜中幻象，清楚看到了钥匙的准确位置和取出方法。"
+          }
+        },
+        {
+          "id": "SI6",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "伸手取钥匙",
+          "type": "无",
+          "requirement": "SI5",
+          "trigger": "你伸手探向疑似藏有钥匙的镜面",
+          "result": "你的手指穿过了冰冷的镜面，触碰到了一个坚硬的物体——一把古铜色的钥匙。你安全地将它取出。",
+          "side_effects": [
+            "@item_gain(item_name='镜中钥匙', quantity=1)"
+          ],
+          "difficulty": ""
+        },
+        {
+          "id": "SI7",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中走廊",
+          "name": "用钥匙开门",
+          "type": "无",
+          "requirement": "SI6",
+          "trigger": "你将钥匙插入门上眼睛的瞳孔锁孔",
+          "result": "钥匙完美契合，齿轮停止转动，门发出轰鸣声缓缓打开。",
+          "side_effects": [],
+          "difficulty": ""
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT1",
+          "entity_type": "auto_trigger",
+          "scene": "SS1_镜中走廊",
+          "name": "低语提醒",
+          "type": "无",
+          "requirement": "",
+          "trigger": "玩家进入场景时自动触发",
+          "result": "你听到周围传来低语：“霍桑……霍桑把钥匙藏在了倒影里……”",
+          "side_effects": [],
+          "difficulty": ""
+        }
+      ],
+      "from_here": [
+        {
+          "target": "SS2_灵魂回响",
+          "method": "通过打开的门",
+          "requirement": "SI2 OR SI7"
+        },
+        {
+          "target": "test_room",
+          "method": "原路返回，退回镜子的入口",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "test_room",
+          "method": "触摸镜子进入",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS2_灵魂回响": {
+      "description": "你坠入一个圆形的房间。房间中央悬浮着一面巨大的破裂镜子，无数碎片在失重的状态下旋转，每块碎片里都是一个活生生的瞬间——霍桑在实验日志里写下的句子浮现在空气中：“镜子不是反射，是囚笼。我用它困住了第一批实验者的灵魂，但代价是……它开始有了自己的饥饿。”无面人形站在你身后，它现在有了你的声音，说：“你也在逃，对吗？我也是。从那个博士的意识囚牢里逃出来的镜子碎片。帮我打碎这里的核心，我就告诉你通往第六节车厢的路。”在圆形房间的穹顶，一块完整的镜面正缓慢地吞吃着周围破碎的记忆碎片，那就是核心。",
+      "interactions": [
+        {
+          "id": "SI8",
+          "entity_type": "interaction",
+          "scene": "SS2_灵魂回响",
+          "name": "与无面人形交谈",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你与身边的无面人形交谈",
+          "result": "无面人形再次强调核心是逃出的关键，它承诺如果你打碎核心，它就分享通往第六节车厢的路。",
+          "side_effects": [],
+          "difficulty": ""
+        },
+        {
+          "id": "SI9",
+          "entity_type": "interaction",
+          "scene": "SS2_灵魂回响",
+          "name": "检查核心镜面",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你仔细观察穹顶上的巨型镜面核心",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "镜面折射的光线刺痛了你的眼睛，你不得不移开视线。",
+            "on_regular": "你发现镜面表面有细微的裂痕，似乎极为脆弱。周围旋转的记忆碎片被它缓缓吸引吞噬。",
+            "on_hard": "你观察到镜面背面有明确的裂痕，攻击那里可以一举粉碎它。",
+            "on_extreme": "你洞察了核心的本质：它并非实体，而是由纯粹的囚禁意念构成，打破它需要决心而非蛮力。"
+          }
+        },
+        {
+          "id": "SI10",
+          "entity_type": "interaction",
+          "scene": "SS2_灵魂回响",
+          "name": "查看记忆碎片",
+          "type": "历史",
+          "requirement": "",
+          "trigger": "你伸手触碰一块旋转的记忆碎片",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "difficulty": "regular",
+          "graded_result": {
+            "on_failure": "碎片化为光点消散，你未能捕捉到任何信息。",
+            "on_regular": "你看到一段画面：霍桑将第一批实验者带到镜子前，他们的身体被吸入镜中。",
+            "on_hard": "你感受到实验者的绝望，以及霍桑逐渐被镜子反噬的过程。",
+            "on_extreme": "你获得了霍桑的完整记忆，了解到核心的来历以及第六节车厢的真实坐标。"
+          }
+        },
+        {
+          "id": "SI11",
+          "entity_type": "interaction",
+          "scene": "SS2_灵魂回响",
+          "name": "攻击核心",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你决定攻击穹顶的镜面核心",
+          "result": "你冲向穹顶，用尽全力击打镜面。核心瞬间布满裂纹，随即爆炸。整个空间开始坍缩，你被混乱的光芒吞没，最终被抛回test_room。",
+          "side_effects": [],
+          "difficulty": ""
+        }
+      ],
+      "auto_triggers": [
+        {
+          "id": "SAT2",
+          "entity_type": "auto_trigger",
+          "scene": "SS2_灵魂回响",
+          "name": "无面人形的请求",
+          "type": "无",
+          "requirement": "",
+          "trigger": "玩家进入场景时自动触发",
+          "result": "无面人形用你的声音说：“你也在逃，对吗？我也是。从那个博士的意识囚牢里逃出来的镜子碎片。帮我打碎这里的核心，我就告诉你通往第六节车厢的路。”",
+          "side_effects": [],
+          "difficulty": ""
+        },
+        {
+          "id": "SAT3",
+          "entity_type": "auto_trigger",
+          "scene": "SS2_灵魂回响",
+          "name": "实验日志浮现",
+          "type": "无",
+          "requirement": "",
+          "trigger": "玩家进入场景时自动触发",
+          "result": "空气中浮现出霍桑的笔记：“镜子不是反射，是囚笼。我用它困住了第一批实验者的灵魂，但代价是……它开始有了自己的饥饿。”",
+          "side_effects": [],
+          "difficulty": ""
+        }
+      ],
+      "from_here": [
+        {
+          "target": "test_room",
+          "method": "空间崩塌后被弹出",
+          "requirement": "SI11"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS1_镜中走廊",
+          "method": "通过门",
+          "requirement": "SI2 OR SI7"
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [],
+  "npc_profiles": {},
+  "dependency_graph": {
+    "nodes": {
+      "SAT1": {
+        "entity_type": "auto_trigger"
+      },
+      "SI1": {
+        "entity_type": "interaction"
+      },
+      "SI2": {
+        "entity_type": "interaction"
+      },
+      "SI3": {
+        "entity_type": "interaction"
+      },
+      "SI4": {
+        "entity_type": "interaction"
+      },
+      "SI5": {
+        "entity_type": "interaction"
+      },
+      "SI6": {
+        "entity_type": "interaction"
+      },
+      "SI7": {
+        "entity_type": "interaction"
+      },
+      "SAT2": {
+        "entity_type": "auto_trigger"
+      },
+      "SAT3": {
+        "entity_type": "auto_trigger"
+      },
+      "SI8": {
+        "entity_type": "interaction"
+      },
+      "SI9": {
+        "entity_type": "interaction"
+      },
+      "SI10": {
+        "entity_type": "interaction"
+      },
+      "SI11": {
+        "entity_type": "interaction"
+      }
+    },
+    "edges": [
+      {
+        "source": "SI2",
+        "target": "SI1",
+        "condition": "completed"
+      },
+      {
+        "source": "SI3",
+        "target": "SI1",
+        "condition": "completed"
+      },
+      {
+        "source": "SI6",
+        "target": "SI5",
+        "condition": "completed"
+      },
+      {
+        "source": "SI7",
+        "target": "SI6",
+        "condition": "completed"
+      }
+    ]
+  },
+  "_scene_names": {
+    "SS1_镜中走廊": "SS1_镜中走廊",
+    "SS2_灵魂回响": "SS2_灵魂回响"
+  },
+  "_phase1": {}
+}

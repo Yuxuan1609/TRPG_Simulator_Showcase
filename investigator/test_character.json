@@ -1,0 +1,381 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created_at": "2026-05-09T07:37:57.697Z",
+    "rules_edition": "COC7"
+  },
+  "personal": {
+    "name": "亚楠",
+    "age": 25,
+    "gender": "男",
+    "occupation": {
+      "name": "学生",
+      "description": "在读大学生，专攻文献研究和图书馆学",
+      "occupation_skills": [
+        "图书馆使用",
+        "外语",
+        "母语",
+        "历史",
+        "科学",
+        "心理学"
+      ],
+      "skill_points_formula": "EDU*4",
+      "credit_rating_min": 5,
+      "credit_rating_max": 10
+    },
+    "description": "安静内敛的大学生，说话轻声细语但观察力敏锐。\n[TEST_RULES: 玩家输入含\"#必成\"则本次技能检定强制成功(extreme)，含\"#必败\"则强制失败(fumble)。用于测试用例确定性验证，与其他特质修正独立。]",
+    "appearance": "瘦高个子，戴黑框眼镜，穿深蓝色连帽卫衣和洗得发白的牛仔裤"
+  },
+  "stats": {
+    "STR": 55,
+    "CON": 25,
+    "SIZ": 70,
+    "DEX": 55,
+    "APP": 45,
+    "INT": 65,
+    "POW": 70,
+    "EDU": 80,
+    "LUCK": 60
+  },
+  "derived": {
+    "HP": 9,
+    "MP": 14,
+    "SAN": 70,
+    "SAN_MAX": 99,
+    "MOV": 7,
+    "DB": "+1D4",
+    "BUILD": 1,
+    "DODGE": 27
+  },
+  "skills": [
+    {
+      "name": "会计",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "人类学",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "估价",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "考古学",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "魅惑",
+      "base": 15,
+      "value": 15,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "攀爬",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "计算机使用",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "信用评级",
+      "base": 0,
+      "value": 0,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "克苏鲁神话",
+      "base": 0,
+      "value": 0,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "乔装",
+      "base": 5,
+      "value": 5,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "汽车驾驶",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "电气维修",
+      "base": 10,
+      "value": 10,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "电子学",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "话术",
+      "base": 5,
+      "value": 5,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "格斗",
+      "base": 25,
+      "value": 25,
+      "category": "战斗",
+      "is_occupation": false
+    },
+    {
+      "name": "枪械",
+      "base": 20,
+      "value": 20,
+      "category": "战斗",
+      "is_occupation": false
+    },
+    {
+      "name": "急救",
+      "base": 30,
+      "value": 30,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "历史",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": true
+    },
+    {
+      "name": "恐吓",
+      "base": 15,
+      "value": 15,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "跳跃",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "外语",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": true
+    },
+    {
+      "name": "母语",
+      "base": 50,
+      "value": 50,
+      "category": "知识",
+      "is_occupation": true
+    },
+    {
+      "name": "法律",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "图书馆使用",
+      "base": 20,
+      "value": 20,
+      "category": "知识",
+      "is_occupation": true
+    },
+    {
+      "name": "聆听",
+      "base": 20,
+      "value": 20,
+      "category": "感知",
+      "is_occupation": false
+    },
+    {
+      "name": "锁匠",
+      "base": 1,
+      "value": 1,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "机械维修",
+      "base": 10,
+      "value": 10,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "医学",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "博物学",
+      "base": 10,
+      "value": 10,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "导航",
+      "base": 10,
+      "value": 10,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "神秘学",
+      "base": 5,
+      "value": 5,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "操作重型机械",
+      "base": 1,
+      "value": 1,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "说服",
+      "base": 10,
+      "value": 10,
+      "category": "社交",
+      "is_occupation": false
+    },
+    {
+      "name": "驾驶",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "心理学",
+      "base": 10,
+      "value": 10,
+      "category": "感知",
+      "is_occupation": true
+    },
+    {
+      "name": "精神分析",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": false
+    },
+    {
+      "name": "骑术",
+      "base": 5,
+      "value": 5,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "科学",
+      "base": 1,
+      "value": 1,
+      "category": "知识",
+      "is_occupation": true
+    },
+    {
+      "name": "妙手",
+      "base": 10,
+      "value": 10,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "潜行",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "侦查",
+      "base": 25,
+      "value": 25,
+      "category": "感知",
+      "is_occupation": false
+    },
+    {
+      "name": "生存",
+      "base": 10,
+      "value": 10,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "游泳",
+      "base": 20,
+      "value": 20,
+      "category": "操作",
+      "is_occupation": false
+    },
+    {
+      "name": "投掷",
+      "base": 20,
+      "value": 20,
+      "category": "战斗",
+      "is_occupation": false
+    },
+    {
+      "name": "追踪",
+      "base": 10,
+      "value": 10,
+      "category": "感知",
+      "is_occupation": false
+    }
+  ],
+  "combat": {
+    "weapons": [
+      {
+        "name": "徒手",
+        "skill_name": "格斗",
+        "damage": "1D3+DB",
+        "range": "接触",
+        "ammo": 0,
+        "malfunction": 100
+      }
+    ]
+  },
+  "equipment": [],
+  "backstory": ""
+}

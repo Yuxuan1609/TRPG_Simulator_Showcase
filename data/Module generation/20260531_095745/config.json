@@ -1,0 +1,21 @@
+{
+  "docx_path": "D:\\COC simulator\\常暗之厢（7版规则，简体修正版）.docx",
+  "module_name": "常暗之厢_0531",
+  "output_dir": "data/debug",
+  "weapon_lib_path": "data/library/core/weapons.json",
+  "enemy_lib_path": "data/library/core/enemies.json",
+  "boss_lib_path": "data/library/core/bosses.json",
+  "skill_checks_path": "data/skill_checks.json",
+  "json_model": "deepseek-v4-pro",
+  "text_model": "deepseek-v4-pro",
+  "thinking_enabled": true,
+  "reasoning_effort": "high",
+  "json_temperature": 0.3,
+  "text_temperature": 0.7,
+  "auto_mode": true,
+  "start_from": "step_1",
+  "max_retries": 3,
+  "parallel_workers": 4,
+  "inject_wr0": true,
+  "inject_world_at": true
+}

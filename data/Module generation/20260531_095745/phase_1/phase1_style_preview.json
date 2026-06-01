@@ -1,0 +1,10 @@
+{
+  "enemies": [
+    {
+      "enemy_ref": "Clicker",
+      "min_count": 1,
+      "max_count": 3
+    }
+  ],
+  "weapons": []
+}

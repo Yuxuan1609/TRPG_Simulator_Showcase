@@ -1,0 +1,166 @@
+{
+  "dependencies": [
+    {
+      "entity_id": "I1",
+      "requires": []
+    },
+    {
+      "entity_id": "I2",
+      "requires": []
+    },
+    {
+      "entity_id": "I3",
+      "requires": []
+    },
+    {
+      "entity_id": "I23",
+      "requires": []
+    },
+    {
+      "entity_id": "I4",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I3"
+        }
+      ]
+    },
+    {
+      "entity_id": "I5",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I3"
+        }
+      ]
+    },
+    {
+      "entity_id": "I6",
+      "requires": []
+    },
+    {
+      "entity_id": "I7",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I3"
+        }
+      ]
+    },
+    {
+      "entity_id": "I8",
+      "requires": []
+    },
+    {
+      "entity_id": "I9",
+      "requires": []
+    },
+    {
+      "entity_id": "I13",
+      "requires": []
+    },
+    {
+      "entity_id": "I14",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I11"
+        }
+      ]
+    },
+    {
+      "entity_id": "I15",
+      "requires": []
+    },
+    {
+      "entity_id": "I16",
+      "requires": []
+    },
+    {
+      "entity_id": "I17",
+      "requires": []
+    },
+    {
+      "entity_id": "I18",
+      "requires": []
+    },
+    {
+      "entity_id": "I19",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I13"
+        },
+        {
+          "type": "interaction",
+          "id": "I14"
+        }
+      ]
+    },
+    {
+      "entity_id": "I20",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I19"
+        }
+      ]
+    },
+    {
+      "entity_id": "I21",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I20"
+        }
+      ]
+    },
+    {
+      "entity_id": "I22",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I20"
+        }
+      ]
+    },
+    {
+      "entity_id": "NPC_FOLLOW_UNLOCK_京山 人吉",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I11"
+        },
+        {
+          "type": "interaction",
+          "id": "I12"
+        }
+      ]
+    },
+    {
+      "entity_id": "EV_巨口加速吞噬",
+      "requires": [
+        {
+          "type": "interaction",
+          "id": "I3"
+        }
+      ]
+    },
+    {
+      "entity_id": "AT_6号车厢_进入",
+      "requires": []
+    },
+    {
+      "entity_id": "AT_3号车厢_进入",
+      "requires": []
+    },
+    {
+      "entity_id": "AT_2号车厢_进入",
+      "requires": []
+    },
+    {
+      "entity_id": "AT_WORLD",
+      "requires": []
+    }
+  ]
+}

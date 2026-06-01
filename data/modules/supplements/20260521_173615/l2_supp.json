@@ -1,0 +1,177 @@
+{
+  "scenes": {
+    "SS1_镜中世界": {
+      "description": "你跌入一个与测试房间一模一样的空间，但一切都呈现出诡异的镜像颠倒——墙壁泛着潮湿的黑色，光源来自脚下，投下扭曲的影子。空气中弥漫着铁锈与腐朽的气味，而每一面墙壁上都嵌着无数面镜子，反射出无数个你自己的倒影，但它们都在冷笑、哭泣或低语，说着你听不懂的语言。你意识到这就是镜中世界，一个由奈亚拉托提普编织的灵魂囚笼。",
+      "interactions": [
+        {
+          "id": "SI1",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中世界",
+          "name": "聆听低语",
+          "type": "聆听",
+          "requirement": "",
+          "trigger": "你仔细倾听那些低语声，试图找到它们的源头。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "你无法听清低语的含义，只听到模糊的呢喃。",
+            "on_regular": "你听出低语在指引一个方向，指向一堵看似无门的墙壁。",
+            "on_hard": "你不仅听出方向，还隐约捕捉到一个名字：奈亚拉托提普。",
+            "on_extreme": "你完全理解了低语，那是一段直指内心恐惧的话语，你意识到那扇门一直存在，只是被幻象遮盖。"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI2",
+          "entity_type": "interaction",
+          "scene": "SS1_镜中世界",
+          "name": "与镜中黑暗对话",
+          "type": "神秘学",
+          "requirement": "",
+          "trigger": "你凝视镜子深处最黑暗的角落，试图与那里的存在建立联系。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "黑暗如同死寂，没有传来任何回应，只有刺骨的寒意。",
+            "on_regular": "你感到一股模模糊糊的意念与你接触，仿佛有什么东西在观察你。",
+            "on_hard": "你成功与黑暗中的存在短暂沟通，它似乎在嘲笑你的努力，并传来一丝恶意。",
+            "on_extreme": "你的意识与奈亚拉托提普的一部分建立了链接，一个声音直接在你脑中响起：“光即是谎言，黑暗才是出口。”"
+          },
+          "difficulty": "hard"
+        }
+      ],
+      "auto_triggers": [],
+      "from_here": [
+        {
+          "target": "SS2_深渊回廊",
+          "method": "推开隐藏的门",
+          "requirement": "SI1"
+        }
+      ],
+      "to_here": [
+        {
+          "source": "test_room",
+          "method": "触摸镜面被吸入",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    },
+    "SS2_深渊回廊": {
+      "description": "你推开那扇门后，一条无限延伸的回廊出现在眼前。回廊两侧的镜墙中囚禁着模糊的人形，它们用指甲划着镜面，发出刺耳的尖叫。其中一张脸你认得——那是日志中的照片，霍桑研究员。他张着嘴，似乎想告诉你什么，但声音被镜面阻隔。回廊尽头，一面巨大的暗镜矗立，镜面上浮现出一行倒写的字：「记住，光是谎言，黑暗才是出口。」",
+      "interactions": [
+        {
+          "id": "SI3",
+          "entity_type": "interaction",
+          "scene": "SS2_深渊回廊",
+          "name": "观察囚禁的人形",
+          "type": "侦查",
+          "requirement": "",
+          "trigger": "你仔细查看回廊两侧镜墙中的人形，特别是那张熟悉的脸。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "镜面模糊不清，你什么也看不清楚。",
+            "on_regular": "你确认了其中一个是霍桑研究员，他似乎在指着回廊的尽头。",
+            "on_hard": "你看到所有囚禁的人形都在挣扎，霍桑的口型似乎在重复几个字。",
+            "on_extreme": "你读出了霍桑的口型：“光不是出口，不要相信镜子。”"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI4",
+          "entity_type": "interaction",
+          "scene": "SS2_深渊回廊",
+          "name": "阅读暗镜文字",
+          "type": "无",
+          "requirement": "",
+          "trigger": "你走到回廊尽头的巨大暗镜前，试图辨认镜面上的文字。",
+          "result": "你看到一行倒写的字：「记住，光是谎言，黑暗才是出口。」",
+          "side_effects": [],
+          "difficulty": "None"
+        },
+        {
+          "id": "SI5",
+          "entity_type": "interaction",
+          "scene": "SS2_深渊回廊",
+          "name": "回应霍桑的求助",
+          "type": "话术",
+          "requirement": "SI3",
+          "trigger": "你注意到霍桑似乎想传达什么，于是尝试与镜中囚禁的他沟通。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "他无法理解你的话，表情变得更加绝望。",
+            "on_regular": "他焦急地指向回廊尽头，似乎在示意你前进。",
+            "on_hard": "你捕捉到他的意念波动，理解了他重复的信息：“黑暗是出口。”",
+            "on_extreme": "你与他的意识短暂融合，他警告你：“镜子中的存在都在欺骗，只有黑暗才是真实的出口。”"
+          },
+          "difficulty": "regular"
+        },
+        {
+          "id": "SI6",
+          "entity_type": "interaction",
+          "scene": "SS2_深渊回廊",
+          "name": "与镜中黑暗共鸣",
+          "type": "神秘学",
+          "requirement": "SI4",
+          "trigger": "你站在暗镜前，回想那行文字，尝试与镜中的黑暗力量共鸣。",
+          "result": "##GRADED##",
+          "side_effects": [],
+          "graded_result": {
+            "on_failure": "黑暗纹丝不动，你感到一阵眩晕。",
+            "on_regular": "你感受到镜中传来的凝视，一股寒意沿着脊椎爬升。",
+            "on_hard": "低语再次响起：“将你自己交给黑暗，获取真实。”",
+            "on_extreme": "奈亚拉托提普的意志直接降临：\"穿过我，你将知晓一切，但代价是你的自我。\""
+          },
+          "difficulty": "hard"
+        }
+      ],
+      "auto_triggers": [],
+      "from_here": [
+        {
+          "target": "test_room",
+          "method": "触碰暗镜",
+          "requirement": ""
+        }
+      ],
+      "to_here": [
+        {
+          "source": "SS1_镜中世界",
+          "method": "推门进入",
+          "requirement": ""
+        }
+      ],
+      "extra": {}
+    }
+  },
+  "events": [],
+  "npc_profiles": {},
+  "dependency_graph": {
+    "nodes": {
+      "SI1": {},
+      "SI2": {},
+      "SI3": {},
+      "SI4": {},
+      "SI5": {},
+      "SI6": {}
+    },
+    "edges": [
+      {
+        "source": "SI5",
+        "target": "SI3",
+        "condition": "completed"
+      },
+      {
+        "source": "SI6",
+        "target": "SI4",
+        "condition": "completed"
+      }
+    ]
+  },
+  "_scene_names": {
+    "SS1_镜中世界": "SS1_镜中世界",
+    "SS2_深渊回廊": "SS2_深渊回廊"
+  },
+  "_phase1": {}
+}

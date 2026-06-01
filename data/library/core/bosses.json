@@ -1,0 +1,72 @@
+{
+  "吞噬之口": {
+    "name": "吞噬之口",
+    "type": "神话生物",
+    "attributes": {"STR": 200, "CON": 300, "SIZ": 250, "DEX": 10, "POW": 150},
+    "armor": "10点厚皮（常规武器无效，需环境交互破解）",
+    "attacks": [
+      {"name": "吞噬车厢", "damage": {"dice_n": 0, "dice_d": 0, "bonus": 0, "use_db": false}, "skill_name": "", "skill_value": 0, "weight": 1, "notes": "环境性攻击，非直接战斗伤害"}
+    ],
+    "special_abilities": [
+      {"name": "不可阻挡", "desc": "常规武器攻击无法造成有效伤害"}
+    ],
+    "san_loss": "1D10/1D100",
+    "description": "来自异界的巨大吞噬之口，不断吞噬列车后方的车厢。任何被吞噬之物永远消失。",
+    "boss_mechanics": "弱点为驾驶室控制面板——需同时持有操作面板钥匙并通过电气维修或操作重型机械检定切断其与列车连接。常规武器攻击无效。击败触发END2（列车幸存），被吞噬触发END3，逃离触发END1。",
+    "flags": ["boss"],
+    "multi_attack": 1,
+    "damage_multipliers": {},
+    "dodge_bonus": 0,
+    "phases": [],
+    "special_rules": ""
+  },
+  "食尸鬼（艾米丽的丈夫）": {
+    "name": "食尸鬼（艾米丽的丈夫）",
+    "type": "诅咒生物/食尸鬼",
+    "attributes": {"STR": 80, "CON": 70, "SIZ": 65, "DEX": 60, "POW": 40},
+    "armor": "2点厚皮（对普通武器有一定承受力）",
+    "attacks": [
+      {"name": "扑咬", "damage": {"dice_n": 1, "dice_d": 8, "bonus": 0, "use_db": true}, "skill_name": "格斗", "skill_value": 60, "weight": 2, "notes": "双爪按住猎物后低头撕咬颈部"},
+      {"name": "利爪挥击", "damage": {"dice_n": 1, "dice_d": 6, "bonus": 0, "use_db": true}, "skill_name": "格斗", "skill_value": 55, "weight": 1, "notes": "绕对手跛行后挥击"}
+    ],
+    "special_abilities": [
+      {"name": "银器弱点", "desc": "被银制物品刺中后诅咒碎裂，强制恢复人形。银器净化绝对生效"},
+      {"name": "敏锐嗅觉", "desc": "对活物气味极其敏感，可远距离感知生人位置"},
+      {"name": "非银器崩解", "desc": "以非银器方式杀死时，躯体迅速沙化崩解为黑灰，彻底湮灭"}
+    ],
+    "san_loss": "1/1D8",
+    "description": "被林间邪祟诅咒转化为食尸鬼的伐木工。灰绿色皮肤皱缩如鞣皮，利爪尖牙，被嗜血本能支配但仍残存一丝人性。银器可破除诅咒使其恢复人形，非银器杀死则永久崩解。",
+    "boss_mechanics": "银餐刀刺中即触发诅咒净化（无需伤害阈值），恢复人形后可能短暂存活或死去。非银器杀死则崩解为黑灰，艾米丽彻底绝望。玩家面临救赎与毁灭的道德抉择。",
+    "flags": ["boss"],
+    "multi_attack": 1,
+    "damage_multipliers": {},
+    "dodge_bonus": 0,
+    "phases": [],
+    "special_rules": ""
+  },
+  "深渊之口": {
+    "name": "深渊之口",
+    "type": "神话生物/古神残骸",
+    "attributes": {"STR": 300, "CON": 500, "SIZ": 400, "DEX": 5, "POW": 200},
+    "armor": "20点异界物质（常规武器无效；需以古代封印术式强制压制后，以仪式武器攻击才可造成伤害）",
+    "attacks": [
+      {"name": "吞噬存在", "damage": {"dice_n": 0, "dice_d": 0, "bonus": 0, "use_db": false}, "skill_name": "POW对抗", "skill_value": 200, "weight": 2, "notes": "每轮吞噬一个目标的全部记忆和身份，目标永久失去1D6+2点POW。被吞噬者成为无意识空壳"},
+      {"name": "深渊凝视", "damage": {"dice_n": 0, "dice_d": 0, "bonus": 0, "use_db": false}, "skill_name": "SAN对抗", "skill_value": 200, "weight": 1, "notes": "所有目击者需进行SAN检定，失败额外失去1D10点SAN并陷入临时疯狂"}
+    ],
+    "special_abilities": [
+      {"name": "不可直视", "desc": "雕像的形态是对三维空间的亵渎。任何试图理解其形状的行为需要INT检定，失败失去1/1D6 SAN"},
+      {"name": "雾气领域", "desc": "周围一英里范围被灰色浓雾笼罩，雾气是它的感知延伸。雾中所有生物的位置它能精确感知"},
+      {"name": "记忆吞噬", "desc": "通过铜镜作为媒介，可以吞噬任何人的全部记忆。被吞噬者失去所有身份认同，成为行尸走肉"},
+      {"name": "封印弱点", "desc": "铜镜（眼）、玉刀（手）、雕像（口）三者分开时无法完全降临。重新组合三者可将它完整召唤——或利用组合仪式进行短暂压制"}
+    ],
+    "san_loss": "1D10/2D100 (目击雕像本体), 0/1D20 (每轮在雾中停留)",
+    "description": "来自远古宇宙的巨大存在残骸。被古代文明分割封印为三部分——铜镜为眼（感知），玉刀为手（执行），雕像为口（吞噬）。三者合一方能完整降临。当前状态的它被困在星陨村矿场深处的黑石祭坛中，通过控制矿主马德胜和数百名被吞噬记忆的矿工企图重获完整。",
+    "boss_mechanics": "必须先将铜镜和玉刀从马德胜手中夺回，在矿场深处的黑石祭坛找到雕像本体。将三件物品放入祭坛的三个凹槽中，然后用古代封印咒术进行逆向封印。封印仪式需要一个人手持玉刀为锚点，承受每轮1D3点HP损失和1点POW损失，持续3轮。若锚点中断，深渊之口成功降临。成功封印后铜镜碎裂、玉刀钝化、雕像沉入地底深渊，三个月内无法重组。",
+    "flags": ["boss"],
+    "multi_attack": 1,
+    "damage_multipliers": {},
+    "dodge_bonus": 0,
+    "phases": [],
+    "special_rules": "吞噬存在命中后造成 2D6+2 点伤害并附加 POW 侵蚀；深渊凝视命中后造成 1D10 点 SAN 损失。Boss 攻击伤害应显著高于普通敌人。"
+  }
+}

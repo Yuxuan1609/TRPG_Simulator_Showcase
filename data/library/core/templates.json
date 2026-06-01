@@ -1,0 +1,69 @@
+{
+  "_description": "三类实体的 schema 模板，供提取脚本和验证工具使用。新增字段在此处定义默认值。",
+  "enemy": {
+    "fields": {
+      "name": "",
+      "type": "",
+      "attributes": {"STR": 50, "CON": 50, "SIZ": 50, "DEX": 50, "POW": 50},
+      "armor": "无",
+      "attacks": [
+        {"name": "", "damage": {"dice_n": 1, "dice_d": 6, "bonus": 0, "use_db": true}, "skill_name": "格斗", "skill_value": 50, "weight": 1, "notes": ""}
+      ],
+      "special_abilities": [
+        {"name": "", "desc": ""}
+      ],
+      "san_loss": "0/1D6",
+      "combat_behavior": "",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": ""
+    },
+    "llm_hint": "根据文本描述合理推断 attributes（默认人类 50-60，怪物按描述调整）。attacks 的攻击名和 damage 从描述中提取，无明确描述用合理默认值。combat_behavior 可含 [adjacent_aware] / [avoidable] 等标记前缀。"
+  },
+  "boss": {
+    "fields": {
+      "name": "",
+      "type": "",
+      "attributes": {"STR": 100, "CON": 100, "SIZ": 100, "DEX": 50, "POW": 100},
+      "armor": "4点异界物质",
+      "attacks": [
+        {"name": "", "damage": {"dice_n": 1, "dice_d": 6, "bonus": 0, "use_db": true}, "skill_name": "格斗", "skill_value": 50, "weight": 1, "notes": ""}
+      ],
+      "special_abilities": [
+        {"name": "", "desc": ""}
+      ],
+      "san_loss": "1/1D10",
+      "description": "",
+      "boss_mechanics": "",
+      "flags": ["boss"],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "phases": [],
+      "special_rules": ""
+    },
+    "llm_hint": "attributes 显著高于普通敌人（建议 STR/CON/SIZ >= 80，POW >= 60）。boss_mechanics 需描述战斗机制和弱点。flags 固定为 [\"boss\"]。"
+  },
+  "weapon": {
+    "fields": {
+      "name": "",
+      "skill_name": "格斗",
+      "damage": {"dice_n": 1, "dice_d": 6, "bonus": 0, "use_db": true},
+      "range": "接触",
+      "shots": 0,
+      "malfunction": 100,
+      "era": "all",
+      "rarity": "common",
+      "damage_type": "物理",
+      "armor_piercing": 0,
+      "attack_bonus": 0,
+      "multi_attack": 1,
+      "special_rules": "",
+      "description": ""
+    },
+    "llm_hint": "range 近战用「接触」，远程用「N码」或「N米」。era 可选 all / 1920s / 现代。rarity 可选 common / uncommon / rare / unique。shots=0 表示无限/不适用。malfunction=100 表示不会卡壳。"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "links": [
+    {
+      "scene": "6号车厢",
+      "element_name": "白色便签",
+      "linked_interaction": "检查白色便签"
+    },
+    {
+      "scene": "6号车厢",
+      "element_name": "电车示意地图",
+      "linked_interaction": "观察电车示意地图"
+    },
+    {
+      "scene": "7号车厢",
+      "element_name": "残破的人体肢体",
+      "linked_interaction": "检查残骸"
+    },
+    {
+      "scene": "7号车厢",
+      "element_name": "巨大的嘴巴",
+      "linked_interaction": "仔细观察巨口"
+    },
+    {
+      "scene": "5号车厢",
+      "element_name": "报纸",
+      "linked_interaction": "搜索报纸"
+    },
+    {
+      "scene": "4号车厢",
+      "element_name": "受伤的乘务员",
+      "linked_interaction": ""
+    },
+    {
+      "scene": "3号车厢",
+      "element_name": "散落的行李",
+      "linked_interaction": "小心穿过杂物"
+    },
+    {
+      "scene": "2号车厢",
+      "element_name": "彻底的黑暗",
+      "linked_interaction": ""
+    },
+    {
+      "scene": "2号车厢",
+      "element_name": "浓烈的血腥与恶臭",
+      "linked_interaction": ""
+    },
+    {
+      "scene": "2号车厢",
+      "element_name": "粗重的喘息声",
+      "linked_interaction": ""
+    },
+    {
+      "scene": "先头车厢",
+      "element_name": "驾驶室门",
+      "linked_interaction": "使用钥匙打开驾驶室门"
+    }
+  ]
+}

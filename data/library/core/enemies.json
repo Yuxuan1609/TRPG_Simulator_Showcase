@@ -1,0 +1,447 @@
+{
+  "items": [
+    {
+      "name": "Clicker",
+      "type": "神话生物",
+      "attributes": {
+        "STR": 80,
+        "CON": 70,
+        "SIZ": 65,
+        "DEX": 50,
+        "POW": 60
+      },
+      "armor": "2点厚皮",
+      "attacks": [
+        {
+          "name": "噬咬",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 8,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 50,
+          "weight": 2,
+          "notes": ""
+        },
+        {
+          "name": "利爪",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 45,
+          "weight": 1,
+          "notes": ""
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "盲感",
+          "desc": "无眼，通过声音定位。对其潜行检定为硬性难度。任何大声响会立即吸引其注意。"
+        },
+        {
+          "name": "恐惧灵气",
+          "desc": "首次目睹Clicker需进行SAN检定(0/1D4)。"
+        }
+      ],
+      "san_loss": "0/1D4 (目睹), 1/1D6 (被攻击)",
+      "combat_behavior": "[adjacent_aware] | 优先攻击发出最大声音的目标。若无人出声则随机攻击。被击伤后会狂暴，每轮攻击两次。",
+      "phases": [
+        {
+          "trigger": "hp_below_pct:0.5",
+          "name": "狂暴",
+          "overrides": {
+            "multi_attack": 2
+          },
+          "description": "Clicker受伤后陷入狂暴，每轮攻击两次"
+        }
+      ],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "无眼的人形怪物，通过声音定位猎物，对声音极度敏感。概念源自电子游戏《最后生还者》"
+    },
+    {
+      "name": "深潜者",
+      "type": "神话生物",
+      "attributes": {
+        "STR": 70,
+        "CON": 65,
+        "SIZ": 70,
+        "DEX": 50,
+        "POW": 50
+      },
+      "armor": "1点鳞片",
+      "attacks": [
+        {
+          "name": "利爪",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 45,
+          "weight": 2,
+          "notes": ""
+        },
+        {
+          "name": "抓取",
+          "damage": {
+            "dice_n": 0,
+            "dice_d": 0,
+            "bonus": 0,
+            "use_db": false
+          },
+          "skill_name": "格斗",
+          "skill_value": 50,
+          "weight": 1,
+          "notes": "擒抱后每轮自动造成1D3+DB伤害"
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "两栖",
+          "desc": "可在水下无限呼吸，游泳速度等于MOV。"
+        }
+      ],
+      "san_loss": "0/1D6",
+      "combat_behavior": "[avoidable] | 偏好伏击，从水中或暗处突袭。受伤后会撤退到水中。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "受伤后攻击变得更加凶猛，伤害+2。每轮对流血目标额外造成1点撕裂伤害。",
+      "description": "克苏鲁神话经典两栖人形生物，偏好水下伏击，受伤后会撤退"
+    },
+    {
+      "name": "食尸鬼",
+      "type": "神话生物",
+      "attributes": {
+        "STR": 70,
+        "CON": 60,
+        "SIZ": 55,
+        "DEX": 65,
+        "POW": 45
+      },
+      "armor": "无",
+      "attacks": [
+        {
+          "name": "噬咬",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 45,
+          "weight": 1,
+          "notes": ""
+        },
+        {
+          "name": "利爪",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 4,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 50,
+          "weight": 2,
+          "notes": "两次攻击/轮"
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "食尸",
+          "desc": "偏好捕食人类尸体。在墓地/停尸房附近出现概率极高。"
+        },
+        {
+          "name": "夜视",
+          "desc": "在完全黑暗中也能正常视物。"
+        }
+      ],
+      "san_loss": "0/1D6",
+      "combat_behavior": "群体狩猎，数量通常为2-5只。优先攻击落单或最弱的猎物。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "克苏鲁神话食尸生物，群体狩猎，偏好捕食人类尸体，黑暗中也能视物"
+    },
+    {
+      "name": "疯狂信徒",
+      "type": "人类",
+      "attributes": {
+        "STR": 50,
+        "CON": 55,
+        "SIZ": 60,
+        "DEX": 60,
+        "POW": 40
+      },
+      "armor": "无",
+      "attacks": [
+        {
+          "name": "匕首",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 4,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 40,
+          "weight": 2,
+          "notes": ""
+        },
+        {
+          "name": "拳头",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 3,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 35,
+          "weight": 1,
+          "notes": ""
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "狂热",
+          "desc": "不受SAN损失影响。不会逃跑，战至死亡。"
+        }
+      ],
+      "san_loss": "0/1D3 (目睹仪式行为时)",
+      "combat_behavior": "狂热的邪教徒，以数量优势压倒对手。有时携带简陋武器。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "狂热的邪教徒，不受恐惧影响，以数量优势战斗至死不退"
+    },
+    {
+      "name": "失忆矿工",
+      "type": "人类（被控制）",
+      "attributes": {
+        "STR": 60,
+        "CON": 65,
+        "SIZ": 60,
+        "DEX": 45,
+        "POW": 10
+      },
+      "armor": "无",
+      "attacks": [
+        {
+          "name": "镐头",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 8,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 35,
+          "weight": 2,
+          "notes": "作为矿工自带工具"
+        },
+        {
+          "name": "徒手",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 3,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 30,
+          "weight": 1,
+          "notes": ""
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "无意识",
+          "desc": "不受SAN损失影响，不会逃跑，不会恐惧。被铜镜吞噬记忆后沦为纯粹的空壳，只服从铜镜持有者的指令。"
+        },
+        {
+          "name": "数量优势",
+          "desc": "通常以10-30人群体出现，围困目标。"
+        }
+      ],
+      "san_loss": "0/1D2 (目睹他们空洞的眼神)",
+      "combat_behavior": "以数量压倒。无痛觉也不会恐惧，只执行简单命令：围困、攻击、搬运。不会闪避也不会使用策略。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "被铜镜吞噬了全部记忆和身份的矿工。眼神空洞，瞳孔被灰白色薄膜覆盖。身体机能还在，但意识已经完全消失，沦为行尸走肉。"
+    },
+    {
+      "name": "TestDummy",
+      "type": "人类",
+      "attributes": {
+        "STR": 30,
+        "CON": 10,
+        "SIZ": 40,
+        "DEX": 30,
+        "POW": 10
+      },
+      "armor": "无",
+      "attacks": [
+        {
+          "name": "徒手",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 3,
+            "bonus": 0,
+            "use_db": false
+          },
+          "skill_name": "格斗",
+          "skill_value": 20,
+          "weight": 1,
+          "notes": "弱攻击，测试用"
+        }
+      ],
+      "special_abilities": [],
+      "san_loss": "0/1",
+      "combat_behavior": "测试用低血量敌人。HP≈5，1-2轮可击杀。不会逃跑。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "测试用靶子敌人，CON=10/SIZ=40 → HP≈5，用于快速验证战斗系统。"
+    },
+    {
+      "name": "触手侍僧",
+      "type": "人类（异化）",
+      "attributes": {
+        "STR": 70,
+        "CON": 75,
+        "SIZ": 65,
+        "DEX": 55,
+        "POW": 80
+      },
+      "armor": "2点异化皮肤",
+      "attacks": [
+        {
+          "name": "触手鞭击",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 55,
+          "weight": 2,
+          "notes": "左手的触手状手指可延伸攻击，射程3米"
+        },
+        {
+          "name": "铜镜冲击",
+          "damage": {
+            "dice_n": 0,
+            "dice_d": 0,
+            "bonus": 0,
+            "use_db": false
+          },
+          "skill_name": "POW对抗",
+          "skill_value": 80,
+          "weight": 1,
+          "notes": "用铜镜照射目标，目标需POW对抗，失败失去1D3记忆片段"
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "深渊赐福",
+          "desc": "长期接触铜镜后被深渊之力异化。皮肤呈铅灰色，脖子延伸出黑色脉管，左手长出触手状手指。"
+        },
+        {
+          "name": "记忆吞噬者",
+          "desc": "每轮可用铜镜攻击一个目标。受害者需进行POW检定，失败则被吞噬1D3条记忆（1点POW临时损失，恢复需1D6天）。"
+        },
+        {
+          "name": "铜镜之佑",
+          "desc": "持有铜镜时，所有远程攻击（包括子弹）在命中前被镜面反射，攻击者需进行LUCK检定，失败则攻击被弹回。"
+        }
+      ],
+      "san_loss": "1/1D8 (目击其异化形态)",
+      "combat_behavior": "优先用铜镜吞噬调查员的记忆以削弱其抵抗意志。当调查员POW低于40时改用触手物理攻击。绝不舍弃铜镜，铜镜被夺后战斗力下降50%。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "",
+      "description": "被深渊之力异化的人类。长期将铜镜作为法器使用后，身体发生不可逆转的变异：皮肤铅灰、左手触手化、面部黑色脉管蔓延。他深信自己是深渊之口的祭司和代言人，实际上只是铜镜的奴隶。"
+    },
+    {
+      "name": "石卫",
+      "type": "石质构造体",
+      "attributes": {
+        "STR": 80,
+        "CON": 80,
+        "SIZ": 80,
+        "DEX": 40,
+        "POW": 30
+      },
+      "armor": "4点石质护甲",
+      "attacks": [
+        {
+          "name": "撞击",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 50,
+          "weight": 2,
+          "notes": "以身体冲撞目标，造成钝击伤害。"
+        },
+        {
+          "name": "石指抓击",
+          "damage": {
+            "dice_n": 1,
+            "dice_d": 6,
+            "bonus": 0,
+            "use_db": true
+          },
+          "skill_name": "格斗",
+          "skill_value": 50,
+          "weight": 1,
+          "notes": "用尖锐的石指抓挠，可撕裂护甲。"
+        }
+      ],
+      "special_abilities": [
+        {
+          "name": "残躯攻击",
+          "desc": "当石卫被摧毁后，其上半身仍可继续爬行并攻击，直到头部或核心被彻底破坏。"
+        }
+      ],
+      "san_loss": "0/1D6",
+      "combat_behavior": "[guardian] 石卫会攻击任何进入大厅的生物，优先攻击威胁最大的目标。一旦被激怒，会以全速突进。",
+      "phases": [],
+      "multi_attack": 1,
+      "damage_multipliers": {},
+      "dodge_bonus": 0,
+      "special_rules": "石卫的关节处有绿色光芒，可作为弱点（-20%命中，伤害加倍）。",
+      "description": "黑石制成的人形构造体，关节处透出暗绿色脉动光芒。体内布满发光的纹理，仿佛石头中生长着血管。"
+    }
+  ]
+}

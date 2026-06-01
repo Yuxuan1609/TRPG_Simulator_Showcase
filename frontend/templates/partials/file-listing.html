@@ -1,0 +1,55 @@
+{# Rendered file/directory listing — returned by /api/files #}
+<div class="text-xs">
+  {# Breadcrumb #}
+  <div class="flex items-center gap-1 mb-2 pb-2 border-b border-gray-800 text-gray-500">
+    <button class="hover:text-aged-gold"
+            hx-get="/api/files?dir=&target_input={{ target_input }}"
+            hx-target="closest .file-listing-container"
+            hx-swap="innerHTML">根目录</button>
+    {% set parts = current.split('/') %}
+    {% set cum = namespace(path='') %}
+    {% for part in parts %}
+      {% set cum.path = cum.path + '/' + part if cum.path else part %}
+      <span class="text-gray-600">/</span>
+      <button class="hover:text-aged-gold"
+              hx-get="/api/files?dir={{ cum.path }}&target_input={{ target_input }}"
+              hx-target="closest .file-listing-container"
+              hx-swap="innerHTML">{{ part }}</button>
+    {% endfor %}
+  </div>
+
+  {# Parent directory #}
+  {% if parent is not none %}
+  <button class="flex items-center gap-2 w-full px-2 py-1 hover:bg-gray-800 rounded text-left text-gray-500"
+          hx-get="/api/files?dir={{ parent }}&target_input={{ target_input }}"
+          hx-target="closest .file-listing-container"
+          hx-swap="innerHTML">
+    <span>📁 ..</span>
+  </button>
+  {% endif %}
+
+  {# Directories #}
+  {% for d in dirs %}
+  <button class="flex items-center gap-2 w-full px-2 py-1 hover:bg-gray-800 rounded text-left text-gray-400"
+          hx-get="/api/files?dir={{ d.path }}&target_input={{ target_input }}"
+          hx-target="closest .file-listing-container"
+          hx-swap="innerHTML">
+    <span>📁</span> {{ d.name }}
+  </button>
+  {% endfor %}
+
+  {# Files #}
+  {% for f in files %}
+  <button class="flex items-center gap-2 w-full px-2 py-1 hover:bg-gray-800 rounded text-left text-gray-400
+                {{ 'bg-gray-800 text-aged-gold' if f.path == selected else '' }}"
+          onclick="pickFile('{{ f.path }}', '{{ target_input }}')">
+    <span>📄</span> {{ f.name }}
+    <span class="text-gray-600 ml-auto text-[10px]">{{ f.ext }}</span>
+  </button>
+  {% endfor %}
+
+  {% if not dirs and not files %}
+  <div class="text-gray-600 text-center py-2">（空目录）</div>
+  {% endif %}
+</div>
+
