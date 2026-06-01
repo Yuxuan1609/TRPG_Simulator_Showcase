@@ -39,6 +39,51 @@
 │             BossManager / MemoryManager                       │
 └──────────────────────────────────────────────────────────────┘
 ```
+---
+## 已有成果展示
+
+### 模组生成中间产物
+
+管线运行过程中，每步 LLM 调用的 prompt 和 response 均持久化保存，可用于复现和调试：
+
+```
+data/Module generation/<timestamp>/
+├── step_1/           # Step 1a 结构化提取 + 1b 章节精炼
+├── step_2a/          # Step 2a Interaction 提取
+├── step_2bc/         # Step 2b Events+AT + 2c L1/L3 并行构建
+├── step_3a/          # Step 3a 去重冲突 + 实体归属
+├── step_3b/          # Step 3b L1 ↔ L2 交叉核对
+├── step_35/          # Step 3.5 依赖图
+├── step_25/          # Step 2.5 NPC 档案绑定
+├── phase_2/          # Phase 2 标准化 + Schema 验证
+├── _llm_calls/       # 全部 LLM 调用的原始 prompt/response
+└── _validation_report.json
+```
+
+完整管线运行结果详见下方「展示：管线运行结果」章节。
+
+### 大模型模拟玩家测试
+
+使用 LLM 模拟真人玩家进行自动化游戏测试，每轮 30 回合，含完整日志与审计报告：
+
+```
+logs/llm_player/<timestamp>/
+├── turn_01.json ~ turn_30.json   # 逐回合完整状态快照
+├── turn_log.jsonl                 # 回合日志流
+├── audit_report.md                # LLM 审计报告
+├── keeper_parse.txt               # Parse 步骤 LLM 记录
+├── keeper_enrich.txt              # Enrich 步骤 LLM 记录
+├── narrator.txt                   # Narrator 步骤 LLM 记录
+├── timeagent.txt                  # 时间评估记录
+├── combat_entry.txt               # 战斗入口判定记录
+├── player_llm.txt                 # 模拟玩家对话
+└── skill_checks.txt               # 全量技能检定记录
+```
+
+### 游戏运行演示
+
+> 视频演示：[*待补充链接*]()
+
 
 ---
 
@@ -526,8 +571,60 @@ TimePressure（定期判断）  → 叙事注入时间压力 → 影响玩家感
 | `/inject` | 查看/切换库素材注入状态 |
 | `/health` | Pipeline 监控快照 |
 
+---
+## 术语表
 
+### 游戏概念
 
+| 术语 | 说明 |
+|------|------|
+| COC 7th | Call of Cthulhu 第 7 版规则，本项目的规则基底 |
+| KP / 守秘人 | 游戏主持人，本项目中由 Keeper Agent 扮演 |
+| 调查员 | 玩家角色，COC 规则中的普通人探员 |
+| Entity / 实体 | 场景中可互动的预设节点，分为 Interaction / Auto-Trigger / Event 三类 |
+| D100 检定 | 百面骰技能检定，≤技能值=常规、≤技能值/2=困难、≤技能值/5=极难 |
+| 奖励骰 / 惩罚骰 | COC 7th 机制：有利/不利条件下额外掷骰取优/取劣 |
+| SAN / HP / MP | 理智值、生命值、魔法值（COC 衍生属性）|
+
+### 架构概念
+
+| 术语 | 说明 |
+|------|------|
+| L1 / L2 / L3 | 三层信息架构：玩家层 / KP 层 / 设计者层 |
+| Keeper | 回合编排中枢 Agent，持有所有确定性子系统 |
+| Narrator | 叙事 Agent，消费 L1 数据生成沉浸式文本 |
+| Author | 动态创作 Agent，消费 L3 数据响应玩家超出预设的行为 |
+| TimeAgent | 时间评估 Agent（flash 模型），每回合与 Enrich 并行 |
+| Judge | 确定性判定闸门：requirement 解析、D100 检定、时间条件 |
+| Curator | 确定性策展器，将 ActionOutcome 组装为 NarratorBrief（54 行）|
+| PreParseDisambiguator | 消歧网关：模糊输入反问 + 跨回合整合 |
+| IntentDetector | 意图判定器，决定 other 类行动是否需要 Author 介入 |
+| CombatEntry | 战斗入口判定（LLM flash），判断敌意/对峙/Boss 遭遇 |
+
+### 数据合约与标记
+
+| 术语 | 说明 |
+|------|------|
+| `requirement` | 实体触发条件字符串，支持 AND/OR 布尔逻辑 + `\|\|` 软条件 |
+| `##GRADED##` | 分级结果占位符，按 tier 拆分为 on_regular / on_failure |
+| `##END_xxx##` | 结局标记，由 L3 ending_conditions 触发 |
+| `@markup` | 副效果语法，如 `@spawn_enemy`、`@stat_change` 等 8 种 |
+| `TurnInput` / `NarratorBrief` | 回合输入/叙事简报等 20 种消息 dataclass |
+| `NEVER_TRIGGER` | requirement 特殊值，实体永远不可触发 |
+
+### 系统机制
+
+| 术语 | 说明 |
+|------|------|
+| WR0 | 创作者豁免规则（WR-zero），开启后 Author 的 StructuralEdit 不受 world_rules 约束 |
+| dependency_graph | 实体间的依赖关系图，含循环检测 + 自动切断 |
+| GameClock | 分钟级计时器，自动注入 day/time flag 供 time_condition 消费 |
+| TimePressure | L3 预设的时间压力参数，按间隔触发叙事紧迫度提示 |
+| `adjacent_aware` | 敌人标记：允许跨场景感知调查员 |
+| `avoidable` | 敌人标记：可通过对峙检定避免战斗 |
+| Supplement | 运行时 Author 补充的新场景/实体数据（L1/L2/L3 补丁）|
+
+---
 ---
 
 ## 待升级
