@@ -194,7 +194,6 @@ flowchart TB
 
     subgraph S2[Step 2 意图匹配]
         Parse[Parse · LLM<br/>意图匹配 + 非确定性 req 解析]
-        NPC[NPC 对话 · LLM<br/>talk_to / 跟随]
     end
 
     subgraph S25[Step 2.5 战斗入口]
@@ -202,7 +201,7 @@ flowchart TB
     end
 
     subgraph S31[Step 3.1 预编排路径]
-        Entity[entity / move / search<br/>确定性执行等待]
+        Entity[entity / move / search / NPC对话<br/>确定性执行等待]
     end
 
     subgraph S32[Step 3.2-3.5 other 路径]
@@ -230,7 +229,6 @@ flowchart TB
 
     Pre --> DetReq
     DetReq --> Parse
-    DetReq --> NPC
     Parse --> Combat
     Combat --> S31 & S32
 
