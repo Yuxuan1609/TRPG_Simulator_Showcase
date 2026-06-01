@@ -82,7 +82,7 @@ logs/llm_player/<timestamp>/
 
 ### 游戏运行演示
 
-> 视频演示：[*待补充链接*]()
+> 视频演示：https://www.bilibili.com/video/BV1zAVZ6YE99/?spm_id_from=333.40164.top_right_bar_window_dynamic.content.click&vd_source=578ff4f3e10f2b6667e6350d51780bfe
 
 
 ---
